@@ -3,12 +3,10 @@
  */
 package ch.zhaw.prog2.tasktracker;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import javafx.application.Application;
 
+public class App {
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+		Application.launch(MainWindow.class, args);
     }
 }
