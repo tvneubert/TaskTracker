@@ -19,6 +19,11 @@ public class MainWindow extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainWindow.fxml"));
         try {
             Pane rootNode = loader.load();
+
+            // Add random Projects to scrollPane (FOR DEMONSTRATION ONLY!!)
+            MainWindowController mainWindowController = loader.getController();
+            mainWindowController.addProjectsToScrollPane();
+
             Scene scene = new Scene(rootNode);
             stage.setScene(scene);
             stage.show();

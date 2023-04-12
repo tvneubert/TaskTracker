@@ -1,6 +1,7 @@
 package ch.zhaw.prog2.tasktracker;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,6 +34,37 @@ public class MainWindowController {
             stageOfNewWindow.show();
         } catch (IOException e) {
             System.err.println("Error while loading FXML file: " + e.getMessage());
+        }
+    }
+
+    /**
+     * This method adds for each Project in the list a Project to the scrollPane
+     * 
+     * This method is here for testing and will need to be changed!
+     */
+    public void addProjectsToScrollPane() {
+        HashMap<Integer, String> projects = new HashMap<>();
+        projects.put(1, "Project 1");
+        projects.put(2, "Project 2");
+        projects.put(3, "Project 3");
+        projects.put(4, "Project 4");
+        projects.put(5, "Project 5");
+        projects.put(6, "Project 6");
+        projects.put(7, "Project 7");
+        projects.put(8, "Project 8");
+
+        for (String project : projects.values()) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ProjectListItem.fxml"));
+                Pane projectPane = loader.load();
+
+                ProjectListItemController projectListItemController = loader.getController();
+                projectListItemController.setProjectNameLabel(project);
+
+                projectOverviewContent.getChildren().add(projectPane);
+            } catch (IOException e) {
+                System.err.println("Error while loading FXML file: " + e.getMessage());
+            }
         }
     }
 
