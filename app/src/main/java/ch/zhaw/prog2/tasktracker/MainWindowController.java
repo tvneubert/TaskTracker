@@ -12,14 +12,31 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * The controller for the main window of the Task Tracker application.
+ */
 public class MainWindowController {
 
+    /**
+     * The button for opening the create Project window.
+     */
     @FXML
     private Button openCreateProjectWindowButton;
 
+    /**
+     * The VBox for displaying the list of Projects.
+     */
     @FXML
     private VBox projectOverviewContent;
 
+    /**
+     * This method is called when the "open create Project window" button is
+     * clicked.
+     * It initializes and loads the window scene graph from the fxml description and
+     * then creates a new stage with the new scene and shows it.
+     * 
+     * @param event the ActionEvent that triggered the method call
+     */
     @FXML
     private void openCreateProjectWindow(ActionEvent event) {
         try {

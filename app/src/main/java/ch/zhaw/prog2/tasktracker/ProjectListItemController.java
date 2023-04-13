@@ -11,17 +11,37 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
+/**
+ * This class is a controller for the Project list item.
+ */
 public class ProjectListItemController {
 
+    /**
+     * The label for displaying the name of the Project.
+     */
     @FXML
     private Label ProjectNameLabel;
 
+    /**
+     * The button for deleting the Project.
+     */
     @FXML
     private Button deleteProjectButton;
 
+    /**
+     * The button for opening the Project in a new window.
+     */
     @FXML
     private Button openProjectButton;
 
+    /**
+     * Opens the Project in a new window.
+     * 
+     * Loads the scene graph from the FXML file, sets up the controller, and
+     * displays the window.
+     * 
+     * @param event the ActionEvent that triggered this method
+     */
     @FXML
     private void openProjectWindow(ActionEvent event) {
         try {
@@ -44,6 +64,11 @@ public class ProjectListItemController {
         }
     }
 
+    /**
+     * Sets the text of the ProjectNameLabel to the specified name.
+     * 
+     * @param name the name of the Project to be displayed
+     */
     public void setProjectNameLabel(String name) {
         ProjectNameLabel.setText(name);
     }

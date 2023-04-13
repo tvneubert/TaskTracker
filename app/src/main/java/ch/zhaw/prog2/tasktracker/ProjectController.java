@@ -13,17 +13,36 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * This class is a controller for the main window of the ToDo application.
+ */
 public class ProjectController {
 
+    /**
+     * The button for opening the create ToDo window.
+     */
     @FXML
     private Button openCreateTodoWindowButton;
 
+    /**
+     * The label for displaying the added up time of all todos of the project.
+     */
     @FXML
     private Label timeLabel;
 
+    /**
+     * The VBox for displaying the list of ToDos.
+     */
     @FXML
     private VBox todoOverviewContent;
 
+    /**
+     * This method is called when the "open create ToDo window" button is clicked.
+     * It initializes and loads the window scene graph from the fxml description and
+     * then creates a new stage with the new scene and shows it.
+     * 
+     * @param event the ActionEvent that triggered the method call
+     */
     @FXML
     void openCreateTodoWindow(ActionEvent event) {
         try {
