@@ -14,6 +14,13 @@ public class App {
    * @param args the command line arguments.
    */
   public static void main(String[] args) {
+    /*ScheduledThreadPoolExecutor stpe = new ScheduledThreadPoolExecutor(1);
+    TimeTracker timeTracker = new TimeTracker();
+    timeTracker.start();
+    stpe.scheduleAtFixedRate(() -> {
+      System.out.println(timeTracker.getCurrentTime());
+    }, 0, 1, TimeUnit.SECONDS);*/
+
     Application.launch(MainWindow.class, args);
   }
 }
