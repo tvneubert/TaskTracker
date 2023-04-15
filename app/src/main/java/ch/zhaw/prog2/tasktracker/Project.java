@@ -9,8 +9,13 @@ public class Project {
     private ArrayList<Object> tasks = new ArrayList<>();
     //TODO Replace float with the proper Time
     private float time;
-    boolean complete = false;
+    private boolean complete = false;
+    private String name;
 
+    public Project(String name){
+        this.name = name;
+        this.time = 0;
+    }
     public boolean isCompleted(){return complete;}
     private void calculateTime(){
         for(Object task : tasks){
@@ -31,6 +36,9 @@ public class Project {
             }
         }
         return openTasks;
+    }
+    public String getName(){
+        return name;
     }
     public void addTask(Object task){
         if(complete){
