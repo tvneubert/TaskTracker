@@ -1,24 +1,20 @@
 package ch.zhaw.prog2.tasktracker;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Task {
 
-    private String title;
     private String description;
     private String goal;
-    private Date dateNow;
-    private Calendar calendar;
+    private Date deadline;
+
     private boolean taskStatus;
 
 
-    public Task(String title, String description, String goal, Date deadline) {
-        this.title = title;
+    public Task(String description, String goal, Date deadline) {
         this.description = description;
         this.goal = goal;
+        this.deadline = deadline;
         this.taskStatus = true;
     }
 
@@ -37,10 +33,6 @@ public class Task {
         }
     }
 
-    protected String getTitle() {
-        return title;
-    }
-
     protected String getDescription() {
         return description;
     }
@@ -48,5 +40,6 @@ public class Task {
     protected String getGoal() {
         return goal;
     }
+    protected Date getDate() { return deadline;}
 
 }

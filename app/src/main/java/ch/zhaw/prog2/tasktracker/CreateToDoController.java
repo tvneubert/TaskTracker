@@ -7,6 +7,9 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+import java.sql.Date;
+
 public class CreateToDoController {
 
     @FXML
@@ -19,16 +22,79 @@ public class CreateToDoController {
     private TextArea todoDescription;
 
     @FXML
-    private TextArea todoTasks;
+    private TextArea todoGoal;
+    private Task task;
+    private LocalDate deadlineDate;
+    private Date date;
 
+    /**
+     * Creates a new task based on user input.
+     * Validates the input fields before creating the task.
+     *
+     * @param event The event that triggered the method.
+     */
     @FXML
     void createTodo(ActionEvent event) {
-        
-        // TODO Create a new todo
-
-        // Close window after creation
-        Stage stage = (Stage) newTodoSubmitButton.getScene().getWindow();
-        stage.close();
+        if (todoDeadline.getValue() != null) {
+            deadlineDate = todoDeadline.getValue();
+            date = Date.valueOf(deadlineDate);
+        }
+        if (checkDecriptionSet() && checkTaskSet() && checkDeadlineSet()) {
+            task = new Task(todoDescription.getText(), todoGoal.getText(), date);
+            Stage stage = (Stage) newTodoSubmitButton.getScene().getWindow();
+            stage.close();
+        }
     }
 
+    /**
+     * Checks if a description has been entered.
+     * If the field is empty, an error message is displayed.
+     *
+     * @return True if a description has been entered, false otherwise.
+     */
+    private boolean checkDecriptionSet() {
+        String emptyDecription = "Bitte gib eine Beschreibung ein!";
+        if (todoDescription.getText().trim().isEmpty()) {
+            this.todoDescription.appendText(emptyDecription);
+            return false;
+        } else if (todoGoal.getText().equals(emptyDecription)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Checks if a task has been entered.
+     * If the field is empty, an error message is displayed.
+     *
+     * @return True if a task has been entered, false otherwise.
+     */
+    private boolean checkTaskSet() {
+        String emptyTask = "Bitte gib eine Beschreibung ein!";
+        if (todoGoal.getText().trim().isEmpty()) {
+            this.todoGoal.appendText(emptyTask);
+            return false;
+        } else if (todoGoal.getText().equals(emptyTask)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Checks if a deadline has been set and if it is in the future.
+     * If the deadline is missing or in the past, an error message is displayed.
+     *
+     * @return True if a valid deadline has been set, false otherwise.
+     */
+    private boolean checkDeadlineSet() {
+        LocalDate today = LocalDate.now();
+        if (todoDeadline.getValue() == null || deadlineDate.isBefore(today)) {
+            todoDeadline.setStyle("-fx-background-color: #e50808;");
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
