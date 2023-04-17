@@ -10,17 +10,33 @@ import javafx.stage.Stage;
 import java.time.LocalDate;
 import java.sql.Date;
 
+/**
+ * This class is responsible for controlling the "Create Todo" window of the
+ * application.
+ */
 public class CreateToDoController {
 
+    /**
+     * Submit button to create a new ToDo.
+     */
     @FXML
     private Button newTodoSubmitButton;
 
+    /**
+     * DatePicker to select a deadline for the ToDo.
+     */
     @FXML
     private DatePicker todoDeadline;
 
+    /**
+     * TextArea to enter a description for the ToDo.
+     */
     @FXML
     private TextArea todoDescription;
 
+    /**
+     * TextArea to enter tasks for the ToDo.
+     */
     @FXML
     private TextArea todoGoal;
     private Task task;
