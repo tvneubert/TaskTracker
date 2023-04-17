@@ -56,4 +56,14 @@ public class TimeTracker {
             return (int) (pausedTime - startTime);
         }
     }
+
+
+    /**
+     * This function returns the time tracker is running.
+     * @return the state of the time tracker.
+     */
+    public boolean isRunning() {
+
+        return !running;
+    }
 }
