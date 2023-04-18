@@ -51,7 +51,7 @@
                   <Insets bottom="15.0" />
                </VBox.margin>
             </DatePicker>
-            <Button fx:id="newTodoSubmitButton" mnemonicParsing="false" onAction="#createTodo" text="ToDo erstellen" />
+            <Button fx:id="newTodoSubmitButton" mnemonicParsing="false" onAction="#createTodo" stylesheets="@GeneralStyles.css" text="ToDo erstellen" />
          </children>
       </VBox>
    </children>

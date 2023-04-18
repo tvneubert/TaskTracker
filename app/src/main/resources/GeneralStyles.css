@@ -1,0 +1,54 @@
+#openCreateProjectWindowButton,
+#openProjectButton,
+#timerStartButton,
+#timerStopButton,
+#timerResetButton,
+#openCreateTodoWindowButton,
+#newProjectSubmitButton,
+#newTodoSubmitButton {
+    -fx-background-color:
+        linear-gradient(#b6f3fa, #87cdfc);
+}
+
+#openCreateProjectWindowButton:hover,
+#openProjectButton:hover,
+#timerStartButton:hover,
+#timerStopButton:hover,
+#timerResetButton:hover,
+#openCreateTodoWindowButton:hover,
+#newProjectSubmitButton:hover,
+#newTodoSubmitButton:hover {
+    -fx-background-color:
+        linear-gradient(#91dcfa, #5d9cfa);
+}
+
+#deleteProjectButton,
+#deleteTodoButton {
+    -fx-background-color:
+        linear-gradient(#fac4b6, #fd8787);
+}
+
+#deleteProjectButton:hover,
+#deleteTodoButton:hover {
+    -fx-background-color:
+        linear-gradient(#fa9494, #fa6464);
+}
+
+#deleteProjectButton,
+#deleteTodoButton,
+#openCreateProjectWindowButton,
+#openProjectButton,
+#timerStartButton,
+#timerStopButton,
+#timerResetButton,
+#openCreateTodoWindowButton {
+-fx-background-radius: 6, 5;
+    -fx-background-insets: 0, 1;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
+}
+
+#todoItemHboxOne,
+#todoItemHboxTwo,
+#projectItemHbox {
+    -fx-background-color: #ffffff
+}
