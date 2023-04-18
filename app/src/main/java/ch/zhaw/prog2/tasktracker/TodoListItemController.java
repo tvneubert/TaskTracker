@@ -35,10 +35,10 @@ public class TodoListItemController {
     private Button timerResetButton;
 
     /**
-     * The HBox containing the start button for the timer.
+     * The Button for starting the timer for the ToDo.
      */
     @FXML
-    private HBox timerStartButton;
+    private Button timerStartButton;
 
     /**
      * The button for stopping the timer for the ToDo.
