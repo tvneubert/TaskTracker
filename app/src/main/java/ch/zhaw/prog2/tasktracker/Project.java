@@ -1,6 +1,6 @@
 package ch.zhaw.prog2.tasktracker;
 
-import org.checkerframework.checker.units.qual.A;
+import ch.zhaw.prog2.tasktracker.Task.TaskStatus;
 
 import java.util.ArrayList;
 
@@ -10,11 +10,7 @@ import java.util.ArrayList;
  */
 
 public class Project {
-    //TODO Replace Object with the proper Task class
-    private ArrayList<Object> tasks = new ArrayList<>();
-    //TODO Replace float with the proper Time
-    private float time;
-    private boolean complete = false;
+    private ArrayList<Task> tasks = new ArrayList<>();
     private String name;
 
     /**
@@ -23,23 +19,19 @@ public class Project {
      */
     public Project(String name){
         this.name = name;
-        this.time = 0;
     }
 
     /**
      * Return the state of the project
      * @return boolean of the pjoject.
      */
-    public boolean isCompleted(){return complete;}
-
-    /**
-     * Internal method to add the time spent on each task
-     */
-    private void calculateTime(){
-        for(Object task : tasks){
-            //Placeholder TODO replace with proper method of the time class
-            time += task.time();
+    public boolean isCompleted(){
+        for(Task task : tasks){
+            if(!task.getTaskStatus().equals(TaskStatus.FINISHED)) { // TODO Replace with correct method of task class
+                return false;
+            }
         }
+        return true;
     }
 
     /**
@@ -47,8 +39,11 @@ public class Project {
      * @return Time spent on the project TODO Replace return value with proper type
      */
 
-    public float getTime(){
-        calculateTime();
+    public int getTotalTaskTime(){
+        int time = 0;
+        for(Task task : tasks){
+            time += task.getTimeTracker().getCurrentTime();
+        }
         return time;
     }
 
@@ -56,10 +51,10 @@ public class Project {
      * Return only the open tasks associated with this projcet
      * @return List of task objects TODO Replace type of ArrayList with proper class
      */
-    public ArrayList<Object> getOpenTasks(){
-        ArrayList<Object> openTasks = new ArrayList<>();
-        for(Object task : tasks){
-            if(task.isOpen){ // TODO Replace with correct method of task class
+    public ArrayList<Task> getOpenTasks(){
+        ArrayList<Task> openTasks = new ArrayList<>();
+        for(Task task : tasks){
+            if(!task.getTaskStatus().equals(TaskStatus.FINISHED)) { // TODO Replace with correct method of task class
                 openTasks.add(task);
             }
         }
@@ -79,13 +74,7 @@ public class Project {
      * If the project has been marked as complete and an open task is added the project will reopen.
      * @param task Task to be added to the project TODO Replace type of parameter with proper task Class
      */
-    public void addTask(Object task){
-        if(complete){
-            if(task.isComplete){ //TODO Replace with proper method
-                complete = !complete;
-            }
-
-        }
+    public void addTask(Task task){
         tasks.add(task);
     }
 
@@ -93,16 +82,18 @@ public class Project {
      * Get all the tasks of the Project
      * @return List of task of this project TODO Replace type of ArrayList with proper class
      */
-    public ArrayList<Object> getTasks(){return tasks;}
+    public ArrayList<Task> getTasks(){
+        return tasks;
+    }
 
     /**
      * Get all the tasks of this project that are closed.
      * @return List of closed tasks TODO Replace type of ArrayList  with proper class
      */
-    public ArrayList<Object> getClosedTasks(){
-        ArrayList<Object> closedTasks = new ArrayList<>();
-        for(Object task : tasks){
-            if(!task.isOpen){       //TODO Replace with proper method
+    public ArrayList<Task> getClosedTasks(){
+        ArrayList<Task> closedTasks = new ArrayList<>();
+        for(Task task : tasks){
+            if(task.getTaskStatus().equals(TaskStatus.FINISHED)){       //TODO Replace with proper method
                 closedTasks.add(task);
             }
         }
@@ -113,7 +104,7 @@ public class Project {
      * Remove a task from this project
      * @param task task to be removed TODO Replace type of parameter with proper task Class
      */
-    public void removeTask (Object task){
+    public void removeTask (Task task){
         if(tasks.contains(task)){
             tasks.remove(task);
         }
