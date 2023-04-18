@@ -1,0 +1,59 @@
+package ch.zhaw;
+
+/*
+ * This class implements a simple time tracker logic.
+ * It can be started, paused and resumed.
+ * It can be queried for the current time.
+ */
+
+public class TimeTracker {
+    private boolean running;
+    private long startTime;
+    private long pausedTime;
+
+
+    /**
+     * This function starts the time tracker.
+     */
+    public void start() {
+        if (!running) {
+            startTime = System.currentTimeMillis();
+            running = true;
+        }
+    }
+
+
+    /**
+     * This function pauses the time tracker.
+     */
+    public void pause() {
+        if (running) {
+            pausedTime = System.currentTimeMillis();
+            running = false;
+        }
+    }
+
+    
+    /**
+     * This function resumes the time tracker.
+     */
+    public void resume() {
+        if (!running) {
+            startTime += System.currentTimeMillis() - pausedTime;
+            running = true;
+        }
+    }
+
+    
+    /**
+     * This function returns the current time in milliseconds.
+     * @return the current time in milliseconds as integer.
+     */
+    public int getCurrentTime() {
+        if (running) {
+            return (int) (System.currentTimeMillis() - startTime);
+        } else {
+            return (int) (pausedTime - startTime);
+        }
+    }
+}

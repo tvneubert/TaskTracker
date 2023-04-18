@@ -1,8 +1,12 @@
 package ch.zhaw.prog2.tasktracker;
 
 import java.io.IOException;
-import java.util.HashMap;
 
+import ch.zhaw.prog2.tasktracker.todo.DummyTodoDataObject;
+import ch.zhaw.prog2.tasktracker.todo.DummyTodoModel;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * This class is a controller for the main window of the ToDo application.
@@ -35,6 +40,14 @@ public class ProjectController {
      */
     @FXML
     private VBox todoOverviewContent;
+
+    /**
+     * The model for a dummyToDo Model to test the application with time summary.
+     */
+    private DummyTodoModel tm = new DummyTodoModel();
+
+    // this timeline is for summarizing the time of all todos
+    private Timeline tl;
 
     /**
      * This method is called when the "open create ToDo window" button is clicked.
@@ -66,28 +79,37 @@ public class ProjectController {
      * This method is here for testing and will need to be changed!
      */
     public void addToDosToScrollPane() {
-        HashMap<Integer, String> todos = new HashMap<>();
-        todos.put(1, "ToDo 1");
-        todos.put(2, "ToDo 2");
-        todos.put(3, "ToDo 3");
-        todos.put(4, "ToDo 4");
-        todos.put(5, "ToDo 5");
-        todos.put(6, "ToDo 6");
-        todos.put(7, "ToDo 7");
-
-        for (String todo : todos.values()) {
+        for (DummyTodoDataObject todo : tm.getTodos()) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/TodoListItem.fxml"));
                 Pane todoPane = loader.load();
 
                 TodoListItemController todoListItemController = loader.getController();
-                todoListItemController.setTodoNameLabel(todo);
+                todoListItemController.setTodoObject(todo);
 
                 todoOverviewContent.getChildren().add(todoPane);
             } catch (IOException e) {
                 System.err.println("Error while loading FXML file: " + e.getMessage());
             }
         }
+        this.startSummarizingTimer();
+
+    }
+
+    /**
+     * This method starts the timeline for summarizing the time of all todos.
+     */
+    private void startSummarizingTimer() {
+        // we can only start the timeline if we do have a todo object because it does contain the timer
+        tl = new Timeline(new KeyFrame(Duration.millis(16.6), (ActionEvent e) -> {
+            int timerSum = 0;
+            for (DummyTodoDataObject todo : tm.getTodos()) {
+                timerSum += todo.getTimeTracker().getCurrentTime();
+            }
+            timeLabel.setText(TimeFormater.showTheTime(timerSum));
+        }));
+        tl.setCycleCount(Animation.INDEFINITE);
+        tl.play();
     }
 
 }

@@ -34,14 +34,14 @@
             </HBox>
             <HBox fx:id="todoItemHboxTwo" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="11.0">
                <children>
-                  <Label fx:id="timerLabel" text="Stoppuhr">
+                  <Label fx:id="timerLabel" prefHeight="17.0" prefWidth="81.0" text="Stoppuhr">
                      <HBox.margin>
                         <Insets left="5.0" right="65.0" />
                      </HBox.margin>
                   </Label>
-                  <Button fx:id="timerStartButton" mnemonicParsing="false" text="Start" />
-                  <Button fx:id="timerStopButton" mnemonicParsing="false" text="Stop" />
-                  <Button fx:id="timerResetButton" mnemonicParsing="false" text="Reset" />
+                  <Button fx:id="timerStartButton" mnemonicParsing="false" onAction="#startTimer" text="Start" />
+                  <Button fx:id="timerStopButton" mnemonicParsing="false" onAction="#pauseTimer" text="Stop" />
+                  <Button fx:id="timerResetButton" mnemonicParsing="false" onAction="#resumeTimer" text="Resume" />
                </children>
             </HBox>
          </children>
