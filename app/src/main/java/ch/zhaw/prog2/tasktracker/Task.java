@@ -24,8 +24,9 @@ public class Task {
         this.taskStatus = TaskStatus.TODO;
     }
 
-        /**
+    /**
      * This method creates the TimeTracker for the ToDo.
+     *
      * @return the TimeTracker of the ToDo
      */
     public TimeTracker getTimeTracker() {
@@ -47,6 +48,9 @@ public class Task {
     protected String getGoal() {
         return goal;
     }
-    protected Date getDate() { return deadline;}
+
+    protected Date getDate() {
+        return deadline;
+    }
 
 }

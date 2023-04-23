@@ -50,7 +50,7 @@ public class CreateToDoController {
      * @param event The event that triggered the method.
      */
     @FXML
-    void createTodo(ActionEvent event) {
+    private void createTodo(ActionEvent event) {
         if (todoDeadline.getValue() != null) {
             deadlineDate = todoDeadline.getValue();
             date = Date.valueOf(deadlineDate);
