@@ -1,6 +1,5 @@
 package ch.zhaw.prog2.tasktracker;
 
-import ch.zhaw.prog2.tasktracker.todo.DummyTodoDataObject;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -18,7 +17,8 @@ public class TodoListItemController {
     /**
      * The ToDo object that is represented by this list item.
      */
-    private DummyTodoDataObject tdo;
+    private Task taskListItem;
+    //private DummyTodoDataObject tdo;          <-- Old placeholder
 
     /**
      * The label for displaying the name of the ToDo.
@@ -65,18 +65,18 @@ public class TodoListItemController {
     /**
      * This method is called when the ToDo is set and initializes the timeline for
      * timer that is displayed in the ToDo list item.
-     * @param _tdo
+     * @param task
      */
-    public void setTodoObject(DummyTodoDataObject _tdo) {
-        this.tdo = _tdo;
+    public void setTodoObject(Task task) {
+        this.taskListItem = task;
         // we can only start the timeline if we do have a todo object because it does contain the timer
         tl = new Timeline(new KeyFrame(Duration.millis(16.6), (ActionEvent e) -> {
-            timerLabel.setText(TimeFormater.showTheTime(this.tdo.getTimeTracker().getCurrentTime()));
+            timerLabel.setText(TimeFormater.showTheTime(this.taskListItem.getTimeTracker().getCurrentTime()));
         }));
         tl.setCycleCount(Animation.INDEFINITE);
         tl.play();
         
-        TodoNameLabel.setText(this.tdo.getTodoName());
+        TodoNameLabel.setText(this.taskListItem.getDescription());
     }
 
     /**
@@ -90,7 +90,7 @@ public class TodoListItemController {
      */
     @FXML
     public void startTimer() {
-        this.tdo.getTimeTracker().start();
+        this.taskListItem.getTimeTracker().start();
     }
 
     /**
@@ -98,7 +98,7 @@ public class TodoListItemController {
      */
     @FXML
     public void pauseTimer() {
-        this.tdo.getTimeTracker().pause();
+        this.taskListItem.getTimeTracker().pause();
     }
 
     /**
@@ -106,7 +106,7 @@ public class TodoListItemController {
      */
     @FXML
     public void resumeTimer() {
-        this.tdo.getTimeTracker().resume();
+        this.taskListItem.getTimeTracker().resume();
     }
 
 }

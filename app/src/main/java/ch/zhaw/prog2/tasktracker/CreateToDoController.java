@@ -42,6 +42,7 @@ public class CreateToDoController {
     private Task task;
     private LocalDate deadlineDate;
     private Date date;
+    private Project rootProject;
 
     /**
      * Creates a new task based on user input.
@@ -57,6 +58,7 @@ public class CreateToDoController {
         }
         if (checkDecriptionSet() && checkTaskSet() && checkDeadlineSet()) {
             task = new Task(todoDescription.getText(), todoGoal.getText(), date);
+            rootProject.addTask(task);
             Stage stage = (Stage) newTodoSubmitButton.getScene().getWindow();
             stage.close();
         }
@@ -111,6 +113,11 @@ public class CreateToDoController {
             return false;
         } else {
             return true;
+        }
+    }
+    public void setRootProject(Project project){
+        if(project != null){
+            rootProject = project;
         }
     }
 }

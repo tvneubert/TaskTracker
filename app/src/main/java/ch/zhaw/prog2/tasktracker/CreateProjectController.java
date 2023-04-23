@@ -35,8 +35,13 @@ public class CreateProjectController {
      */
     @FXML
     void createProject(ActionEvent event) {
-
-        // TODO Create a new project
+        String emptyName = "Bitten geben Sie dem Projekt einen Namen";
+        // TODO add to ProjectOverview list
+        if(newProjectTextField == null || newProjectTextField.toString().trim() == "" || newProjectTextField.toString().equals(emptyName)){
+            newProjectTextField.setText(emptyName);
+        }else{
+            Project project = new Project(newProjectTextField.toString());
+        }
 
         // Close window after creation
         Stage stage = (Stage) newProjectSubmitButton.getScene().getWindow();

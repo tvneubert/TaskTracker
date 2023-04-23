@@ -48,6 +48,7 @@ public class ProjectController {
 
     // this timeline is for summarizing the time of all todos
     private Timeline tl;
+    private Project project;
 
     /**
      * This method is called when the "open create ToDo window" button is clicked.
@@ -62,6 +63,8 @@ public class ProjectController {
             // initialize and load the window scene graph from the fxml description
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/CreateToDo.fxml"));
             Pane rootPane = loader.load();
+            CreateToDoController controller = loader.getController();
+            controller.setRootProject(project);
             // create a scene with the new the root-Node
             Scene scene = new Scene(rootPane);
             // create a new stage and show the new window
@@ -79,13 +82,14 @@ public class ProjectController {
      * This method is here for testing and will need to be changed!
      */
     public void addToDosToScrollPane() {
-        for (DummyTodoDataObject todo : tm.getTodos()) {
+        //for (DummyTodoDataObject to do : tm.getTodos()) {             <-- Old placeholder loop
+        for(Task task : project.getOpenTasks()){
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/TodoListItem.fxml"));
                 Pane todoPane = loader.load();
 
                 TodoListItemController todoListItemController = loader.getController();
-                todoListItemController.setTodoObject(todo);
+                todoListItemController.setTodoObject(task);
 
                 todoOverviewContent.getChildren().add(todoPane);
             } catch (IOException e) {
