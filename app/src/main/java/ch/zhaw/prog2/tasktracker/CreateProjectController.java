@@ -1,5 +1,6 @@
 package ch.zhaw.prog2.tasktracker;
 
+import ch.zhaw.prog2.tasktracker.todo.DummyProjectOverwiev;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -23,6 +24,7 @@ public class CreateProjectController {
      */
     @FXML
     private TextField newProjectTextField;
+    private DummyProjectOverwiev rootProjectOverview;
 
     /**
      * This method is called when the user clicks the "Create Project" button.
@@ -41,11 +43,17 @@ public class CreateProjectController {
             newProjectTextField.setText(emptyName);
         }else{
             Project project = new Project(newProjectTextField.toString());
+            rootProjectOverview.addProject(project);
         }
 
         // Close window after creation
         Stage stage = (Stage) newProjectSubmitButton.getScene().getWindow();
         stage.close();
+    }
+    public void setRootProjectOverview(DummyProjectOverwiev projectOverwiev){
+        if(projectOverwiev != null){
+            rootProjectOverview = projectOverwiev;
+        }
     }
 
 }

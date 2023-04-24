@@ -53,9 +53,11 @@ public class Project {
      */
     public ArrayList<Task> getOpenTasks(){
         ArrayList<Task> openTasks = new ArrayList<>();
-        for(Task task : tasks){
-            if(!task.getTaskStatus().equals(TaskStatus.FINISHED)) { // TODO Replace with correct method of task class
-                openTasks.add(task);
+        if(tasks.size() != 0) {
+            for (Task task : tasks) {
+                if (!task.getTaskStatus().equals(TaskStatus.FINISHED)) { // TODO Replace with correct method of task class
+                    openTasks.add(task);
+                }
             }
         }
         return openTasks;

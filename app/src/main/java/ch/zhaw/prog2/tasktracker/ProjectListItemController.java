@@ -33,6 +33,7 @@ public class ProjectListItemController {
      */
     @FXML
     private Button openProjectButton;
+    private Project project;
 
     /**
      * Opens the Project in a new window.
@@ -52,6 +53,7 @@ public class ProjectListItemController {
             // Add random Projects to scrollPane (FOR DEMONSTRATION ONLY!!)
             ProjectController projectController = loader.getController();
             projectController.addToDosToScrollPane();
+            projectController.setProject(project);
 
             // create a scene with the new the root-Node
             Scene scene = new Scene(rootPane);
@@ -71,6 +73,11 @@ public class ProjectListItemController {
      */
     public void setProjectNameLabel(String name) {
         ProjectNameLabel.setText(name);
+    }
+    public void setProject(Project project){
+        if(project != null){
+            this.project = project;
+        }
     }
 
 }

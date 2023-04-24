@@ -115,5 +115,10 @@ public class ProjectController {
         tl.setCycleCount(Animation.INDEFINITE);
         tl.play();
     }
+    public void setProject(Project project){
+        if(project != null){
+            this.project = project;
+        }
+    }
 
 }
