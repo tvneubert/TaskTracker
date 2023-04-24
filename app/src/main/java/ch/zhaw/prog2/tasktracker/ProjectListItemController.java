@@ -52,8 +52,8 @@ public class ProjectListItemController {
 
             // Add random Projects to scrollPane (FOR DEMONSTRATION ONLY!!)
             ProjectController projectController = loader.getController();
-            projectController.addToDosToScrollPane();
             projectController.setProject(project);
+            projectController.addToDosToScrollPane();
 
             // create a scene with the new the root-Node
             Scene scene = new Scene(rootPane);

@@ -82,7 +82,6 @@ public class ProjectController {
      * This method is here for testing and will need to be changed!
      */
     public void addToDosToScrollPane() {
-        //for (DummyTodoDataObject to do : tm.getTodos()) {             <-- Old placeholder loop
         for(Task task : project.getOpenTasks()){
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/TodoListItem.fxml"));

@@ -46,6 +46,7 @@ public class MainWindowController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/CreateProject.fxml"));
             Pane rootPane = loader.load();
             CreateProjectController controller = loader.getController();
+            System.out.println(projectOverwiev);
             controller.setRootProjectOverview(this.projectOverwiev);
             // create a scene with the new the root-Node
             Scene scene = new Scene(rootPane);
@@ -64,16 +65,6 @@ public class MainWindowController {
      * This method is here for testing and will need to be changed!
      */
     public void addProjectsToScrollPane() {
-//        HashMap<Integer, String> projects = new HashMap<>();
-//        projects.put(1, "Project 1");
-//        projects.put(2, "Project 2");
-//        projects.put(3, "Project 3");
-//        projects.put(4, "Project 4");
-//        projects.put(5, "Project 5");
-//        projects.put(6, "Project 6");
-//        projects.put(7, "Project 7");
-//        projects.put(8, "Project 8");
-
         for (Project project : projectOverwiev.getProjectList()) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/ProjectListItem.fxml"));
@@ -81,8 +72,7 @@ public class MainWindowController {
 
                 ProjectListItemController projectListItemController = loader.getController();
                 projectListItemController.setProjectNameLabel(project.getName());
-                ProjectListItemController listItemController = loader.getController();
-                listItemController.setProject(project);
+                projectListItemController.setProject(project);
 
                 projectOverviewContent.getChildren().add(projectPane);
             } catch (IOException e) {
