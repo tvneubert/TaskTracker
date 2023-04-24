@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import ch.zhaw.prog2.tasktracker.todo.DummyProjectOverwiev;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +18,7 @@ import javafx.stage.Stage;
 /**
  * The controller for the main window of the Task Tracker application.
  */
-public class MainWindowController {
+public class MainWindowController implements InvalidationListener {
 
     /**
      * The button for opening the create Project window.
@@ -46,7 +48,7 @@ public class MainWindowController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/CreateProject.fxml"));
             Pane rootPane = loader.load();
             CreateProjectController controller = loader.getController();
-            System.out.println(projectOverwiev);
+            controller.addListener(this);
             controller.setRootProjectOverview(this.projectOverwiev);
             // create a scene with the new the root-Node
             Scene scene = new Scene(rootPane);
@@ -81,4 +83,9 @@ public class MainWindowController {
         }
     }
 
+    @Override
+    public void invalidated(Observable observable) {
+        projectOverviewContent.getChildren().clear();
+        addProjectsToScrollPane();
+    }
 }

@@ -25,7 +25,7 @@ public class DummyProjectOverwiev {
     }
 
     public void addProject(Project project){
-        if(project == null) {
+        if(project != null) {
             projectList.add(project);
         }
     }

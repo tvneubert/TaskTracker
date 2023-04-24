@@ -1,5 +1,7 @@
 package ch.zhaw.prog2.tasktracker;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,12 +11,13 @@ import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  * This class is responsible for controlling the "Create Todo" window of the
  * application.
  */
-public class CreateToDoController {
+public class CreateToDoController implements Observable {
 
     /**
      * Submit button to create a new ToDo.
@@ -43,6 +46,7 @@ public class CreateToDoController {
     private LocalDate deadlineDate;
     private Date date;
     private Project rootProject;
+    private ArrayList<InvalidationListener> observers = new ArrayList<>();
 
     /**
      * Creates a new task based on user input.
@@ -61,6 +65,7 @@ public class CreateToDoController {
             rootProject.addTask(task);
             Stage stage = (Stage) newTodoSubmitButton.getScene().getWindow();
             stage.close();
+            notifyListeners();
         }
     }
 
@@ -118,6 +123,24 @@ public class CreateToDoController {
     public void setRootProject(Project project){
         if(project != null){
             rootProject = project;
+        }
+    }
+    @Override
+    public void addListener(InvalidationListener listener) {
+        if(listener != null){
+            observers.add(listener);
+        }
+    }
+
+    @Override
+    public void removeListener(InvalidationListener listener) {
+        if(observers.contains(listener)){
+            observers.remove(listener);
+        }
+    }
+    private void notifyListeners(){
+        for(InvalidationListener listener : observers){
+            listener.invalidated(this);
         }
     }
 }

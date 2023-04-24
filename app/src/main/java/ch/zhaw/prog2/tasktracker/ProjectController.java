@@ -7,6 +7,8 @@ import ch.zhaw.prog2.tasktracker.todo.DummyTodoModel;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +23,7 @@ import javafx.util.Duration;
 /**
  * This class is a controller for the main window of the ToDo application.
  */
-public class ProjectController {
+public class ProjectController implements InvalidationListener {
 
     /**
      * The button for opening the create ToDo window.
@@ -120,4 +122,8 @@ public class ProjectController {
         }
     }
 
+    @Override
+    public void invalidated(Observable observable) {
+
+    }
 }

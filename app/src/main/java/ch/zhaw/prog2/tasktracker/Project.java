@@ -1,7 +1,6 @@
 package ch.zhaw.prog2.tasktracker;
 
 import ch.zhaw.prog2.tasktracker.Task.TaskStatus;
-
 import java.util.ArrayList;
 
 /**
@@ -9,7 +8,7 @@ import java.util.ArrayList;
  * Has a list of tasks and keeps track of time used for each task
  */
 
-public class Project {
+public class Project{
     private ArrayList<Task> tasks = new ArrayList<>();
     private String name;
 
@@ -111,5 +110,4 @@ public class Project {
             tasks.remove(task);
         }
     }
-
 }
