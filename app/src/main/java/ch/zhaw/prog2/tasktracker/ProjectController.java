@@ -67,6 +67,7 @@ public class ProjectController implements InvalidationListener {
             Pane rootPane = loader.load();
             CreateToDoController controller = loader.getController();
             controller.setRootProject(project);
+            controller.addListener(this);
             // create a scene with the new the root-Node
             Scene scene = new Scene(rootPane);
             // create a new stage and show the new window
@@ -124,6 +125,7 @@ public class ProjectController implements InvalidationListener {
 
     @Override
     public void invalidated(Observable observable) {
-
+        todoOverviewContent.getChildren().clear();
+        addToDosToScrollPane();
     }
 }
