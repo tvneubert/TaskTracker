@@ -110,7 +110,7 @@ public class ProjectController implements InvalidationListener {
         // we can only start the timeline if we do have a todo object because it does contain the timer
         tl = new Timeline(new KeyFrame(Duration.millis(16.6), (ActionEvent e) -> {
             int timerSum = 0;
-            for (DummyTodoDataObject todo : tm.getTodos()) {
+            for (Task todo : project.getTasks()) {
                 timerSum += todo.getTimeTracker().getCurrentTime();
             }
             timeLabel.setText(TimeFormater.showTheTime(timerSum));
