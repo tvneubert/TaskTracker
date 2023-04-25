@@ -1,24 +1,28 @@
 package ch.zhaw.prog2.tasktracker;
 
-import ch.zhaw.prog2.tasktracker.todo.DummyTodoDataObject;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
+
 /**
  * This class is a controller for the ToDo list item.
  */
-public class TodoListItemController {
+public class TodoListItemController implements Observable {
 
     /**
      * The ToDo object that is represented by this list item.
      */
-    private DummyTodoDataObject tdo;
+    private Task taskListItem;
+    private ArrayList<InvalidationListener> observers = new ArrayList<>();
 
     /**
      * The label for displaying the name of the ToDo.
@@ -65,18 +69,18 @@ public class TodoListItemController {
     /**
      * This method is called when the ToDo is set and initializes the timeline for
      * timer that is displayed in the ToDo list item.
-     * @param _tdo
+     * @param task
      */
-    public void setTodoObject(DummyTodoDataObject _tdo) {
-        this.tdo = _tdo;
+    public void setTodoObject(Task task) {
+        this.taskListItem = task;
         // we can only start the timeline if we do have a todo object because it does contain the timer
         tl = new Timeline(new KeyFrame(Duration.millis(16.6), (ActionEvent e) -> {
-            timerLabel.setText(TimeFormater.showTheTime(this.tdo.getTimeTracker().getCurrentTime()));
+            timerLabel.setText(TimeFormater.showTheTime(this.taskListItem.getTimeTracker().getCurrentTime()));
         }));
         tl.setCycleCount(Animation.INDEFINITE);
         tl.play();
         
-        TodoNameLabel.setText(this.tdo.getTodoName());
+        TodoNameLabel.setText(this.taskListItem.getDescription());
     }
 
     /**
@@ -90,7 +94,7 @@ public class TodoListItemController {
      */
     @FXML
     public void startTimer() {
-        this.tdo.getTimeTracker().start();
+        this.taskListItem.getTimeTracker().start();
     }
 
     /**
@@ -98,7 +102,7 @@ public class TodoListItemController {
      */
     @FXML
     public void pauseTimer() {
-        this.tdo.getTimeTracker().pause();
+        this.taskListItem.getTimeTracker().pause();
     }
 
     /**
@@ -106,7 +110,53 @@ public class TodoListItemController {
      */
     @FXML
     public void resumeTimer() {
-        this.tdo.getTimeTracker().resume();
+        this.taskListItem.getTimeTracker().resume();
     }
-
+    /**
+     * Event-handler for the delete button of the list item
+     * Deletes the Task
+     * @param event the ActionEvent that triggered this method
+     */
+    @FXML
+    void deleteTodo(ActionEvent event) {
+        notifyListeners();
+    }
+    /**
+     * Implementation of Observable
+     * Add listener to the list of listeners to be notified
+     * @param listener InvalidationListener to add to the list
+     *            The listener to register
+     */
+    @Override
+    public void addListener(InvalidationListener listener) {
+        if(listener != null){
+            observers.add(listener);
+        }
+    }
+    /**
+     * Implementation of Observable
+     * remove listener from the list of listeners to be notified
+     * @param listener InvalidationListener to remove from the list
+     *            The listener to remove
+     */
+    @Override
+    public void removeListener(InvalidationListener listener) {
+        if(observers.contains(listener)){
+            observers.remove(listener);
+        }
+    }
+    /**
+     * Required for the function of Observable
+     * Loop though all listeners and notify them all
+     */
+    private void notifyListeners(){
+        for(InvalidationListener listener : observers){
+            listener.invalidated(this);
+        }
+    }
+    /**
+     * get the Task object this list item represents
+     * @return Task object
+     */
+    public Task getTaskListItem(){return taskListItem;}
 }

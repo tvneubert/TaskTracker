@@ -2,11 +2,11 @@ package ch.zhaw.prog2.tasktracker;
 
 import java.io.IOException;
 
-import ch.zhaw.prog2.tasktracker.todo.DummyTodoDataObject;
-import ch.zhaw.prog2.tasktracker.todo.DummyTodoModel;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +21,7 @@ import javafx.util.Duration;
 /**
  * This class is a controller for the main window of the ToDo application.
  */
-public class ProjectController {
+public class ProjectController implements InvalidationListener {
 
     /**
      * The button for opening the create ToDo window.
@@ -41,13 +41,18 @@ public class ProjectController {
     @FXML
     private VBox todoOverviewContent;
 
-    /**
-     * The model for a dummyToDo Model to test the application with time summary.
-     */
-    private DummyTodoModel tm = new DummyTodoModel();
 
-    // this timeline is for summarizing the time of all todos
-    private Timeline tl;
+    /**
+     *
+     this timeline is for summarizing the time of all todos
+     */
+
+    private Timeline projectTimeLine;
+
+    /**
+     * Project this window is displaying
+     */
+    private Project project;
 
     /**
      * This method is called when the "open create ToDo window" button is clicked.
@@ -62,6 +67,9 @@ public class ProjectController {
             // initialize and load the window scene graph from the fxml description
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/CreateToDo.fxml"));
             Pane rootPane = loader.load();
+            CreateToDoController controller = loader.getController();
+            controller.setRootProject(project);
+            controller.addListener(this);
             // create a scene with the new the root-Node
             Scene scene = new Scene(rootPane);
             // create a new stage and show the new window
@@ -79,13 +87,14 @@ public class ProjectController {
      * This method is here for testing and will need to be changed!
      */
     public void addToDosToScrollPane() {
-        for (DummyTodoDataObject todo : tm.getTodos()) {
+        for(Task task : project.getOpenTasks()){
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/TodoListItem.fxml"));
                 Pane todoPane = loader.load();
 
                 TodoListItemController todoListItemController = loader.getController();
-                todoListItemController.setTodoObject(todo);
+                todoListItemController.addListener(this);
+                todoListItemController.setTodoObject(task);
 
                 todoOverviewContent.getChildren().add(todoPane);
             } catch (IOException e) {
@@ -101,15 +110,40 @@ public class ProjectController {
      */
     private void startSummarizingTimer() {
         // we can only start the timeline if we do have a todo object because it does contain the timer
-        tl = new Timeline(new KeyFrame(Duration.millis(16.6), (ActionEvent e) -> {
+        projectTimeLine = new Timeline(new KeyFrame(Duration.millis(16.6), (ActionEvent e) -> {
             int timerSum = 0;
-            for (DummyTodoDataObject todo : tm.getTodos()) {
+            for (Task todo : project.getTasks()) {
                 timerSum += todo.getTimeTracker().getCurrentTime();
             }
             timeLabel.setText(TimeFormater.showTheTime(timerSum));
         }));
-        tl.setCycleCount(Animation.INDEFINITE);
-        tl.play();
+        projectTimeLine.setCycleCount(Animation.INDEFINITE);
+        projectTimeLine.play();
     }
 
+    /**
+     * Set the project that this Window is controlling
+     * @param project Project to be used
+     */
+    public void setProject(Project project){
+        if(project != null){
+            this.project = project;
+        }
+    }
+
+    /**
+     * Implementation of the InvalidationListener
+     * Processes the invalidation event from the Observable
+     * @param observable the Observable that triggered the invalidation event
+     *            The {@code Observable} that became invalid
+     */
+    @Override
+    public void invalidated(Observable observable) {
+        if(observable instanceof TodoListItemController){
+            Task task = ((TodoListItemController) observable).getTaskListItem();
+            project.removeTask(task);
+        }
+        todoOverviewContent.getChildren().clear();
+        addToDosToScrollPane();
+    }
 }

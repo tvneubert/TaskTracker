@@ -1,7 +1,10 @@
 package ch.zhaw.prog2.tasktracker;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -14,7 +17,7 @@ import javafx.fxml.FXMLLoader;
 /**
  * This class is a controller for the Project list item.
  */
-public class ProjectListItemController {
+public class ProjectListItemController implements Observable {
 
     /**
      * The label for displaying the name of the Project.
@@ -35,6 +38,17 @@ public class ProjectListItemController {
     private Button openProjectButton;
 
     /**
+     * Project this list item represents
+     */
+    private Project project;
+
+    /**
+     * Required for the function of Observable
+     * List of observers of this Observable
+     */
+    private ArrayList<InvalidationListener> observers = new ArrayList<>();
+
+    /**
      * Opens the Project in a new window.
      * 
      * Loads the scene graph from the FXML file, sets up the controller, and
@@ -51,6 +65,7 @@ public class ProjectListItemController {
 
             // Add random Projects to scrollPane (FOR DEMONSTRATION ONLY!!)
             ProjectController projectController = loader.getController();
+            projectController.setProject(project);
             projectController.addToDosToScrollPane();
 
             // create a scene with the new the root-Node
@@ -65,12 +80,70 @@ public class ProjectListItemController {
     }
 
     /**
+     * Event-handler for the delete button of the list item
+     * Deletes the project
+     * @param event the ActionEvent that triggered this method
+     */
+    @FXML
+    void deleteProject(ActionEvent event) {
+        notifyListeners();
+        }
+
+    /**
      * Sets the text of the ProjectNameLabel to the specified name.
      * 
      * @param name the name of the Project to be displayed
      */
     public void setProjectNameLabel(String name) {
         ProjectNameLabel.setText(name);
+    }
+
+    /**
+     * Set the Project this list item represents
+     * @param project Project of this list item
+     */
+    public void setProject(Project project){
+        if(project != null){
+            this.project = project;
+        }
+    }
+    /**
+     * get the Project object this list item represents
+     * @return Project object
+     */
+    public Project getProject(){return project;}
+    /**
+     * Implementation of Observable
+     * Add listener to the list of listeners to be notified
+     * @param listener InvalidationListener to add to the list
+     *            The listener to register
+     */
+    @Override
+    public void addListener(InvalidationListener listener) {
+        if(listener != null){
+            observers.add(listener);
+        }
+    }
+    /**
+     * Implementation of Observable
+     * remove listener from the list of listeners to be notified
+     * @param listener InvalidationListener to remove from the list
+     *            The listener to remove
+     */
+    @Override
+    public void removeListener(InvalidationListener listener) {
+        if(observers.contains(listener)){
+            observers.remove(listener);
+        }
+    }
+    /**
+     * Required for the function of Observable
+     * Loop though all listeners and notify them all
+     */
+    private void notifyListeners(){
+        for(InvalidationListener listener : observers){
+            listener.invalidated(this);
+        }
     }
 
 }

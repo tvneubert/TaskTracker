@@ -1,5 +1,7 @@
 package ch.zhaw.prog2.tasktracker;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,12 +11,13 @@ import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  * This class is responsible for controlling the "Create Todo" window of the
  * application.
  */
-public class CreateToDoController {
+public class CreateToDoController implements Observable {
 
     /**
      * Submit button to create a new ToDo.
@@ -42,6 +45,15 @@ public class CreateToDoController {
     private Task task;
     private LocalDate deadlineDate;
     private Date date;
+    /**
+     * Project this new task will be added to
+     */
+    private Project rootProject;
+    /**
+     * List of observers
+     * Required for the implementation of Observable
+     */
+    private ArrayList<InvalidationListener> observers = new ArrayList<>();
 
     /**
      * Creates a new task based on user input.
@@ -57,8 +69,10 @@ public class CreateToDoController {
         }
         if (checkDecriptionSet() && checkTaskSet() && checkDeadlineSet()) {
             task = new Task(todoDescription.getText(), todoGoal.getText(), date);
+            rootProject.addTask(task);
             Stage stage = (Stage) newTodoSubmitButton.getScene().getWindow();
             stage.close();
+            notifyListeners();
         }
     }
 
@@ -111,6 +125,49 @@ public class CreateToDoController {
             return false;
         } else {
             return true;
+        }
+    }
+    /**
+     * Set the project this task will be added to
+     * @param project Project to add this task to
+     */
+    public void setRootProject(Project project){
+        if(project != null){
+            rootProject = project;
+        }
+    }
+    /**
+     * Implementation of Observable
+     * Add listener to the list of listeners to be notified
+     * @param listener InvalidationListener to add to the list
+     *            The listener to register
+     */
+    @Override
+    public void addListener(InvalidationListener listener) {
+        if(listener != null){
+            observers.add(listener);
+        }
+    }
+
+    /**
+     * Implementation of Observable
+     * remove listener from the list of listeners to be notified
+     * @param listener InvalidationListener to remove from the list
+     *            The listener to remove
+     */
+    @Override
+    public void removeListener(InvalidationListener listener) {
+        if(observers.contains(listener)){
+            observers.remove(listener);
+        }
+    }
+    /**
+     * Required for the function of Observable
+     * Loop though all listeners and notify them all
+     */
+    private void notifyListeners(){
+        for(InvalidationListener listener : observers){
+            listener.invalidated(this);
         }
     }
 }

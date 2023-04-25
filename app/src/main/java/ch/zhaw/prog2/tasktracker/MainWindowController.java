@@ -1,8 +1,10 @@
 package ch.zhaw.prog2.tasktracker;
 
 import java.io.IOException;
-import java.util.HashMap;
 
+import ch.zhaw.prog2.tasktracker.todo.DummyProjectOverview;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +17,7 @@ import javafx.stage.Stage;
 /**
  * The controller for the main window of the Task Tracker application.
  */
-public class MainWindowController {
+public class MainWindowController implements InvalidationListener {
 
     /**
      * The button for opening the create Project window.
@@ -28,6 +30,12 @@ public class MainWindowController {
      */
     @FXML
     private VBox projectOverviewContent;
+
+    /**
+     * Placeholder for a projectOverview for testing purposes
+     * TODO Replace with proper ProjectOverview once implemented
+     */
+    private DummyProjectOverview projectOverview = new DummyProjectOverview();
 
     /**
      * This method is called when the "open create Project window" button is
@@ -43,6 +51,9 @@ public class MainWindowController {
             // initialize and load the window scene graph from the fxml description
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/CreateProject.fxml"));
             Pane rootPane = loader.load();
+            CreateProjectController controller = loader.getController();
+            controller.addListener(this);
+            controller.setRootProjectOverview(this.projectOverview);
             // create a scene with the new the root-Node
             Scene scene = new Scene(rootPane);
             // create a new stage and show the new window
@@ -60,23 +71,15 @@ public class MainWindowController {
      * This method is here for testing and will need to be changed!
      */
     public void addProjectsToScrollPane() {
-        HashMap<Integer, String> projects = new HashMap<>();
-        projects.put(1, "Project 1");
-        projects.put(2, "Project 2");
-        projects.put(3, "Project 3");
-        projects.put(4, "Project 4");
-        projects.put(5, "Project 5");
-        projects.put(6, "Project 6");
-        projects.put(7, "Project 7");
-        projects.put(8, "Project 8");
-
-        for (String project : projects.values()) {
+        for (Project project : projectOverview.getProjectList()) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/ProjectListItem.fxml"));
                 Pane projectPane = loader.load();
 
                 ProjectListItemController projectListItemController = loader.getController();
-                projectListItemController.setProjectNameLabel(project);
+                projectListItemController.addListener(this);
+                projectListItemController.setProjectNameLabel(project.getName());
+                projectListItemController.setProject(project);
 
                 projectOverviewContent.getChildren().add(projectPane);
             } catch (IOException e) {
@@ -85,4 +88,20 @@ public class MainWindowController {
         }
     }
 
+    /**
+     * Implementation of the InvalidationListener
+     * Processes the invalidation event from the Observable
+     * @param observable the Observable that triggered the invalidation event
+     *            The {@code Observable} that became invalid
+     */
+
+    @Override
+    public void invalidated(Observable observable) {
+        if(observable instanceof ProjectListItemController){
+            Project project = ((ProjectListItemController) observable).getProject();
+            projectOverview.removeProject(project);
+        }
+        projectOverviewContent.getChildren().clear();
+        addProjectsToScrollPane();
+    }
 }
