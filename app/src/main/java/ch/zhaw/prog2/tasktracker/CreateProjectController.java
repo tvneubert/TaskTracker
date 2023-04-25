@@ -1,6 +1,6 @@
 package ch.zhaw.prog2.tasktracker;
 
-import ch.zhaw.prog2.tasktracker.todo.DummyProjectOverwiev;
+import ch.zhaw.prog2.tasktracker.todo.DummyProjectOverview;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.event.ActionEvent;
@@ -28,7 +28,14 @@ public class CreateProjectController implements Observable {
      */
     @FXML
     private TextField newProjectTextField;
-    private DummyProjectOverwiev rootProjectOverview;
+    /**
+     * ProjectOverview this new Project will be added to
+     */
+    private DummyProjectOverview rootProjectOverview;
+    /**
+     * List of observers
+     * Required for the implementation of Observable
+     */
     private ArrayList<InvalidationListener> observers = new ArrayList<>();
 
     /**
@@ -60,24 +67,44 @@ public class CreateProjectController implements Observable {
         stage.close();
         notifyListeners();
     }
-    public void setRootProjectOverview(DummyProjectOverwiev projectOverwiev){
-        if(projectOverwiev != null){
-            rootProjectOverview = projectOverwiev;
+
+    /**
+     * Set the ProjectOverview this task will be added to
+     * @param projectOverview Project to add this task to
+     */
+    public void setRootProjectOverview(DummyProjectOverview projectOverview){
+        if(projectOverview != null){
+            rootProjectOverview = projectOverview;
         }
     }
+    /**
+     * Implementation of Observable
+     * Add listener to the list of listeners to be notified
+     * @param listener InvalidationListener to add to the list
+     *            The listener to register
+     */
     @Override
     public void addListener(InvalidationListener listener) {
         if(listener != null){
             observers.add(listener);
         }
     }
-
+    /**
+     * Implementation of Observable
+     * remove listener from the list of listeners to be notified
+     * @param listener InvalidationListener to remove from the list
+     *            The listener to remove
+     */
     @Override
     public void removeListener(InvalidationListener listener) {
         if(observers.contains(listener)){
             observers.remove(listener);
         }
     }
+    /**
+     * Required for the function of Observable
+     * Loop though all listeners and notify them all
+     */
     private void notifyListeners(){
         for(InvalidationListener listener : observers){
             listener.invalidated(this);

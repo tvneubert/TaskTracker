@@ -2,8 +2,6 @@ package ch.zhaw.prog2.tasktracker;
 
 import java.io.IOException;
 
-import ch.zhaw.prog2.tasktracker.todo.DummyTodoDataObject;
-import ch.zhaw.prog2.tasktracker.todo.DummyTodoModel;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -43,13 +41,17 @@ public class ProjectController implements InvalidationListener {
     @FXML
     private VBox todoOverviewContent;
 
-    /**
-     * The model for a dummyToDo Model to test the application with time summary.
-     */
-    private DummyTodoModel tm = new DummyTodoModel();
 
-    // this timeline is for summarizing the time of all todos
-    private Timeline tl;
+    /**
+     *
+     this timeline is for summarizing the time of all todos
+     */
+
+    private Timeline projectTimeLine;
+
+    /**
+     * Project this window is displaying
+     */
     private Project project;
 
     /**
@@ -108,22 +110,33 @@ public class ProjectController implements InvalidationListener {
      */
     private void startSummarizingTimer() {
         // we can only start the timeline if we do have a todo object because it does contain the timer
-        tl = new Timeline(new KeyFrame(Duration.millis(16.6), (ActionEvent e) -> {
+        projectTimeLine = new Timeline(new KeyFrame(Duration.millis(16.6), (ActionEvent e) -> {
             int timerSum = 0;
             for (Task todo : project.getTasks()) {
                 timerSum += todo.getTimeTracker().getCurrentTime();
             }
             timeLabel.setText(TimeFormater.showTheTime(timerSum));
         }));
-        tl.setCycleCount(Animation.INDEFINITE);
-        tl.play();
+        projectTimeLine.setCycleCount(Animation.INDEFINITE);
+        projectTimeLine.play();
     }
+
+    /**
+     * Set the project that this Window is controlling
+     * @param project Project to be used
+     */
     public void setProject(Project project){
         if(project != null){
             this.project = project;
         }
     }
 
+    /**
+     * Implementation of the InvalidationListener
+     * Processes the invalidation event from the Observable
+     * @param observable the Observable that triggered the invalidation event
+     *            The {@code Observable} that became invalid
+     */
     @Override
     public void invalidated(Observable observable) {
         if(observable instanceof TodoListItemController){

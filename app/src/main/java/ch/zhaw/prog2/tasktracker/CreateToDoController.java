@@ -45,7 +45,14 @@ public class CreateToDoController implements Observable {
     private Task task;
     private LocalDate deadlineDate;
     private Date date;
+    /**
+     * Project this new task will be added to
+     */
     private Project rootProject;
+    /**
+     * List of observers
+     * Required for the implementation of Observable
+     */
     private ArrayList<InvalidationListener> observers = new ArrayList<>();
 
     /**
@@ -120,11 +127,21 @@ public class CreateToDoController implements Observable {
             return true;
         }
     }
+    /**
+     * Set the project this task will be added to
+     * @param project Project to add this task to
+     */
     public void setRootProject(Project project){
         if(project != null){
             rootProject = project;
         }
     }
+    /**
+     * Implementation of Observable
+     * Add listener to the list of listeners to be notified
+     * @param listener InvalidationListener to add to the list
+     *            The listener to register
+     */
     @Override
     public void addListener(InvalidationListener listener) {
         if(listener != null){
@@ -132,12 +149,22 @@ public class CreateToDoController implements Observable {
         }
     }
 
+    /**
+     * Implementation of Observable
+     * remove listener from the list of listeners to be notified
+     * @param listener InvalidationListener to remove from the list
+     *            The listener to remove
+     */
     @Override
     public void removeListener(InvalidationListener listener) {
         if(observers.contains(listener)){
             observers.remove(listener);
         }
     }
+    /**
+     * Required for the function of Observable
+     * Loop though all listeners and notify them all
+     */
     private void notifyListeners(){
         for(InvalidationListener listener : observers){
             listener.invalidated(this);

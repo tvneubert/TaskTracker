@@ -3,13 +3,20 @@ package ch.zhaw.prog2.tasktracker.todo;
 import ch.zhaw.prog2.tasktracker.Project;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class DummyProjectOverwiev {
+public class DummyProjectOverview {
+
+    /**
+     * List of projects
+     * Something similar will have to be in proper ProjectOverview
+     */
     private ArrayList<Project> projectList = new ArrayList<>();
 
-
-    public DummyProjectOverwiev(){
+    /**
+     * Constructor for the DummmyProjectOverview
+     * Adds some placeholder projects for testing
+     */
+    public DummyProjectOverview(){
 
         projectList.add(new Project("Project 1"));
         projectList.add(new Project("Project 2"));
@@ -24,16 +31,30 @@ public class DummyProjectOverwiev {
 
     }
 
+    /**
+     * Add Project to the list
+     * @param project Project to be added to the list
+     */
     public void addProject(Project project){
         if(project != null) {
             projectList.add(project);
         }
     }
+
+    /**
+     * remove a project from the list again
+     * @param project project to be removed from the list
+     */
     public void removeProject(Project project){
         if(projectList.contains(project)){
             projectList.remove(project);
         }
     }
+
+    /**
+     * Return list of projects in the overview
+     * @return ArrayList of Projects from the projectList
+     */
     public ArrayList<Project> getProjectList(){
         return projectList;
     }

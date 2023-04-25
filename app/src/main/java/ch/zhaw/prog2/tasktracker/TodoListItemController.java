@@ -112,32 +112,51 @@ public class TodoListItemController implements Observable {
     public void resumeTimer() {
         this.taskListItem.getTimeTracker().resume();
     }
-
-
+    /**
+     * Event-handler for the delete button of the list item
+     * Deletes the Task
+     * @param event the ActionEvent that triggered this method
+     */
     @FXML
     void deleteTodo(ActionEvent event) {
         notifyListeners();
     }
-
-
-
+    /**
+     * Implementation of Observable
+     * Add listener to the list of listeners to be notified
+     * @param listener InvalidationListener to add to the list
+     *            The listener to register
+     */
     @Override
     public void addListener(InvalidationListener listener) {
         if(listener != null){
             observers.add(listener);
         }
     }
-
+    /**
+     * Implementation of Observable
+     * remove listener from the list of listeners to be notified
+     * @param listener InvalidationListener to remove from the list
+     *            The listener to remove
+     */
     @Override
     public void removeListener(InvalidationListener listener) {
         if(observers.contains(listener)){
             observers.remove(listener);
         }
     }
+    /**
+     * Required for the function of Observable
+     * Loop though all listeners and notify them all
+     */
     private void notifyListeners(){
         for(InvalidationListener listener : observers){
             listener.invalidated(this);
         }
     }
+    /**
+     * get the Task object this list item represents
+     * @return Task object
+     */
     public Task getTaskListItem(){return taskListItem;}
 }

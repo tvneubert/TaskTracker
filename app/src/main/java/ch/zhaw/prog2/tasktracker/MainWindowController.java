@@ -1,9 +1,8 @@
 package ch.zhaw.prog2.tasktracker;
 
 import java.io.IOException;
-import java.util.HashMap;
 
-import ch.zhaw.prog2.tasktracker.todo.DummyProjectOverwiev;
+import ch.zhaw.prog2.tasktracker.todo.DummyProjectOverview;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.event.ActionEvent;
@@ -31,7 +30,12 @@ public class MainWindowController implements InvalidationListener {
      */
     @FXML
     private VBox projectOverviewContent;
-    private DummyProjectOverwiev projectOverwiev = new DummyProjectOverwiev();
+
+    /**
+     * Placeholder for a projectOverview for testing purposes
+     * TODO Replace with proper ProjectOverview once implemented
+     */
+    private DummyProjectOverview projectOverview = new DummyProjectOverview();
 
     /**
      * This method is called when the "open create Project window" button is
@@ -49,7 +53,7 @@ public class MainWindowController implements InvalidationListener {
             Pane rootPane = loader.load();
             CreateProjectController controller = loader.getController();
             controller.addListener(this);
-            controller.setRootProjectOverview(this.projectOverwiev);
+            controller.setRootProjectOverview(this.projectOverview);
             // create a scene with the new the root-Node
             Scene scene = new Scene(rootPane);
             // create a new stage and show the new window
@@ -67,7 +71,7 @@ public class MainWindowController implements InvalidationListener {
      * This method is here for testing and will need to be changed!
      */
     public void addProjectsToScrollPane() {
-        for (Project project : projectOverwiev.getProjectList()) {
+        for (Project project : projectOverview.getProjectList()) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/ProjectListItem.fxml"));
                 Pane projectPane = loader.load();
@@ -84,11 +88,18 @@ public class MainWindowController implements InvalidationListener {
         }
     }
 
+    /**
+     * Implementation of the InvalidationListener
+     * Processes the invalidation event from the Observable
+     * @param observable the Observable that triggered the invalidation event
+     *            The {@code Observable} that became invalid
+     */
+
     @Override
     public void invalidated(Observable observable) {
         if(observable instanceof ProjectListItemController){
             Project project = ((ProjectListItemController) observable).getProject();
-            projectOverwiev.removeProject(project);
+            projectOverview.removeProject(project);
         }
         projectOverviewContent.getChildren().clear();
         addProjectsToScrollPane();
