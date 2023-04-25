@@ -7,7 +7,7 @@ import ch.zhaw.TimeTracker;
 public class Task {
 
     public enum TaskStatus {
-        TODO, ACTIVE, FINISHED
+        task, ACTIVE, FINISHED
     }
 
     private String description;
@@ -21,13 +21,13 @@ public class Task {
         this.description = description;
         this.goal = goal;
         this.deadline = deadline;
-        this.taskStatus = TaskStatus.TODO;
+        this.taskStatus = TaskStatus.task;
     }
 
     /**
-     * This method creates the TimeTracker for the ToDo.
+     * This method creates the TimeTracker for the task.
      *
-     * @return the TimeTracker of the ToDo
+     * @return the TimeTracker of the task
      */
     public TimeTracker getTimeTracker() {
         return tt;

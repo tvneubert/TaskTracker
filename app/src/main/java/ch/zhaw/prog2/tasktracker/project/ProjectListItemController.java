@@ -68,7 +68,7 @@ public class ProjectListItemController implements Observable {
             // Add random Projects to scrollPane (FOR DEMONSTRATION ONLY!!)
             ProjectController projectController = loader.getController();
             projectController.setProject(project);
-            projectController.addToDosToScrollPane();
+            projectController.addTasksToScrollPane();
 
             // create a scene with the new the root-Node
             Scene scene = new Scene(rootPane);

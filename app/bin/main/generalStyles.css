@@ -3,9 +3,9 @@
 #timerStartButton,
 #timerStopButton,
 #timerResetButton,
-#openCreateTodoWindowButton,
+#openCreateTaskWindowButton,
 #newProjectSubmitButton,
-#newTodoSubmitButton {
+#newTaskSubmitButton {
     -fx-background-color:
         linear-gradient(#b6f3fa, #87cdfc);
 }
@@ -15,40 +15,40 @@
 #timerStartButton:hover,
 #timerStopButton:hover,
 #timerResetButton:hover,
-#openCreateTodoWindowButton:hover,
+#openCreateTaskWindowButton:hover,
 #newProjectSubmitButton:hover,
-#newTodoSubmitButton:hover {
+#newTaskSubmitButton:hover {
     -fx-background-color:
         linear-gradient(#91dcfa, #5d9cfa);
 }
 
 #deleteProjectButton,
-#deleteTodoButton {
+#deleteTaskButton {
     -fx-background-color:
         linear-gradient(#fac4b6, #fd8787);
 }
 
 #deleteProjectButton:hover,
-#deleteTodoButton:hover {
+#deleteTaskButton:hover {
     -fx-background-color:
         linear-gradient(#fa9494, #fa6464);
 }
 
 #deleteProjectButton,
-#deleteTodoButton,
+#deleteTaskButton,
 #openCreateProjectWindowButton,
 #openProjectButton,
 #timerStartButton,
 #timerStopButton,
 #timerResetButton,
-#openCreateTodoWindowButton {
+#openCreaeTaskWindowButton {
 -fx-background-radius: 6, 5;
     -fx-background-insets: 0, 1;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
 }
 
-#todoItemHboxOne,
-#todoItemHboxTwo,
+#taskItemHboxOne,
+#taskItemHboxTwo,
 #projectItemHbox {
     -fx-background-color: #ffffff
 }
