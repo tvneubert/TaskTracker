@@ -8,13 +8,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane fx:id="todoListItemBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="92.0" prefWidth="294.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zhaw.prog2.tasktracker.TodoListItemController">
+<Pane fx:id="taskListItemBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="92.0" prefWidth="294.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zhaw.prog2.tasktracker.task.TaskListItemController">
    <children>
       <VBox fx:id="projectItemVbox" prefHeight="92.0" prefWidth="294.0">
          <children>
-            <HBox fx:id="todoItemHboxOne" alignment="CENTER_LEFT" prefHeight="105.0" prefWidth="284.0" spacing="15.0">
+            <HBox fx:id="taskItemHboxOne" alignment="CENTER_LEFT" prefHeight="105.0" prefWidth="284.0" spacing="15.0">
                <children>
-                  <Label fx:id="TodoNameLabel" text="Todo Name">
+                  <Label fx:id="taskNameLabel" text="task Name">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -22,7 +22,7 @@
                         <Insets left="5.0" right="145.0" />
                      </HBox.margin>
                   </Label>
-                  <Button fx:id="deleteTodoButton" mnemonicParsing="false" text="löschen">
+                  <Button fx:id="deleteTaskButton" mnemonicParsing="false" text="löschen">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -32,7 +32,7 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <HBox fx:id="todoItemHboxTwo" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="11.0">
+            <HBox fx:id="taskItemHboxTwo" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="11.0">
                <children>
                   <Label fx:id="timerLabel" prefHeight="17.0" prefWidth="81.0" text="Stoppuhr">
                      <HBox.margin>
@@ -48,7 +48,7 @@
       </VBox>
    </children>
    <stylesheets>
-      <URL value="@TodoListItem.css" />
+      <URL value="@taskListItem.css" />
       <URL value="@GeneralStyles.css" />
    </stylesheets>
 </Pane>

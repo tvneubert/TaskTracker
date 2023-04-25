@@ -1,5 +1,6 @@
-package ch.zhaw.prog2.tasktracker;
+package ch.zhaw.prog2.tasktracker.task;
 
+import ch.zhaw.prog2.tasktracker.project.Project;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.event.ActionEvent;
@@ -14,34 +15,34 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 /**
- * This class is responsible for controlling the "Create Todo" window of the
+ * This class is responsible for controlling the "Create task" window of the
  * application.
  */
-public class CreateToDoController implements Observable {
+public class CreateTaskController implements Observable {
 
     /**
-     * Submit button to create a new ToDo.
+     * Submit button to create a new task.
      */
     @FXML
-    private Button newTodoSubmitButton;
+    private Button newTaskSubmitButton;
 
     /**
-     * DatePicker to select a deadline for the ToDo.
+     * DatePicker to select a deadline for the task.
      */
     @FXML
-    private DatePicker todoDeadline;
+    private DatePicker taskDeadline;
 
     /**
-     * TextArea to enter a description for the ToDo.
+     * TextArea to enter a description for the task.
      */
     @FXML
-    private TextArea todoDescription;
+    private TextArea taskDescription;
 
     /**
-     * TextArea to enter tasks for the ToDo.
+     * TextArea to enter tasks for the task.
      */
     @FXML
-    private TextArea todoGoal;
+    private TextArea taskGoal;
     private Task task;
     private LocalDate deadlineDate;
     private Date date;
@@ -62,15 +63,15 @@ public class CreateToDoController implements Observable {
      * @param event The event that triggered the method.
      */
     @FXML
-    private void createTodo(ActionEvent event) {
-        if (todoDeadline.getValue() != null) {
-            deadlineDate = todoDeadline.getValue();
+    private void createTask(ActionEvent event) {
+        if (taskDeadline.getValue() != null) {
+            deadlineDate = taskDeadline.getValue();
             date = Date.valueOf(deadlineDate);
         }
         if (checkDecriptionSet() && checkTaskSet() && checkDeadlineSet()) {
-            task = new Task(todoDescription.getText(), todoGoal.getText(), date);
+            task = new Task(taskDescription.getText(), taskGoal.getText(), date);
             rootProject.addTask(task);
-            Stage stage = (Stage) newTodoSubmitButton.getScene().getWindow();
+            Stage stage = (Stage) newTaskSubmitButton.getScene().getWindow();
             stage.close();
             notifyListeners();
         }
@@ -84,10 +85,10 @@ public class CreateToDoController implements Observable {
      */
     private boolean checkDecriptionSet() {
         String emptyDecription = "Bitte gib eine Beschreibung ein!";
-        if (todoDescription.getText().trim().isEmpty()) {
-            this.todoDescription.appendText(emptyDecription);
+        if (taskDescription.getText().trim().isEmpty()) {
+            this.taskDescription.appendText(emptyDecription);
             return false;
-        } else if (todoGoal.getText().equals(emptyDecription)) {
+        } else if (taskGoal.getText().equals(emptyDecription)) {
             return false;
         } else {
             return true;
@@ -102,10 +103,10 @@ public class CreateToDoController implements Observable {
      */
     private boolean checkTaskSet() {
         String emptyTask = "Bitte gib eine Beschreibung ein!";
-        if (todoGoal.getText().trim().isEmpty()) {
-            this.todoGoal.appendText(emptyTask);
+        if (taskGoal.getText().trim().isEmpty()) {
+            this.taskGoal.appendText(emptyTask);
             return false;
-        } else if (todoGoal.getText().equals(emptyTask)) {
+        } else if (taskGoal.getText().equals(emptyTask)) {
             return false;
         } else {
             return true;
@@ -120,8 +121,8 @@ public class CreateToDoController implements Observable {
      */
     private boolean checkDeadlineSet() {
         LocalDate today = LocalDate.now();
-        if (todoDeadline.getValue() == null || deadlineDate.isBefore(today)) {
-            todoDeadline.setStyle("-fx-background-color: #e50808;");
+        if (taskDeadline.getValue() == null || deadlineDate.isBefore(today)) {
+            taskDeadline.setStyle("-fx-background-color: #e50808;");
             return false;
         } else {
             return true;

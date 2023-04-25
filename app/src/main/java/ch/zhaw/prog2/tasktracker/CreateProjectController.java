@@ -1,6 +1,7 @@
 package ch.zhaw.prog2.tasktracker;
 
-import ch.zhaw.prog2.tasktracker.todo.DummyProjectOverview;
+import ch.zhaw.prog2.tasktracker.project.Project;
+import ch.zhaw.prog2.tasktracker.task.DummyProjectOverview;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.event.ActionEvent;
@@ -42,7 +43,7 @@ public class CreateProjectController implements Observable {
      * This method is called when the user clicks the "Create Project" button.
      * It creates a new project and closes the window.
      *
-     * TODO: Implement the creation of a new project.
+     * task: Implement the creation of a new project.
      *
      * @param event The ActionEvent triggered by the user clicking the "Create
      *              Project" button.
@@ -50,7 +51,7 @@ public class CreateProjectController implements Observable {
     @FXML
     void createProject(ActionEvent event) {
         String emptyName = "Bitten geben Sie dem Projekt einen Namen";
-        // TODO add to ProjectOverview list
+        // task add to ProjectOverview list
         if(newProjectTextField == null || newProjectTextField.toString().trim() == "" || newProjectTextField.toString().equals(emptyName)){
             newProjectTextField.setText(emptyName);
         }else{

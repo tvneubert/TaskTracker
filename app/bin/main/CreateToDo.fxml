@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zhaw.prog2.tasktracker.CreateToDoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zhaw.prog2.tasktracker.task.CreateTaskController">
    <children>
       <VBox layoutX="100.0" layoutY="14.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
          <children>
-            <Label text="Neues ToDo erstellen">
+            <Label text="Neuer Task erstellen">
                <font>
                   <Font name="Arial" size="17.0" />
                </font>
@@ -26,7 +26,7 @@
                   <Insets bottom="5.0" />
                </VBox.margin>
             </Label>
-            <TextArea fx:id="todoDescription" prefHeight="200.0" prefWidth="200.0">
+            <TextArea fx:id="taskDescription" prefHeight="200.0" prefWidth="200.0">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
@@ -36,7 +36,7 @@
                   <Insets bottom="5.0" />
                </VBox.margin>
             </Label>
-            <TextArea fx:id="todoGoal" prefHeight="200.0" prefWidth="200.0">
+            <TextArea fx:id="taskGoal" prefHeight="200.0" prefWidth="200.0">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
@@ -46,12 +46,12 @@
                   <Insets bottom="5.0" />
                </VBox.margin>
             </Label>
-            <DatePicker fx:id="todoDeadline">
+            <DatePicker fx:id="taskDeadline">
                <VBox.margin>
                   <Insets bottom="15.0" />
                </VBox.margin>
             </DatePicker>
-            <Button fx:id="newTodoSubmitButton" mnemonicParsing="false" onAction="#createTodo" stylesheets="@GeneralStyles.css" text="ToDo erstellen" />
+            <Button fx:id="newTaskSubmitButton" mnemonicParsing="false" onAction="#createTask" stylesheets="@GeneralStyles.css" text="task erstellen" />
          </children>
       </VBox>
    </children>
