@@ -91,6 +91,7 @@ public class ProjectController implements InvalidationListener {
                 Pane todoPane = loader.load();
 
                 TodoListItemController todoListItemController = loader.getController();
+                todoListItemController.addListener(this);
                 todoListItemController.setTodoObject(task);
 
                 todoOverviewContent.getChildren().add(todoPane);
@@ -125,6 +126,10 @@ public class ProjectController implements InvalidationListener {
 
     @Override
     public void invalidated(Observable observable) {
+        if(observable instanceof TodoListItemController){
+            Task task = ((TodoListItemController) observable).getTaskListItem();
+            project.removeTask(task);
+        }
         todoOverviewContent.getChildren().clear();
         addToDosToScrollPane();
     }

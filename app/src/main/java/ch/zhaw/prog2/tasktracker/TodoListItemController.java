@@ -3,22 +3,26 @@ package ch.zhaw.prog2.tasktracker;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
+
 /**
  * This class is a controller for the ToDo list item.
  */
-public class TodoListItemController {
+public class TodoListItemController implements Observable {
 
     /**
      * The ToDo object that is represented by this list item.
      */
     private Task taskListItem;
-    //private DummyTodoDataObject tdo;          <-- Old placeholder
+    private ArrayList<InvalidationListener> observers = new ArrayList<>();
 
     /**
      * The label for displaying the name of the ToDo.
@@ -109,4 +113,31 @@ public class TodoListItemController {
         this.taskListItem.getTimeTracker().resume();
     }
 
+
+    @FXML
+    void deleteTodo(ActionEvent event) {
+        notifyListeners();
+    }
+
+
+
+    @Override
+    public void addListener(InvalidationListener listener) {
+        if(listener != null){
+            observers.add(listener);
+        }
+    }
+
+    @Override
+    public void removeListener(InvalidationListener listener) {
+        if(observers.contains(listener)){
+            observers.remove(listener);
+        }
+    }
+    private void notifyListeners(){
+        for(InvalidationListener listener : observers){
+            listener.invalidated(this);
+        }
+    }
+    public Task getTaskListItem(){return taskListItem;}
 }

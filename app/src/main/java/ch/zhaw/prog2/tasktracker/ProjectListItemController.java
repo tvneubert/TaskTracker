@@ -1,7 +1,10 @@
 package ch.zhaw.prog2.tasktracker;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -14,7 +17,7 @@ import javafx.fxml.FXMLLoader;
 /**
  * This class is a controller for the Project list item.
  */
-public class ProjectListItemController {
+public class ProjectListItemController implements Observable {
 
     /**
      * The label for displaying the name of the Project.
@@ -34,6 +37,7 @@ public class ProjectListItemController {
     @FXML
     private Button openProjectButton;
     private Project project;
+    private ArrayList<InvalidationListener> observers = new ArrayList<>();
 
     /**
      * Opens the Project in a new window.
@@ -65,6 +69,10 @@ public class ProjectListItemController {
             System.err.println("Error while loading FXML file: " + e.getMessage());
         }
     }
+    @FXML
+    void deleteProject(ActionEvent event) {
+        notifyListeners();
+        }
 
     /**
      * Sets the text of the ProjectNameLabel to the specified name.
@@ -77,6 +85,25 @@ public class ProjectListItemController {
     public void setProject(Project project){
         if(project != null){
             this.project = project;
+        }
+    }
+    public Project getProject(){return project;}
+    @Override
+    public void addListener(InvalidationListener listener) {
+        if(listener != null){
+            observers.add(listener);
+        }
+    }
+
+    @Override
+    public void removeListener(InvalidationListener listener) {
+        if(observers.contains(listener)){
+            observers.remove(listener);
+        }
+    }
+    private void notifyListeners(){
+        for(InvalidationListener listener : observers){
+            listener.invalidated(this);
         }
     }
 

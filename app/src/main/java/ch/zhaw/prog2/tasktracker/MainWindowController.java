@@ -73,6 +73,7 @@ public class MainWindowController implements InvalidationListener {
                 Pane projectPane = loader.load();
 
                 ProjectListItemController projectListItemController = loader.getController();
+                projectListItemController.addListener(this);
                 projectListItemController.setProjectNameLabel(project.getName());
                 projectListItemController.setProject(project);
 
@@ -85,6 +86,10 @@ public class MainWindowController implements InvalidationListener {
 
     @Override
     public void invalidated(Observable observable) {
+        if(observable instanceof ProjectListItemController){
+            Project project = ((ProjectListItemController) observable).getProject();
+            projectOverwiev.removeProject(project);
+        }
         projectOverviewContent.getChildren().clear();
         addProjectsToScrollPane();
     }
