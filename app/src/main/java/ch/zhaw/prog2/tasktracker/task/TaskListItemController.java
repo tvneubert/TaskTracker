@@ -1,5 +1,6 @@
-package ch.zhaw.prog2.tasktracker;
+package ch.zhaw.prog2.tasktracker.task;
 
+import ch.zhaw.prog2.tasktracker.TimeFormater;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 /**
  * This class is a controller for the ToDo list item.
  */
-public class TodoListItemController implements Observable {
+public class TaskListItemController implements Observable {
 
     /**
      * The ToDo object that is represented by this list item.
@@ -86,7 +87,7 @@ public class TodoListItemController implements Observable {
     /**
      * This is the constructor for the controller
      */
-    public TodoListItemController() {
+    public TaskListItemController() {
     }
 
     /**

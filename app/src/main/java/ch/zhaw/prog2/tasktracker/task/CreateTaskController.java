@@ -1,5 +1,6 @@
-package ch.zhaw.prog2.tasktracker;
+package ch.zhaw.prog2.tasktracker.task;
 
+import ch.zhaw.prog2.tasktracker.project.Project;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.event.ActionEvent;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
  * This class is responsible for controlling the "Create Todo" window of the
  * application.
  */
-public class CreateToDoController implements Observable {
+public class CreateTaskController implements Observable {
 
     /**
      * Submit button to create a new ToDo.

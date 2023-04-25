@@ -1,4 +1,4 @@
-package ch.zhaw.prog2.tasktracker;
+package ch.zhaw.prog2.tasktracker.task;
 
 import java.util.Date;
 

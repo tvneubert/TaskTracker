@@ -1,6 +1,7 @@
-package ch.zhaw.prog2.tasktracker;
+package ch.zhaw.prog2.tasktracker.project;
 
-import ch.zhaw.prog2.tasktracker.Task.TaskStatus;
+import ch.zhaw.prog2.tasktracker.task.Task;
+import ch.zhaw.prog2.tasktracker.task.Task.TaskStatus;
 import java.util.ArrayList;
 
 /**

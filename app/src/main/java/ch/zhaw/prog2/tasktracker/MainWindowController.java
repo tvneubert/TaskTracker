@@ -2,6 +2,8 @@ package ch.zhaw.prog2.tasktracker;
 
 import java.io.IOException;
 
+import ch.zhaw.prog2.tasktracker.project.Project;
+import ch.zhaw.prog2.tasktracker.project.ProjectListItemController;
 import ch.zhaw.prog2.tasktracker.todo.DummyProjectOverview;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;

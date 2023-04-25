@@ -1,7 +1,12 @@
-package ch.zhaw.prog2.tasktracker;
+package ch.zhaw.prog2.tasktracker.project;
 
 import java.io.IOException;
 
+import ch.zhaw.prog2.tasktracker.TimeFormater;
+import ch.zhaw.prog2.tasktracker.project.Project;
+import ch.zhaw.prog2.tasktracker.task.CreateTaskController;
+import ch.zhaw.prog2.tasktracker.task.Task;
+import ch.zhaw.prog2.tasktracker.task.TaskListItemController;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -67,7 +72,7 @@ public class ProjectController implements InvalidationListener {
             // initialize and load the window scene graph from the fxml description
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/CreateToDo.fxml"));
             Pane rootPane = loader.load();
-            CreateToDoController controller = loader.getController();
+            CreateTaskController controller = loader.getController();
             controller.setRootProject(project);
             controller.addListener(this);
             // create a scene with the new the root-Node
@@ -92,7 +97,7 @@ public class ProjectController implements InvalidationListener {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/TodoListItem.fxml"));
                 Pane todoPane = loader.load();
 
-                TodoListItemController todoListItemController = loader.getController();
+                TaskListItemController todoListItemController = loader.getController();
                 todoListItemController.addListener(this);
                 todoListItemController.setTodoObject(task);
 
@@ -139,8 +144,8 @@ public class ProjectController implements InvalidationListener {
      */
     @Override
     public void invalidated(Observable observable) {
-        if(observable instanceof TodoListItemController){
-            Task task = ((TodoListItemController) observable).getTaskListItem();
+        if(observable instanceof TaskListItemController){
+            Task task = ((TaskListItemController) observable).getTaskListItem();
             project.removeTask(task);
         }
         todoOverviewContent.getChildren().clear();
