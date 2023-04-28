@@ -56,6 +56,8 @@ public class CreateTaskController implements Observable {
      */
     private ArrayList<InvalidationListener> observers = new ArrayList<>();
 
+
+
     /**
      * Creates a new task based on user input.
      * Validates the input fields before creating the task.
@@ -68,7 +70,12 @@ public class CreateTaskController implements Observable {
             deadlineDate = taskDeadline.getValue();
             date = Date.valueOf(deadlineDate);
         }
-        if (checkDecriptionSet() && checkTaskSet() && checkDeadlineSet()) {
+
+        boolean isDescriptionSet = checkDecriptionSet();
+        boolean isTaskSet = checkTaskSet();
+        boolean isDeadlineSet = checkDeadlineSet();
+
+        if (isDescriptionSet && isTaskSet && isDeadlineSet) {
             task = new Task(taskDescription.getText(), taskGoal.getText(), date);
             rootProject.addTask(task);
             Stage stage = (Stage) newTaskSubmitButton.getScene().getWindow();
@@ -122,12 +129,14 @@ public class CreateTaskController implements Observable {
     private boolean checkDeadlineSet() {
         LocalDate today = LocalDate.now();
         if (taskDeadline.getValue() == null || deadlineDate.isBefore(today)) {
-            taskDeadline.setStyle("-fx-background-color: #e50808;");
+            taskDeadline.getStyleClass().add("emptyField");
             return false;
         } else {
+            taskDeadline.getStyleClass().removeAll("emptyField");
             return true;
         }
     }
+
     /**
      * Set the project this task will be added to
      * @param project Project to add this task to
@@ -137,6 +146,7 @@ public class CreateTaskController implements Observable {
             rootProject = project;
         }
     }
+
     /**
      * Implementation of Observable
      * Add listener to the list of listeners to be notified
@@ -162,6 +172,7 @@ public class CreateTaskController implements Observable {
             observers.remove(listener);
         }
     }
+
     /**
      * Required for the function of Observable
      * Loop though all listeners and notify them all
