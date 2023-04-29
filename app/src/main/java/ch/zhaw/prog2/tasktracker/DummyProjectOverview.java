@@ -1,6 +1,4 @@
-package ch.zhaw.prog2.tasktracker.todo;
-
-import ch.zhaw.prog2.tasktracker.Project;
+package ch.zhaw.prog2.tasktracker;
 
 import java.util.ArrayList;
 

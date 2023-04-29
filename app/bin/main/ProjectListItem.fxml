@@ -20,7 +20,7 @@
                </HBox.margin>
             </Label>
             <Button fx:id="openProjectButton" mnemonicParsing="false" onAction="#openProjectWindow" text="öffnen" />
-            <Button fx:id="deleteProjectButton" mnemonicParsing="false" text="löschen">
+            <Button fx:id="deleteProjectButton" mnemonicParsing="false" onAction="#deleteProject" text="löschen">
                <HBox.margin>
                   <Insets />
                </HBox.margin>

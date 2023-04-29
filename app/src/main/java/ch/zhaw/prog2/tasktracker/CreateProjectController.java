@@ -1,6 +1,5 @@
 package ch.zhaw.prog2.tasktracker;
 
-import ch.zhaw.prog2.tasktracker.todo.DummyProjectOverview;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.event.ActionEvent;
