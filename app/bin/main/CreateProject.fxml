@@ -25,10 +25,7 @@
                   <Insets bottom="25.0" />
                </VBox.margin>
             </TextField>
-            <Button fx:id="newProjectSubmitButton" mnemonicParsing="false" onAction="#createProject" text="✓">
-               <font>
-                  <Font size="20.0" />
-               </font></Button>
+            <Button fx:id="newProjectSubmitButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#createProject" text="✓" textAlignment="RIGHT" />
          </children>
       </VBox>
    </children>
