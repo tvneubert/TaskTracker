@@ -2,9 +2,13 @@ package ch.zhaw.prog2.tasktracker.project;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
+import ch.zhaw.prog2.tasktracker.oservables.ProjectEvent;
+import ch.zhaw.prog2.tasktracker.oservables.TaskEvent;
 import ch.zhaw.prog2.tasktracker.project.Project;
 import ch.zhaw.prog2.tasktracker.project.ProjectController;
+import ch.zhaw.prog2.tasktracker.task.Task;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.event.ActionEvent;
@@ -20,7 +24,7 @@ import javafx.fxml.FXMLLoader;
 /**
  * This class is a controller for the Project list item.
  */
-public class ProjectListItemController implements Observable {
+public class ProjectListItemController implements Observable, ProjectEvent {
 
     /**
      * The label for displaying the name of the Project.
@@ -104,6 +108,10 @@ public class ProjectListItemController implements Observable {
         ProjectNameLabel.setText(name);
     }
 
+    public void changeProjectNameLableColor(String color) {
+        ProjectNameLabel.setStyle("-fx-text-fill:"+color+";");
+    }
+
     /**
      * Set the Project this list item represents
      * @param project Project of this list item
@@ -111,6 +119,7 @@ public class ProjectListItemController implements Observable {
     public void setProject(Project project){
         if(project != null){
             this.project = project;
+            this.project.addListener(this);
         }
     }
     /**
@@ -149,6 +158,29 @@ public class ProjectListItemController implements Observable {
     private void notifyListeners(){
         for(InvalidationListener listener : observers){
             listener.invalidated(this);
+        }
+    }
+
+    @Override
+    public void allTasksFinished() {
+        if(this.project.getTasks().size() == 0) {
+            return;
+        }
+        this.changeProjectNameLableColor("green");
+    }
+
+    @Override
+    public void taskDeleted(Task t) {
+    }
+
+    @Override
+    public void taskCreated(Task t) {
+    }
+
+    @Override
+    public void taskStateChange(Task t) {
+        if(this.project.getOpenTasks().size() != 0) {
+            this.changeProjectNameLableColor("black");
         }
     }
 

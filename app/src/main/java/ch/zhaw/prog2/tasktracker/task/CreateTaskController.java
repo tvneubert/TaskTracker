@@ -1,10 +1,8 @@
 package ch.zhaw.prog2.tasktracker.task;
 
-import ch.zhaw.prog2.tasktracker.oservables.ITaskEvent;
-import ch.zhaw.prog2.tasktracker.oservables.ObservableTaskView;
+import ch.zhaw.prog2.tasktracker.oservables.TaskEvent;
 import ch.zhaw.prog2.tasktracker.project.Project;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
+import ch.zhaw.prog2.tasktracker.oservables.ObservableTask;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -20,7 +18,7 @@ import java.util.ArrayList;
  * This class is responsible for controlling the "Create task" window of the
  * application.
  */
-public class CreateTaskController implements ObservableTaskView {
+public class CreateTaskController {
 
     /**
      * Submit button to create a new task.
@@ -50,7 +48,9 @@ public class CreateTaskController implements ObservableTaskView {
      * List of observers
      * Required for the implementation of Observable
      */
-    private ArrayList<ITaskEvent> observers = new ArrayList<>();
+    private ArrayList<TaskEvent> observers = new ArrayList<>();
+
+    private Project project;
 
 
 
@@ -73,7 +73,7 @@ public class CreateTaskController implements ObservableTaskView {
         boolean isDeadlineSet = checkDeadlineSet();
 
         if (isDescriptionSet && isTaskSet && isDeadlineSet) {
-            notifyListeners(taskGoal.getText(), taskDescription.getText(), date);
+            this.project.addTask(new Task(taskDescription.getText(), taskGoal.getText(), date));
             Stage stage = (Stage) newTaskSubmitButton.getScene().getWindow();
             stage.close();
         }
@@ -116,6 +116,10 @@ public class CreateTaskController implements ObservableTaskView {
         }
     }
 
+    public void setProject(Project p) {
+        this.project = p;
+    }
+
     /**
      * Checks if a deadline has been set and if it is in the future.
      * If the deadline is missing or in the past, an error message is displayed.
@@ -130,42 +134,6 @@ public class CreateTaskController implements ObservableTaskView {
         } else {
             taskDeadline.getStyleClass().removeAll("emptyField");
             return true;
-        }
-    }
-
-    /**
-     * Implementation of Observable
-     * Add listener to the list of listeners to be notified
-     * @param listener InvalidationListener to add to the list
-     *            The listener to register
-     */
-    @Override
-    public void addListener(ITaskEvent listener) {
-        if(listener != null){
-            observers.add(listener);
-        }
-    }
-
-    /**
-     * Implementation of Observable
-     * remove listener from the list of listeners to be notified
-     * @param listener InvalidationListener to remove from the list
-     *            The listener to remove
-     */
-    @Override
-    public void removeListener(ITaskEvent listener) {
-        if(observers.contains(listener)){
-            observers.remove(listener);
-        }
-    }
-
-    /**
-     * Required for the function of Observable
-     * Loop though all listeners and notify them all
-     */
-    private void notifyListeners(String taskGoal, String taskDescription, Date deadlineDate){
-        for(ITaskEvent listener : observers){
-            listener.taskCreate(taskGoal, taskDescription, deadlineDate);
         }
     }
 }

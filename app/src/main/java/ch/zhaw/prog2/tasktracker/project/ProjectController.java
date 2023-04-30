@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.util.Date;
 
 import ch.zhaw.prog2.tasktracker.TimeFormater;
-import ch.zhaw.prog2.tasktracker.oservables.ITaskEvent;
+import ch.zhaw.prog2.tasktracker.oservables.ProjectEvent;
+import ch.zhaw.prog2.tasktracker.oservables.TaskEvent;
 import ch.zhaw.prog2.tasktracker.task.CreateTaskController;
 import ch.zhaw.prog2.tasktracker.task.Task;
 import ch.zhaw.prog2.tasktracker.task.TaskListItemController;
@@ -31,7 +32,7 @@ import javafx.util.Duration;
 /**
  * This class is a controller for the main window of the task application.
  */
-public class ProjectController implements ITaskEvent {
+public class ProjectController implements ProjectEvent {
 
     /**
      * The button for opening the create task window.
@@ -86,7 +87,7 @@ public class ProjectController implements ITaskEvent {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/CreateTask.fxml"));
             Pane rootPane = loader.load();
             CreateTaskController controller = loader.getController();
-            controller.addListener(this);
+            controller.setProject(this.project);
             // create a scene with the new the root-Node
             Scene scene = new Scene(rootPane);
             // create a new stage and show the new window
@@ -109,11 +110,11 @@ public class ProjectController implements ITaskEvent {
     public void addTasksToScrollPane() {
         for(Task task : project.getOpenTasks()){
             try {
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/TaskListItem.fxml"));
                 Pane taskPane = loader.load();
 
                 TaskListItemController taskListItemController = loader.getController();
-                taskListItemController.addListener(this);
                 taskListItemController.setTaskObject(task);
 
                 taskOverviewContent.getChildren().add(taskPane);
@@ -154,7 +155,7 @@ public class ProjectController implements ITaskEvent {
         if(project != null){
             this.project = project;
             this.setProjectTitle(project.getName());
-            
+            this.project.addListener(this);
 
             ObservableList<String> filterOptions = FXCollections.observableArrayList(
                 "Offen",
@@ -163,20 +164,26 @@ public class ProjectController implements ITaskEvent {
         }
     }
 
-    @Override
-    public void taskDeleteClick(Task taskListItem) {
-        project.removeTask(taskListItem);
-
+    private void reloadTaskList() {
         taskOverviewContent.getChildren().clear();
         addTasksToScrollPane();
     }
 
     @Override
-    public void taskCreate(String taskGoal, String taskDescription, Date deadlineDate) {
-        Task task = new Task(taskDescription, taskGoal, deadlineDate);
-        this.project.addTask(task);
+    public void allTasksFinished() {
+    }
 
-        taskOverviewContent.getChildren().clear();
-        addTasksToScrollPane();
+    @Override
+    public void taskDeleted(Task t) {
+        this.reloadTaskList();
+    }
+
+    @Override
+    public void taskCreated(Task t) {
+        this.reloadTaskList();
+    }
+
+    @Override
+    public void taskStateChange(Task t) {
     }
 }
