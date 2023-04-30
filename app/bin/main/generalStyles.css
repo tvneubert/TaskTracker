@@ -50,37 +50,5 @@
 #todoItemHboxOne,
 #todoItemHboxTwo,
 #projectItemHbox {
-    -fx-background-color: #ffff99;
-}
-
-/* Style.css */
-.root {
-    /* Hintergrundfarbe (gelbliche Farbe eines Post-its) */
-    -fx-background-color: #ffff99;
-}
-
-.text, .text-input, .label, .button {
-    /* Schriftfarbe (schwarz) */
-    -fx-text-fill: #000;
-    /* Schriftart (ein Beispiel für eine Handschrift-ähnliche Schriftart, die nicht extra installiert werden muss) */
-    -fx-font-family: "Segoe Script";
-}
-
-.label {
-    /* Border-Style für Labels */
-    -fx-border-style: none none solid none;
-    /* Border-Breite für Labels */
-    -fx-border-width: 0 0 1px 0;
-    /* Border-Farbe für Labels */
-    -fx-border-color: #000;
-}
-
-.button, .text-input {
-    /* Unsichtbare Border für Buttons und Text Inputs */
-    -fx-border-style: none;
-}
-
-.scroll-pane .viewport {
-    -fx-background-insets: 0;
-    -fx-background-color: transparent;
+    -fx-background-color: #ffffff;
 }
