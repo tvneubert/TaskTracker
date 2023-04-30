@@ -165,20 +165,41 @@ public class ProjectController implements ProjectEvent {
         addTasksToScrollPane();
     }
 
+    /**
+    This method is called when all tasks in the project have been finished.
+    This method is part of the TaskListener interface.
+    */
     @Override
     public void allTasksFinished() {
     }
 
+    /**
+    This method is called when a task has been deleted from the project.
+    It reloads the task list in the UI to reflect the updated project.
+    This method is part of the TaskListener interface.
+    @param t the Task object that was deleted
+    */
     @Override
     public void taskDeleted(Task t) {
         this.reloadTaskList();
     }
 
+    /**
+    This method is called when a new task has been created in the project.
+    It reloads the task list in the UI to reflect the updated project.
+    This method is part of the TaskListener interface.
+    @param t the Task object that was created
+    */
     @Override
     public void taskCreated(Task t) {
         this.reloadTaskList();
     }
 
+    /**
+    This method is called when the state of a task in the project has changed.
+    This method is part of the TaskListener interface.
+    @param t the Task object whose state has changed
+    */
     @Override
     public void taskStateChange(Task t) {
     }

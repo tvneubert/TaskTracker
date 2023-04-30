@@ -147,6 +147,7 @@ public class ProjectListItemController implements Observable, ProjectEvent {
             observers.remove(listener);
         }
     }
+    
     /**
      * Required for the function of Observable
      * Loop though all listeners and notify them all
@@ -157,6 +158,10 @@ public class ProjectListItemController implements Observable, ProjectEvent {
         }
     }
 
+    /**
+    * This method is called when all tasks of the project have finished.
+    * It checks if there are no tasks in the project and changes the color of the project name label to green if it is the case.
+    */
     @Override
     public void allTasksFinished() {
         if(this.project.getTasks().size() == 0) {
@@ -165,14 +170,27 @@ public class ProjectListItemController implements Observable, ProjectEvent {
         this.changeProjectNameLableColor("green");
     }
 
+    /**
+    * This method is called when a task is deleted from the project. It does nothing.
+    * @param t the Task that was deleted
+    */
     @Override
     public void taskDeleted(Task t) {
     }
 
+    /**
+    * This method is called when a new task is created in the project. It does nothing.
+    * @param t the Task that was created
+    */
     @Override
     public void taskCreated(Task t) {
     }
 
+    /**
+    * This method is called when the state of a task in the project is changed.
+    * It checks if there are open tasks in the project and changes the color of the project name label to black if it is the case.
+    * @param t the Task whose state was changed
+    */
     @Override
     public void taskStateChange(Task t) {
         if(this.project.getOpenTasks().size() != 0) {

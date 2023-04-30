@@ -43,10 +43,7 @@ public class CreateTaskController {
     @FXML
     private TextArea taskGoal;
     private LocalDate deadlineDate;
-
     private Project project;
-
-
 
     /**
      * Creates a new task based on user input.

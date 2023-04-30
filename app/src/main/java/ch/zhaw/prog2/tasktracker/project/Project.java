@@ -151,6 +151,11 @@ public class Project implements ObservableProject, TaskEvent {
         }
     }
 
+    /**
+     * Implementation of TaskEvent
+     * Called when the state of a task has changed.
+     * @param task the task whose state has changed
+     */
     @Override
     public void taskStateChanged(Task task) {
         for(ProjectEvent pe : this.observers) {
@@ -161,6 +166,11 @@ public class Project implements ObservableProject, TaskEvent {
         }
     }
 
+     /**
+     * Implementation of TaskEvent
+     * Called when a request is made to delete a task.
+     * @param t the task to be deleted
+     */
     @Override
     public void deleteRequest(Task t) {
         this.removeTask(t);
