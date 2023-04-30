@@ -40,6 +40,9 @@ public class ProjectController implements InvalidationListener {
     @FXML
     private Label timeLabel;
 
+    @FXML
+    private Label projectName;
+
     /**
      * The VBox for displaying the list of tasks.
      */
@@ -113,6 +116,10 @@ public class ProjectController implements InvalidationListener {
 
     }
 
+    private void setProjectTitle(String title) {
+        this.projectName.setText(title);
+    }
+
     /**
      * This method starts the timeline for summarizing the time of all tasks.
      */
@@ -136,6 +143,7 @@ public class ProjectController implements InvalidationListener {
     public void setProject(Project project){
         if(project != null){
             this.project = project;
+            this.setProjectTitle(project.getName());
         }
     }
 

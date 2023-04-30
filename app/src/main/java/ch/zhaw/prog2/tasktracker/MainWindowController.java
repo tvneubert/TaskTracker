@@ -42,6 +42,9 @@ public class MainWindowController implements InvalidationListener {
     @FXML
     private Label timestamp;
 
+    @FXML 
+    private Label timestampLabel;
+
     /**
      * Placeholder for a projectOverview for testing purposes
      * task Replace with proper ProjectOverview once implemented

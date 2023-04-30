@@ -20,8 +20,8 @@
                      <font>
                         <Font size="20.0" />
                      </font></Button>
-                  <Label prefHeight="51.0" prefWidth="105.0" text="Zeit insgesamt:" />
-                  <Label fx:id="timestamp" prefHeight="51.0" prefWidth="144.0" text="Timestamp" />
+                  <Label fx:id="timestampLable" prefHeight="51.0" prefWidth="105.0" styleClass="timestamp" text="Zeit insgesamt:" />
+                  <Label fx:id="timestamp" prefHeight="51.0" prefWidth="144.0" styleClass="timestamp" text="Timestamp" />
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" />
@@ -43,7 +43,7 @@
       </VBox>
    </children>
    <stylesheets>
-      <URL value="@MainWindow.css" />
       <URL value="@GeneralStyles.css" />
+      <URL value="@MainWindow.css" />
    </stylesheets>
 </AnchorPane>

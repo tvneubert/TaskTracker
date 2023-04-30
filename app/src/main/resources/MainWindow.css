@@ -5,3 +5,11 @@
 #openCreateProjectWindowButton {
     -fx-font-size: 20px;
 }
+
+#timestamp {
+    -fx-border-color: transparent;
+}
+
+#timestampLable {
+    -fx-border-color: transparent;
+}

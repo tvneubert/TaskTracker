@@ -68,8 +68,6 @@ public class ProjectListItemController implements Observable {
 
             // Add random Projects to scrollPane (FOR DEMONSTRATION ONLY!!)
             ProjectController projectController = loader.getController();
-            projectController.setProject(project);
-            projectController.addTasksToScrollPane();
 
             // create a scene with the new the root-Node
             Scene scene = new Scene(rootPane);
@@ -79,6 +77,8 @@ public class ProjectListItemController implements Observable {
             stageOfNewWindow.setTitle("Dein Projekt");
             stageOfNewWindow.setResizable(false);
             stageOfNewWindow.setScene(scene);
+            projectController.setProject(this.project);
+            projectController.addTasksToScrollPane();
             stageOfNewWindow.show();
         } catch (IOException e) {
             System.err.println("Error while loading FXML file: " + e.getMessage());
