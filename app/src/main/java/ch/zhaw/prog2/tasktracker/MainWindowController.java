@@ -5,6 +5,9 @@ import java.io.IOException;
 import ch.zhaw.prog2.tasktracker.project.Project;
 import ch.zhaw.prog2.tasktracker.project.ProjectListItemController;
 import ch.zhaw.prog2.tasktracker.todo.DummyProjectOverview;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.event.ActionEvent;
@@ -17,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * The controller for the main window of the Task Tracker application.
@@ -43,6 +47,13 @@ public class MainWindowController implements InvalidationListener {
      * task Replace with proper ProjectOverview once implemented
      */
     private DummyProjectOverview projectOverview = new DummyProjectOverview();
+
+        /**
+     *
+     this timeline is for summarizing the time of all tasks
+     */
+
+     private Timeline allProjectsTimeLine;
 
     /**
      * This method is called when the "open create Project window" button is
@@ -75,6 +86,19 @@ public class MainWindowController implements InvalidationListener {
         }
     }
 
+    private void startSummarizingTimer() {
+        // we can only start the timeline if we do have a task object because it does contain the timer
+        allProjectsTimeLine = new Timeline(new KeyFrame(Duration.millis(16.6), (ActionEvent e) -> {
+            int timerSum = 0;
+            for (Project project : projectOverview.getProjectList()) {
+                timerSum += project.getTotalTaskTime();
+            }
+            timestamp.setText(TimeFormater.showTheTime(timerSum));
+        }));
+        allProjectsTimeLine.setCycleCount(Animation.INDEFINITE);
+        allProjectsTimeLine.play();
+    }
+
     /**
      * This method adds for each Project in the list a Project to the scrollPane
      * 
@@ -90,6 +114,7 @@ public class MainWindowController implements InvalidationListener {
                 projectListItemController.addListener(this);
                 projectListItemController.setProjectNameLabel(project.getName());
                 projectListItemController.setProject(project);
+                this.startSummarizingTimer();
 
                 projectOverviewContent.getChildren().add(projectPane);
             } catch (IOException e) {
