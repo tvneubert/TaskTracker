@@ -2,6 +2,7 @@ package ch.zhaw.prog2.tasktracker;
 
 import java.io.IOException;
 
+import ch.zhaw.prog2.tasktracker.todo.DummyProjectOverview;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.event.ActionEvent;
@@ -9,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -57,6 +59,9 @@ public class MainWindowController implements InvalidationListener {
             Scene scene = new Scene(rootPane);
             // create a new stage and show the new window
             Stage stageOfNewWindow = new Stage();
+            stageOfNewWindow.getIcons().add(new Image(getClass().getResourceAsStream("/TaskTrackerIcon.png")));
+            stageOfNewWindow.setTitle("Erstelle ein Projekt");
+            stageOfNewWindow.setResizable(false);
             stageOfNewWindow.setScene(scene);
             stageOfNewWindow.show();
         } catch (IOException e) {

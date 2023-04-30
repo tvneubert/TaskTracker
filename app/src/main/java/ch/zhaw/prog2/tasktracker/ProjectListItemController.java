@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
@@ -72,6 +73,9 @@ public class ProjectListItemController implements Observable {
             Scene scene = new Scene(rootPane);
             // create a new stage and show the new window
             Stage stageOfNewWindow = new Stage();
+            stageOfNewWindow.getIcons().add(new Image(getClass().getResourceAsStream("/TaskTrackerIcon.png")));
+            stageOfNewWindow.setTitle("Dein Projekt");
+            stageOfNewWindow.setResizable(false);
             stageOfNewWindow.setScene(scene);
             stageOfNewWindow.show();
         } catch (IOException e) {

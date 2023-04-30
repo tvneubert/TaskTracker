@@ -1,3 +1,6 @@
+#openCreateTodoWindowButton {
+    -fx-font-size: 20px;
+}
 #todoOverviewScrollPane {
-    -fx-background-color:#32abfc;
+    -fx-background-color:#f7e2a8;
 }

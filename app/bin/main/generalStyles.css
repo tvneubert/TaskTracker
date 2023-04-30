@@ -1,54 +1,105 @@
-#openCreateProjectWindowButton,
-#openProjectButton,
-#timerStartButton,
-#timerStopButton,
-#timerResetButton,
-#openCreateTodoWindowButton,
-#newProjectSubmitButton,
-#newTodoSubmitButton {
-    -fx-background-color:
-        linear-gradient(#b6f3fa, #87cdfc);
+.button {
+    -fx-background-color: transparent;
+    -fx-text-fill: transparent;
+    -fx-font-weight: bold;
+    -fx-border-width: 0;
 }
 
-#openCreateProjectWindowButton:hover,
-#openProjectButton:hover,
-#timerStartButton:hover,
-#timerStopButton:hover,
-#timerResetButton:hover,
-#openCreateTodoWindowButton:hover,
-#newProjectSubmitButton:hover,
-#newTodoSubmitButton:hover {
-    -fx-background-color:
-        linear-gradient(#91dcfa, #5d9cfa);
+.button:hover {
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
 }
 
-#deleteProjectButton,
-#deleteTodoButton {
-    -fx-background-color:
-        linear-gradient(#fac4b6, #fd8787);
+.root {
+    -fx-background-color: #f7e2a8;
+    -fx-title-bar-background-color: #f7e2a8;
 }
 
-#deleteProjectButton:hover,
-#deleteTodoButton:hover {
-    -fx-background-color:
-        linear-gradient(#fa9494, #fa6464);
+.text, .text-input, .label, .button {
+    -fx-text-fill: #000;
+    -fx-font-family: "Segoe Script";
 }
 
-#deleteProjectButton,
-#deleteTodoButton,
-#openCreateProjectWindowButton,
-#openProjectButton,
-#timerStartButton,
-#timerStopButton,
-#timerResetButton,
-#openCreateTodoWindowButton {
--fx-background-radius: 6, 5;
-    -fx-background-insets: 0, 1;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
+.label {
+    -fx-border-style: none none solid none;
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: #000;
 }
 
-#todoItemHboxOne,
-#todoItemHboxTwo,
-#projectItemHbox {
-    -fx-background-color: #ffffff;
+.button, .text-input {
+    -fx-border-style: none;
+}
+
+.scroll-pane .viewport {
+    -fx-background-insets: 0;
+    -fx-background-color: transparent;
+}
+
+.scroll-pane > .scroll-bar:vertical {
+    -fx-background-color: #f7e2a8;
+    -fx-opacity: 0;
+}
+
+.scroll-pane > .scroll-bar:vertical:hover {
+    -fx-opacity: 1;
+}
+
+.scroll-pane > .scroll-bar:horizontal {
+    -fx-background-color: #f7e2a8;
+    -fx-opacity: 0;
+}
+
+.scroll-pane > .scroll-bar:horizontal:hover {
+    -fx-opacity: 1;
+}
+
+.scroll-pane > .scroll-bar:vertical > .thumb {
+    -fx-background-color: black;
+    -fx-shape: "M 0 0 L 10 0 L 10 60 L 0 60 Z";
+}
+.text-field {
+    -fx-background-color: #f7e2a8;
+    -fx-border-color: black;
+    -fx-border-width: 0 0 1 0;
+    -fx-font-family: "Segoe Script";
+}
+
+.date-picker {
+    -fx-background-color: #f7e2a8;
+}
+
+.date-picker .text-field {
+    -fx-background-color: #f7e2a8;
+}
+
+/* Hintergrundfarbe des Kalenders */
+.date-picker-popup {
+    -fx-background-color: #f7e2a8;
+}
+
+/* Farbe des Datums-Icons */
+.date-picker .arrow-button {
+    -fx-background-color: #f7e2a8;
+}
+
+/* Farbe der Outlines */
+.date-picker > .content > .arrow-button {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-background-radius: 0;
+    -fx-border-color: black;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 0.166667em 0.166667em 0.25em 0.166667em; /* 2 2 3 2 */
+}
+
+/* Farbe der Datumsauswahl */
+.date-picker-popup > .month-year-pane > .label {
+    -fx-text-fill: black;
+}
+
+/* Farbe der ausgewählten Tage */
+.date-picker-popup > .calendar-grid > .day-cell.selected .date-cell {
+    -fx-background-color: red;
 }

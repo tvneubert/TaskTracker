@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" stylesheets="@GeneralStyles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zhaw.prog2.tasktracker.CreateProjectController">
+<AnchorPane maxHeight="100" maxWidth="300" minHeight="200" minWidth="300" prefHeight="100.0" prefWidth="300" stylesheets="@GeneralStyles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zhaw.prog2.tasktracker.CreateProjectController">
    <children>
       <VBox layoutX="100.0" layoutY="14.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
          <children>
-            <Label text="Neues Projekt erstellen">
+            <Label text="Name des Projekts:">
                <font>
                   <Font name="Arial" size="17.0" />
                </font>
@@ -20,17 +20,15 @@
                   <Insets bottom="30.0" />
                </VBox.margin>
             </Label>
-            <Label text="Bitte gib den Namen für dein neues Projekt ein:">
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </Label>
             <TextField fx:id="newProjectTextField">
                <VBox.margin>
                   <Insets bottom="25.0" />
                </VBox.margin>
             </TextField>
-            <Button fx:id="newProjectSubmitButton" mnemonicParsing="false" onAction="#createProject" text="Projekt erstellen" />
+            <Button fx:id="newProjectSubmitButton" mnemonicParsing="false" onAction="#createProject" text="✓">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
          </children>
       </VBox>
    </children>

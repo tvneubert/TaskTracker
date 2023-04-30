@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="294.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zhaw.prog2.tasktracker.ProjectListItemController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="294.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zhaw.prog2.tasktracker.ProjectListItemController">
    <children>
       <HBox fx:id="projectItemHbox" alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="294.0" spacing="15.0">
          <children>
-            <Label fx:id="ProjectNameLabel" text="Project Name">
+            <Label fx:id="ProjectNameLabel" prefHeight="23.0" prefWidth="125.0" text="Project Name">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -19,8 +19,8 @@
                   <Insets right="70.0" />
                </HBox.margin>
             </Label>
-            <Button fx:id="openProjectButton" mnemonicParsing="false" onAction="#openProjectWindow" text="öffnen" />
-            <Button fx:id="deleteProjectButton" mnemonicParsing="false" onAction="#deleteProject" text="löschen">
+            <Button fx:id="openProjectButton" mnemonicParsing="false" onAction="#openProjectWindow" prefHeight="30.0" prefWidth="44.0" text="✓" />
+            <Button fx:id="deleteProjectButton" mnemonicParsing="false" onAction="#deleteProject" text="x">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
