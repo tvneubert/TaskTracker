@@ -1,6 +1,9 @@
 package ch.zhaw.prog2.tasktracker.task;
 
 import ch.zhaw.prog2.tasktracker.TimeFormater;
+import ch.zhaw.prog2.tasktracker.oservables.ITaskEvent;
+import ch.zhaw.prog2.tasktracker.oservables.ObservableTaskView;
+import ch.zhaw.prog2.tasktracker.task.Task.TaskStatus;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -8,6 +11,7 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
@@ -17,13 +21,13 @@ import java.util.ArrayList;
 /**
  * This class is a controller for the task list item.
  */
-public class TaskListItemController implements Observable {
+public class TaskListItemController implements ObservableTaskView {
 
     /**
      * The task object that is represented by this list item.
      */
     private Task taskListItem;
-    private ArrayList<InvalidationListener> observers = new ArrayList<>();
+    private ArrayList<ITaskEvent> observers = new ArrayList<>();
 
     /**
      * The label for displaying the name of the task.
@@ -90,34 +94,30 @@ public class TaskListItemController implements Observable {
     public TaskListItemController() {
     }
 
-    /**
-     * This is the controller event for the startButton
-     */
-    @FXML
-    public void startTimer() {
-        this.taskListItem.getTimeTracker().start();
+    @FXML 
+    public void toggleTaskState() {
+        if(taskListItem.getTaskStatus().equals(TaskStatus.ACTIVE)) {
+            taskListItem.setTaskStatus(TaskStatus.FINISHED);
+            for(Node n : taskNameLabel.getChildrenUnmodifiable()) {
+                n.setStyle("-fx-strikethrough: true;");
+            }
+            taskNameLabel.setStyle("-fx-text-fill: #535151;");
+            timerResetButton.setStyle("-fx-text-fill: green;");
+        } else {
+            taskListItem.setTaskStatus(TaskStatus.ACTIVE);
+            for(Node n : taskNameLabel.getChildrenUnmodifiable()) {
+                n.setStyle("-fx-strikethrough: false;");
+            }
+            taskNameLabel.setStyle("-fx-text-fill: #000;");
+            timerResetButton.setStyle("-fx-text-fill: #000;");
+        }
     }
 
-    /**
-     * This is the controller event for the pauseButton
-     */
-    @FXML
-    public void pauseTimer() {
-        this.taskListItem.getTimeTracker().pause();
-    }
-
-    /**
-     * This is the controller event for the resumeButton
-     */
-    @FXML
-    public void resumeTimer() {
-        this.taskListItem.getTimeTracker().resume();
-    }
 
     @FXML
     public void timerButton() {
         System.out.println(this.taskListItem.getTimeTracker().getCurrentTime());
-        if(this.taskListItem.getTimeTracker().getCurrentTime()==0){
+        if(this.taskListItem.getTimeTracker().getCurrentTime() == 0){
             this.taskListItem.getTimeTracker().start();
             this.timerStartButton.setText("⏸");
         } else if(this.taskListItem.getTimeTracker().isRunning()){
@@ -135,7 +135,7 @@ public class TaskListItemController implements Observable {
      */
     @FXML
     void deleteTask(ActionEvent event) {
-        notifyListeners();
+        notifyListenersDeleteClick();
     }
     /**
      * Implementation of Observable
@@ -144,7 +144,7 @@ public class TaskListItemController implements Observable {
      *            The listener to register
      */
     @Override
-    public void addListener(InvalidationListener listener) {
+    public void addListener(ITaskEvent listener) {
         if(listener != null){
             observers.add(listener);
         }
@@ -156,7 +156,7 @@ public class TaskListItemController implements Observable {
      *            The listener to remove
      */
     @Override
-    public void removeListener(InvalidationListener listener) {
+    public void removeListener(ITaskEvent listener) {
         if(observers.contains(listener)){
             observers.remove(listener);
         }
@@ -165,9 +165,9 @@ public class TaskListItemController implements Observable {
      * Required for the function of Observable
      * Loop though all listeners and notify them all
      */
-    private void notifyListeners(){
-        for(InvalidationListener listener : observers){
-            listener.invalidated(this);
+    private void notifyListenersDeleteClick(){
+        for(ITaskEvent listener : observers){
+            listener.taskDeleteClick(this.taskListItem);
         }
     }
     /**

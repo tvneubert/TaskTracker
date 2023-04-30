@@ -1,5 +1,7 @@
 package ch.zhaw.prog2.tasktracker.task;
 
+import ch.zhaw.prog2.tasktracker.oservables.ITaskEvent;
+import ch.zhaw.prog2.tasktracker.oservables.ObservableTaskView;
 import ch.zhaw.prog2.tasktracker.project.Project;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -18,7 +20,7 @@ import java.util.ArrayList;
  * This class is responsible for controlling the "Create task" window of the
  * application.
  */
-public class CreateTaskController implements Observable {
+public class CreateTaskController implements ObservableTaskView {
 
     /**
      * Submit button to create a new task.
@@ -43,18 +45,12 @@ public class CreateTaskController implements Observable {
      */
     @FXML
     private TextArea taskGoal;
-    private Task task;
     private LocalDate deadlineDate;
-    private Date date;
-    /**
-     * Project this new task will be added to
-     */
-    private Project rootProject;
     /**
      * List of observers
      * Required for the implementation of Observable
      */
-    private ArrayList<InvalidationListener> observers = new ArrayList<>();
+    private ArrayList<ITaskEvent> observers = new ArrayList<>();
 
 
 
@@ -66,6 +62,7 @@ public class CreateTaskController implements Observable {
      */
     @FXML
     private void createTask(ActionEvent event) {
+        Date date = null;
         if (taskDeadline.getValue() != null) {
             deadlineDate = taskDeadline.getValue();
             date = Date.valueOf(deadlineDate);
@@ -76,11 +73,9 @@ public class CreateTaskController implements Observable {
         boolean isDeadlineSet = checkDeadlineSet();
 
         if (isDescriptionSet && isTaskSet && isDeadlineSet) {
-            task = new Task(taskDescription.getText(), taskGoal.getText(), date);
-            rootProject.addTask(task);
+            notifyListeners(taskGoal.getText(), taskDescription.getText(), date);
             Stage stage = (Stage) newTaskSubmitButton.getScene().getWindow();
             stage.close();
-            notifyListeners();
         }
     }
 
@@ -139,23 +134,13 @@ public class CreateTaskController implements Observable {
     }
 
     /**
-     * Set the project this task will be added to
-     * @param project Project to add this task to
-     */
-    public void setRootProject(Project project){
-        if(project != null){
-            rootProject = project;
-        }
-    }
-
-    /**
      * Implementation of Observable
      * Add listener to the list of listeners to be notified
      * @param listener InvalidationListener to add to the list
      *            The listener to register
      */
     @Override
-    public void addListener(InvalidationListener listener) {
+    public void addListener(ITaskEvent listener) {
         if(listener != null){
             observers.add(listener);
         }
@@ -168,7 +153,7 @@ public class CreateTaskController implements Observable {
      *            The listener to remove
      */
     @Override
-    public void removeListener(InvalidationListener listener) {
+    public void removeListener(ITaskEvent listener) {
         if(observers.contains(listener)){
             observers.remove(listener);
         }
@@ -178,9 +163,9 @@ public class CreateTaskController implements Observable {
      * Required for the function of Observable
      * Loop though all listeners and notify them all
      */
-    private void notifyListeners(){
-        for(InvalidationListener listener : observers){
-            listener.invalidated(this);
+    private void notifyListeners(String taskGoal, String taskDescription, Date deadlineDate){
+        for(ITaskEvent listener : observers){
+            listener.taskCreate(taskGoal, taskDescription, deadlineDate);
         }
     }
 }

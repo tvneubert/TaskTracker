@@ -1,8 +1,10 @@
 package ch.zhaw.prog2.tasktracker.project;
 
 import java.io.IOException;
+import java.util.Date;
 
 import ch.zhaw.prog2.tasktracker.TimeFormater;
+import ch.zhaw.prog2.tasktracker.oservables.ITaskEvent;
 import ch.zhaw.prog2.tasktracker.task.CreateTaskController;
 import ch.zhaw.prog2.tasktracker.task.Task;
 import ch.zhaw.prog2.tasktracker.task.TaskListItemController;
@@ -29,7 +31,7 @@ import javafx.util.Duration;
 /**
  * This class is a controller for the main window of the task application.
  */
-public class ProjectController implements InvalidationListener {
+public class ProjectController implements ITaskEvent {
 
     /**
      * The button for opening the create task window.
@@ -84,7 +86,6 @@ public class ProjectController implements InvalidationListener {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/CreateTask.fxml"));
             Pane rootPane = loader.load();
             CreateTaskController controller = loader.getController();
-            controller.setRootProject(project);
             controller.addListener(this);
             // create a scene with the new the root-Node
             Scene scene = new Scene(rootPane);
@@ -162,18 +163,19 @@ public class ProjectController implements InvalidationListener {
         }
     }
 
-    /**
-     * Implementation of the InvalidationListener
-     * Processes the invalidation event from the Observable
-     * @param observable the Observable that triggered the invalidation event
-     *            The {@code Observable} that became invalid
-     */
     @Override
-    public void invalidated(Observable observable) {
-        if(observable instanceof TaskListItemController){
-            Task task = ((TaskListItemController) observable).getTaskListItem();
-            project.removeTask(task);
-        }
+    public void taskDeleteClick(Task taskListItem) {
+        project.removeTask(taskListItem);
+
+        taskOverviewContent.getChildren().clear();
+        addTasksToScrollPane();
+    }
+
+    @Override
+    public void taskCreate(String taskGoal, String taskDescription, Date deadlineDate) {
+        Task task = new Task(taskDescription, taskGoal, deadlineDate);
+        this.project.addTask(task);
+
         taskOverviewContent.getChildren().clear();
         addTasksToScrollPane();
     }

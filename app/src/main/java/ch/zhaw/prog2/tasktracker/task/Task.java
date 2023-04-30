@@ -7,7 +7,7 @@ import ch.zhaw.TimeTracker;
 public class Task {
 
     public enum TaskStatus {
-        task, ACTIVE, FINISHED
+        ACTIVE, FINISHED
     }
 
     private String description;
@@ -15,13 +15,12 @@ public class Task {
     private Date deadline;
     private TimeTracker tt = new TimeTracker();
 
-    private TaskStatus taskStatus;
+    private TaskStatus taskStatus = TaskStatus.ACTIVE;
 
     public Task(String description, String goal, Date deadline) {
         this.description = description;
         this.goal = goal;
         this.deadline = deadline;
-        this.taskStatus = TaskStatus.task;
     }
 
     /**

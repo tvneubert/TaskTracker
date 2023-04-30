@@ -35,7 +35,7 @@
                      </HBox.margin>
                   </Label>
                   <Button fx:id="timerStartButton" mnemonicParsing="false" onAction="#timerButton" prefHeight="30.0" prefWidth="80.0" text="▶" textAlignment="CENTER" textOverrun="CLIP" />
-                  <Button fx:id="timerResetButton" mnemonicParsing="false" onAction="#resumeTimer" text="🗸" />
+                  <Button fx:id="timerResetButton" mnemonicParsing="false" onAction="#toggleTaskState" text="🗸" />
                   <Button fx:id="deleteTaskButton" mnemonicParsing="false" onAction="#deleteTask" text="x">
                      <HBox.margin>
                         <Insets />
