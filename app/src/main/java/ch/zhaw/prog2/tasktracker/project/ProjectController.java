@@ -11,11 +11,14 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
@@ -41,6 +44,9 @@ public class ProjectController implements InvalidationListener {
     private Label timeLabel;
 
     @FXML
+    private ChoiceBox<String> filter;
+
+    @FXML
     private Label projectName;
 
     /**
@@ -49,6 +55,8 @@ public class ProjectController implements InvalidationListener {
     @FXML
     private VBox taskOverviewContent;
 
+    @FXML
+    private Label totalTimeLabel;
 
     /**
      *
@@ -116,6 +124,7 @@ public class ProjectController implements InvalidationListener {
 
     }
 
+
     private void setProjectTitle(String title) {
         this.projectName.setText(title);
     }
@@ -137,13 +146,19 @@ public class ProjectController implements InvalidationListener {
     }
 
     /**
-     * Set the project that this Window is controlling
+     * Set the project that this Window is controlling and the name of the Title and the Filters for the Project
      * @param project Project to be used
      */
     public void setProject(Project project){
         if(project != null){
             this.project = project;
             this.setProjectTitle(project.getName());
+            
+
+            ObservableList<String> filterOptions = FXCollections.observableArrayList(
+                "Offen",
+                "Fertig");
+            filter.setItems(filterOptions);
         }
     }
 
