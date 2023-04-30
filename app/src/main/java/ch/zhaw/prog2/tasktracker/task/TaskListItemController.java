@@ -113,6 +113,21 @@ public class TaskListItemController implements Observable {
     public void resumeTimer() {
         this.taskListItem.getTimeTracker().resume();
     }
+
+    @FXML
+    public void timerButton() {
+        System.out.println(this.taskListItem.getTimeTracker().getCurrentTime());
+        if(this.taskListItem.getTimeTracker().getCurrentTime()==0){
+            this.taskListItem.getTimeTracker().start();
+            this.timerStartButton.setText("⏸");
+        } else if(this.taskListItem.getTimeTracker().isRunning()){
+            this.taskListItem.getTimeTracker().pause();
+            this.timerStartButton.setText("▶");
+        } else {
+            this.taskListItem.getTimeTracker().resume();
+            this.timerStartButton.setText("⏸");
+        }
+    }
     /**
      * Event-handler for the delete button of the list item
      * Deletes the Task

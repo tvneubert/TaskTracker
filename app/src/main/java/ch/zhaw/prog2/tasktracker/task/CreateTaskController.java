@@ -94,6 +94,7 @@ public class CreateTaskController implements Observable {
         String emptyDecription = "Bitte gib eine Beschreibung ein!";
         if (taskDescription.getText().trim().isEmpty()) {
             this.taskDescription.appendText(emptyDecription);
+            taskDescription.setStyle("-fx-border-color: red ;");
             return false;
         } else if (taskGoal.getText().equals(emptyDecription)) {
             return false;

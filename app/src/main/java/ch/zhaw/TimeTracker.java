@@ -64,6 +64,6 @@ public class TimeTracker {
      */
     public boolean isRunning() {
 
-        return !running;
+        return running;
     }
 }
