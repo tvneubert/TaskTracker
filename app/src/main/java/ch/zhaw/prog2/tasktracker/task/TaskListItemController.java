@@ -1,5 +1,6 @@
-package ch.zhaw.prog2.tasktracker;
+package ch.zhaw.prog2.tasktracker.task;
 
+import ch.zhaw.prog2.tasktracker.TimeFormater;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -14,48 +15,48 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 
 /**
- * This class is a controller for the ToDo list item.
+ * This class is a controller for the task list item.
  */
-public class TodoListItemController implements Observable {
+public class TaskListItemController implements Observable {
 
     /**
-     * The ToDo object that is represented by this list item.
+     * The task object that is represented by this list item.
      */
     private Task taskListItem;
     private ArrayList<InvalidationListener> observers = new ArrayList<>();
 
     /**
-     * The label for displaying the name of the ToDo.
+     * The label for displaying the name of the task.
      */
     @FXML
-    private Label TodoNameLabel;
+    private Label taskNameLabel;
 
     /**
-     * The button for deleting the ToDo.
+     * The button for deleting the task.
      */
     @FXML
-    private Button deleteTodoButton;
+    private Button deletetaskButton;
 
     /**
-     * The label for displaying the time spent on the ToDo.
+     * The label for displaying the time spent on the task.
      */
     @FXML
     private Label timerLabel;
 
     /**
-     * The button for resetting the timer for the ToDo.
+     * The button for resetting the timer for the task.
      */
     @FXML
     private Button timerResetButton;
 
     /**
-     * The Button for starting the timer for the ToDo.
+     * The Button for starting the timer for the task.
      */
     @FXML
     private Button timerStartButton;
 
     /**
-     * The button for stopping the timer for the ToDo.
+     * The button for stopping the timer for the task.
      */
     @FXML
     private Button timerStopButton;
@@ -67,26 +68,26 @@ public class TodoListItemController implements Observable {
     private Timeline tl;
 
     /**
-     * This method is called when the ToDo is set and initializes the timeline for
-     * timer that is displayed in the ToDo list item.
+     * This method is called when the task is set and initializes the timeline for
+     * timer that is displayed in the task list item.
      * @param task
      */
-    public void setTodoObject(Task task) {
+    public void setTaskObject(Task task) {
         this.taskListItem = task;
-        // we can only start the timeline if we do have a todo object because it does contain the timer
+        // we can only start the timeline if we do have a task object because it does contain the timer
         tl = new Timeline(new KeyFrame(Duration.millis(16.6), (ActionEvent e) -> {
             timerLabel.setText(TimeFormater.showTheTime(this.taskListItem.getTimeTracker().getCurrentTime()));
         }));
         tl.setCycleCount(Animation.INDEFINITE);
         tl.play();
         
-        TodoNameLabel.setText(this.taskListItem.getDescription());
+        taskNameLabel.setText(this.taskListItem.getDescription());
     }
 
     /**
      * This is the constructor for the controller
      */
-    public TodoListItemController() {
+    public TaskListItemController() {
     }
 
     /**
@@ -118,7 +119,7 @@ public class TodoListItemController implements Observable {
      * @param event the ActionEvent that triggered this method
      */
     @FXML
-    void deleteTodo(ActionEvent event) {
+    void deleteTask(ActionEvent event) {
         notifyListeners();
     }
     /**

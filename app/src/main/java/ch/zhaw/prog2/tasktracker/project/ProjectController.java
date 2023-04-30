@@ -1,7 +1,11 @@
-package ch.zhaw.prog2.tasktracker;
+package ch.zhaw.prog2.tasktracker.project;
 
 import java.io.IOException;
 
+import ch.zhaw.prog2.tasktracker.TimeFormater;
+import ch.zhaw.prog2.tasktracker.task.CreateTaskController;
+import ch.zhaw.prog2.tasktracker.task.Task;
+import ch.zhaw.prog2.tasktracker.task.TaskListItemController;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -20,32 +24,32 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
- * This class is a controller for the main window of the ToDo application.
+ * This class is a controller for the main window of the task application.
  */
 public class ProjectController implements InvalidationListener {
 
     /**
-     * The button for opening the create ToDo window.
+     * The button for opening the create task window.
      */
     @FXML
-    private Button openCreateTodoWindowButton;
+    private Button openCreateTaskWindowButton;
 
     /**
-     * The label for displaying the added up time of all todos of the project.
+     * The label for displaying the added up time of all tasks of the project.
      */
     @FXML
     private Label timeLabel;
 
     /**
-     * The VBox for displaying the list of ToDos.
+     * The VBox for displaying the list of tasks.
      */
     @FXML
-    private VBox todoOverviewContent;
+    private VBox taskOverviewContent;
 
 
     /**
      *
-     this timeline is for summarizing the time of all todos
+     this timeline is for summarizing the time of all tasks
      */
 
     private Timeline projectTimeLine;
@@ -56,19 +60,19 @@ public class ProjectController implements InvalidationListener {
     private Project project;
 
     /**
-     * This method is called when the "open create ToDo window" button is clicked.
+     * This method is called when the "open create task window" button is clicked.
      * It initializes and loads the window scene graph from the fxml description and
      * then creates a new stage with the new scene and shows it.
      * 
      * @param event the ActionEvent that triggered the method call
      */
     @FXML
-    void openCreateTodoWindow(ActionEvent event) {
+    void openCreateTaskWindow(ActionEvent event) {
         try {
             // initialize and load the window scene graph from the fxml description
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/CreateToDo.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/CreateTask.fxml"));
             Pane rootPane = loader.load();
-            CreateToDoController controller = loader.getController();
+            CreateTaskController controller = loader.getController();
             controller.setRootProject(project);
             controller.addListener(this);
             // create a scene with the new the root-Node
@@ -90,17 +94,17 @@ public class ProjectController implements InvalidationListener {
      * 
      * This method is here for testing and will need to be changed!
      */
-    public void addToDosToScrollPane() {
+    public void addTasksToScrollPane() {
         for(Task task : project.getOpenTasks()){
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/TodoListItem.fxml"));
-                Pane todoPane = loader.load();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/TaskListItem.fxml"));
+                Pane taskPane = loader.load();
 
-                TodoListItemController todoListItemController = loader.getController();
-                todoListItemController.addListener(this);
-                todoListItemController.setTodoObject(task);
+                TaskListItemController taskListItemController = loader.getController();
+                taskListItemController.addListener(this);
+                taskListItemController.setTaskObject(task);
 
-                todoOverviewContent.getChildren().add(todoPane);
+                taskOverviewContent.getChildren().add(taskPane);
             } catch (IOException e) {
                 System.err.println("Error while loading FXML file: " + e.getMessage());
             }
@@ -110,14 +114,14 @@ public class ProjectController implements InvalidationListener {
     }
 
     /**
-     * This method starts the timeline for summarizing the time of all todos.
+     * This method starts the timeline for summarizing the time of all tasks.
      */
     private void startSummarizingTimer() {
-        // we can only start the timeline if we do have a todo object because it does contain the timer
+        // we can only start the timeline if we do have a task object because it does contain the timer
         projectTimeLine = new Timeline(new KeyFrame(Duration.millis(16.6), (ActionEvent e) -> {
             int timerSum = 0;
-            for (Task todo : project.getTasks()) {
-                timerSum += todo.getTimeTracker().getCurrentTime();
+            for (Task task : project.getTasks()) {
+                timerSum += task.getTimeTracker().getCurrentTime();
             }
             timeLabel.setText(TimeFormater.showTheTime(timerSum));
         }));
@@ -143,11 +147,11 @@ public class ProjectController implements InvalidationListener {
      */
     @Override
     public void invalidated(Observable observable) {
-        if(observable instanceof TodoListItemController){
-            Task task = ((TodoListItemController) observable).getTaskListItem();
+        if(observable instanceof TaskListItemController){
+            Task task = ((TaskListItemController) observable).getTaskListItem();
             project.removeTask(task);
         }
-        todoOverviewContent.getChildren().clear();
-        addToDosToScrollPane();
+        taskOverviewContent.getChildren().clear();
+        addTasksToScrollPane();
     }
 }

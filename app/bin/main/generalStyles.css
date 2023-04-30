@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .button {
     -fx-background-color: transparent;
     -fx-text-fill: transparent;
@@ -103,3 +104,59 @@
 .date-picker-popup > .calendar-grid > .day-cell.selected .date-cell {
     -fx-background-color: red;
 }
+=======
+#openCreateProjectWindowButton,
+#openProjectButton,
+#timerStartButton,
+#timerStopButton,
+#timerResetButton,
+#openCreateTaskWindowButton,
+#newProjectSubmitButton,
+#newTaskSubmitButton {
+    -fx-background-color:
+        linear-gradient(#b6f3fa, #87cdfc);
+}
+
+#openCreateProjectWindowButton:hover,
+#openProjectButton:hover,
+#timerStartButton:hover,
+#timerStopButton:hover,
+#timerResetButton:hover,
+#openCreateTaskWindowButton:hover,
+#newProjectSubmitButton:hover,
+#newTaskSubmitButton:hover {
+    -fx-background-color:
+        linear-gradient(#91dcfa, #5d9cfa);
+}
+
+#deleteProjectButton,
+#deleteTaskButton {
+    -fx-background-color:
+        linear-gradient(#fac4b6, #fd8787);
+}
+
+#deleteProjectButton:hover,
+#deleteTaskButton:hover {
+    -fx-background-color:
+        linear-gradient(#fa9494, #fa6464);
+}
+
+#deleteProjectButton,
+#deleteTaskButton,
+#openCreateProjectWindowButton,
+#openProjectButton,
+#timerStartButton,
+#timerStopButton,
+#timerResetButton,
+#openCreateTaskWindowButton {
+-fx-background-radius: 6, 5;
+    -fx-background-insets: 0, 1;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
+}
+
+#taskItemHboxOne,
+#taskItemHboxTwo,
+#projectItemHbox {
+    -fx-background-color: #ffffff
+}
+>>>>>>> 298206641f882b29a2cb61df570fafb2c12c9b34

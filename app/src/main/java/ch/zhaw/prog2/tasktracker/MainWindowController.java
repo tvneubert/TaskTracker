@@ -2,7 +2,9 @@ package ch.zhaw.prog2.tasktracker;
 
 import java.io.IOException;
 
-import ch.zhaw.prog2.tasktracker.todo.DummyProjectOverview;
+import ch.zhaw.prog2.tasktracker.project.Project;
+import ch.zhaw.prog2.tasktracker.project.ProjectListItemController;
+import ch.zhaw.prog2.tasktracker.task.DummyProjectOverview;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.event.ActionEvent;
@@ -34,7 +36,7 @@ public class MainWindowController implements InvalidationListener {
 
     /**
      * Placeholder for a projectOverview for testing purposes
-     * TODO Replace with proper ProjectOverview once implemented
+     * task Replace with proper ProjectOverview once implemented
      */
     private DummyProjectOverview projectOverview = new DummyProjectOverview();
 

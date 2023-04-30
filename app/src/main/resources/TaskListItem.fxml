@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<Pane fx:id="todoListItemBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="92.0" prefWidth="294.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zhaw.prog2.tasktracker.TodoListItemController">
+   <children>
+      <VBox fx:id="projectItemVbox" prefHeight="92.0" prefWidth="294.0">
+         <children>
+            <HBox fx:id="todoItemHboxOne" alignment="CENTER_LEFT" prefHeight="105.0" prefWidth="284.0" spacing="15.0">
+               <children>
+                  <Label fx:id="TodoNameLabel" text="Todo Name">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="5.0" right="145.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Button fx:id="deleteTodoButton" mnemonicParsing="false" onAction="#deleteTodo" text="löschen">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <HBox fx:id="todoItemHboxTwo" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="11.0">
+               <children>
+                  <Label fx:id="timerLabel" prefHeight="17.0" prefWidth="81.0" text="Stoppuhr">
+                     <HBox.margin>
+                        <Insets left="5.0" right="65.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Button fx:id="timerStartButton" mnemonicParsing="false" onAction="#startTimer" text="Start" />
+                  <Button fx:id="timerStopButton" mnemonicParsing="false" onAction="#pauseTimer" text="Stop" />
+                  <Button fx:id="timerResetButton" mnemonicParsing="false" onAction="#resumeTimer" text="Resume" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@TodoListItem.css" />
+      <URL value="@GeneralStyles.css" />
+   </stylesheets>
+</Pane>

@@ -27,7 +27,7 @@
                   <Insets bottom="5.0" />
                </VBox.margin>
             </Label>
-            <TextArea fx:id="todoDescription" prefHeight="200.0" prefWidth="200.0">
+            <TextArea fx:id="taskDescription" prefHeight="200.0" prefWidth="200.0">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
@@ -37,7 +37,7 @@
                   <Insets bottom="5.0" />
                </VBox.margin>
             </Label>
-            <TextArea fx:id="todoGoal" prefHeight="200.0" prefWidth="200.0">
+            <TextArea fx:id="taskGoal" prefHeight="200.0" prefWidth="200.0">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
@@ -47,7 +47,7 @@
                   <Insets bottom="5.0" />
                </VBox.margin>
             </Label>
-            <DatePicker fx:id="todoDeadline">
+            <DatePicker fx:id="taskDeadline">
                <VBox.margin>
                   <Insets bottom="15.0" />
                </VBox.margin>
