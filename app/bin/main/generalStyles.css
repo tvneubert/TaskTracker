@@ -23,8 +23,8 @@
 }
 
 .label {
-    -fx-border-style: none none solid none;
-    -fx-border-width: 0 0 1px 0;
+    -fx-border-style: none none none none;
+    -fx-border-width: 0 0 0 0;
     -fx-border-color: #000;
 }
 

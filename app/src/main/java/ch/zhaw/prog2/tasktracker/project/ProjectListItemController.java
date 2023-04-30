@@ -2,12 +2,8 @@ package ch.zhaw.prog2.tasktracker.project;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 
 import ch.zhaw.prog2.tasktracker.oservables.ProjectEvent;
-import ch.zhaw.prog2.tasktracker.oservables.TaskEvent;
-import ch.zhaw.prog2.tasktracker.project.Project;
-import ch.zhaw.prog2.tasktracker.project.ProjectController;
 import ch.zhaw.prog2.tasktracker.task.Task;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;

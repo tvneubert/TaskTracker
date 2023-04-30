@@ -6,7 +6,6 @@ import ch.zhaw.prog2.tasktracker.oservables.TaskEvent;
 import ch.zhaw.prog2.tasktracker.task.Task;
 import ch.zhaw.prog2.tasktracker.task.Task.TaskStatus;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Class to represent a project.

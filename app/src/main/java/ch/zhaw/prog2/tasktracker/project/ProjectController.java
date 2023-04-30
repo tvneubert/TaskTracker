@@ -1,19 +1,15 @@
 package ch.zhaw.prog2.tasktracker.project;
 
 import java.io.IOException;
-import java.util.Date;
 
 import ch.zhaw.prog2.tasktracker.TimeFormater;
 import ch.zhaw.prog2.tasktracker.oservables.ProjectEvent;
-import ch.zhaw.prog2.tasktracker.oservables.TaskEvent;
 import ch.zhaw.prog2.tasktracker.task.CreateTaskController;
 import ch.zhaw.prog2.tasktracker.task.Task;
 import ch.zhaw.prog2.tasktracker.task.TaskListItemController;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

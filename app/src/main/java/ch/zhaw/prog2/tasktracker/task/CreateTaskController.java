@@ -2,7 +2,6 @@ package ch.zhaw.prog2.tasktracker.task;
 
 import ch.zhaw.prog2.tasktracker.oservables.TaskEvent;
 import ch.zhaw.prog2.tasktracker.project.Project;
-import ch.zhaw.prog2.tasktracker.oservables.ObservableTask;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -44,11 +43,6 @@ public class CreateTaskController {
     @FXML
     private TextArea taskGoal;
     private LocalDate deadlineDate;
-    /**
-     * List of observers
-     * Required for the implementation of Observable
-     */
-    private ArrayList<TaskEvent> observers = new ArrayList<>();
 
     private Project project;
 
