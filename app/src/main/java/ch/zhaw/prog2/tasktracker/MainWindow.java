@@ -17,6 +17,8 @@ import javafx.stage.Stage;
  */
 public class MainWindow extends Application {
 
+    private MainWindowController mainWindowController;
+
     /**
      * The start method is called by the JavaFX runtime when the application is
      * launched.
@@ -42,17 +44,17 @@ public class MainWindow extends Application {
             Pane rootNode = loader.load();
 
             // Add random Projects to scrollPane (FOR DEMONSTRATION ONLY!!)
-            MainWindowController mainWindowController = loader.getController();
+            mainWindowController = loader.getController();
             mainWindowController.addProjectsToScrollPane();
 
             Scene scene = new Scene(rootNode);
 
-            stage.setWidth(380);
+            stage.setWidth(367);
             stage.setHeight(600);
 
-            stage.setMinWidth(380);
+            stage.setMinWidth(367);
             stage.setMinHeight(600);
-            stage.setMaxWidth(380);
+            stage.setMaxWidth(367);
             stage.setMaxHeight(600);
 
             stage.setResizable(false);
@@ -61,6 +63,13 @@ public class MainWindow extends Application {
             stage.show();
         } catch (IOException e) {
             System.err.println("Error while loading FXML file: " + e.getMessage());
+            e.printStackTrace();
         }
+    }
+
+    @Override
+    public void stop() throws Exception {
+        mainWindowController.getProjectOverview().save();
+        super.stop();
     }
 }

@@ -2,9 +2,14 @@ package ch.zhaw.prog2.tasktracker;
 
 import java.io.IOException;
 
+import ch.zhaw.prog2.tasktracker.Observerable.ProjectEventListener;
+import ch.zhaw.prog2.tasktracker.Observerable.ProjectOverviewEventListener;
+import ch.zhaw.prog2.tasktracker.project.CreateProjectController;
 import ch.zhaw.prog2.tasktracker.project.Project;
 import ch.zhaw.prog2.tasktracker.project.ProjectListItemController;
-import ch.zhaw.prog2.tasktracker.todo.DummyProjectOverview;
+import ch.zhaw.prog2.tasktracker.projectmodels.JSONProjectOverview;
+import ch.zhaw.prog2.tasktracker.projectmodels.ProjectOverview;
+import ch.zhaw.prog2.tasktracker.task.Task;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -25,7 +30,7 @@ import javafx.util.Duration;
 /**
  * The controller for the main window of the Task Tracker application.
  */
-public class MainWindowController implements InvalidationListener {
+public class MainWindowController implements InvalidationListener, ProjectEventListener, ProjectOverviewEventListener {
 
     /**
      * The button for opening the create Project window.
@@ -49,7 +54,7 @@ public class MainWindowController implements InvalidationListener {
      * Placeholder for a projectOverview for testing purposes
      * task Replace with proper ProjectOverview once implemented
      */
-    private DummyProjectOverview projectOverview = new DummyProjectOverview();
+    private ProjectOverview projectOverview;
 
         /**
      *
@@ -57,6 +62,21 @@ public class MainWindowController implements InvalidationListener {
      */
 
      private Timeline allProjectsTimeLine;
+
+     public MainWindowController() {
+        super();
+        try {
+            JSONProjectOverview jpo = new JSONProjectOverview();
+            jpo.addListener(this);
+            projectOverview = jpo;
+
+            for(Project p : jpo.getProjectList()) {
+                p.addListener(this);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+     }
 
     /**
      * This method is called when the "open create Project window" button is
@@ -86,6 +106,7 @@ public class MainWindowController implements InvalidationListener {
             stageOfNewWindow.show();
         } catch (IOException e) {
             System.err.println("Error while loading FXML file: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -122,8 +143,13 @@ public class MainWindowController implements InvalidationListener {
                 projectOverviewContent.getChildren().add(projectPane);
             } catch (IOException e) {
                 System.err.println("Error while loading FXML file: " + e.getMessage());
+                e.printStackTrace();
             }
         }
+    }
+
+    protected ProjectOverview getProjectOverview() {
+        return this.projectOverview;
     }
 
     /**
@@ -132,7 +158,6 @@ public class MainWindowController implements InvalidationListener {
      * @param observable the Observable that triggered the invalidation event
      *            The {@code Observable} that became invalid
      */
-
     @Override
     public void invalidated(Observable observable) {
         if(observable instanceof ProjectListItemController){
@@ -141,5 +166,34 @@ public class MainWindowController implements InvalidationListener {
         }
         projectOverviewContent.getChildren().clear();
         addProjectsToScrollPane();
+    }
+
+    @Override
+    public void allTasksFinished() {}
+
+    @Override
+    public void taskStateChange(Task t) {
+        this.projectOverview.save();
+    }
+
+    @Override
+    public void taskDeleted(Task t) {
+        this.projectOverview.save();
+    }
+
+    @Override
+    public void taskCreated(Task t) {
+        this.projectOverview.save();
+    }
+
+    @Override
+    public void projectCreated(Project p) {
+        System.out.println("Project has been created");
+        p.addListener(this);
+    }
+
+    @Override
+    public void projectDeleted(Project p) {
+        p.removeListener(this);
     }
 }

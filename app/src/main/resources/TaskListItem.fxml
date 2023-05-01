@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane fx:id="todoListItemBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="92.0" prefWidth="310.0" style="-fx-border-color: black; -fx-border-width: 0 0 1px 0; -fx-border-style: none none solid none;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zhaw.prog2.tasktracker.task.TaskListItemController">
+<Pane fx:id="todoListItemBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="110.0" prefWidth="308.0" style="-fx-border-color: black; -fx-border-width: 0 0 1px 0; -fx-border-style: none none solid none;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zhaw.prog2.tasktracker.task.TaskListItemController">
    <children>
       <VBox fx:id="projectItemVbox" prefHeight="92.0" prefWidth="313.0">
          <children>
@@ -37,6 +37,26 @@
                   <Insets />
                </VBox.margin>
             </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="22.0" prefWidth="97.0" text="Deadline:">
+                     <HBox.margin>
+                        <Insets left="10.0" top="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Region prefHeight="27.0" prefWidth="174.0" />
+                  <Label prefHeight="22.0" prefWidth="83.0" text="deadline">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <Label text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed d" wrapText="true" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+            </Label>
             <HBox fx:id="todoItemHboxTwo" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="285.0" spacing="11.0">
                <children>
                   <GridPane prefHeight="44.0" prefWidth="317.0">
@@ -50,7 +70,7 @@
                     </rowConstraints>
                      <children>
                         <Button fx:id="timerStartButton" mnemonicParsing="false" onAction="#timerButton" prefHeight="87.0" prefWidth="98.0" text="▶" textAlignment="CENTER" textOverrun="CLIP" />
-                        <Button fx:id="timerResetButton" mnemonicParsing="false" onAction="#toggleTaskState" prefHeight="111.0" prefWidth="98.0" text="🗸" GridPane.columnIndex="1" />
+                        <Button fx:id="taskDoneButton" mnemonicParsing="false" onAction="#toggleTaskState" prefHeight="111.0" prefWidth="98.0" text="🗸" GridPane.columnIndex="1" />
                         <Button fx:id="deleteTaskButton" mnemonicParsing="false" onAction="#deleteTask" prefHeight="47.0" prefWidth="98.0" text="x" GridPane.columnIndex="2" />
                      </children>
                   </GridPane>
