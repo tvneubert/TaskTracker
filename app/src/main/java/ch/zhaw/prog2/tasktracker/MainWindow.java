@@ -2,6 +2,8 @@ package ch.zhaw.prog2.tasktracker;
 
 import java.io.IOException;
 
+import ch.zhaw.prog2.tasktracker.project.Project;
+import ch.zhaw.prog2.tasktracker.task.Task;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -67,8 +69,16 @@ public class MainWindow extends Application {
         }
     }
 
+    /*
+     * Pauses all Timer and saves the date before closing the programm
+     */
     @Override
     public void stop() throws Exception {
+        for(Project p : mainWindowController.getProjectOverview().getProjectList()) {
+            for(Task t : p.getTasks()) {
+                t.getTimeTracker().pause();
+            }
+        }
         mainWindowController.getProjectOverview().save();
         super.stop();
     }

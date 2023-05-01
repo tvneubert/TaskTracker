@@ -47,7 +47,7 @@ public class MainWindowController implements InvalidationListener, ProjectEventL
     @FXML
     private Label timestamp;
 
-    @FXML 
+    @FXML
     private Label timestampLabel;
 
     /**
@@ -56,27 +56,32 @@ public class MainWindowController implements InvalidationListener, ProjectEventL
      */
     private ProjectOverview projectOverview;
 
-        /**
+    /**
      *
-     this timeline is for summarizing the time of all tasks
+     * this timeline is for summarizing the time of all tasks
      */
 
-     private Timeline allProjectsTimeLine;
+    private Timeline allProjectsTimeLine;
 
-     public MainWindowController() {
+    /**
+     * This is the constructor for the Mainwindow Conttroller
+     * Here is a listener added to all JSON Project Ovierview Elements
+     * and projects
+     */
+    public MainWindowController() {
         super();
         try {
             JSONProjectOverview jpo = new JSONProjectOverview();
             jpo.addListener(this);
             projectOverview = jpo;
 
-            for(Project p : jpo.getProjectList()) {
+            for (Project p : jpo.getProjectList()) {
                 p.addListener(this);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-     }
+    }
 
     /**
      * This method is called when the "open create Project window" button is
@@ -111,7 +116,8 @@ public class MainWindowController implements InvalidationListener, ProjectEventL
     }
 
     private void startSummarizingTimer() {
-        // we can only start the timeline if we do have a task object because it does contain the timer
+        // we can only start the timeline if we do have a task object because it does
+        // contain the timer
         allProjectsTimeLine = new Timeline(new KeyFrame(Duration.millis(16.6), (ActionEvent e) -> {
             int timerSum = 0;
             for (Project project : projectOverview.getProjectList()) {
@@ -148,6 +154,11 @@ public class MainWindowController implements InvalidationListener, ProjectEventL
         }
     }
 
+    /**
+     * Gets the project overview
+     * 
+     * @return the projectOverwiev
+     */
     protected ProjectOverview getProjectOverview() {
         return this.projectOverview;
     }
@@ -155,12 +166,13 @@ public class MainWindowController implements InvalidationListener, ProjectEventL
     /**
      * Implementation of the InvalidationListener
      * Processes the invalidation event from the Observable
+     * 
      * @param observable the Observable that triggered the invalidation event
-     *            The {@code Observable} that became invalid
+     *                   The {@code Observable} that became invalid
      */
     @Override
     public void invalidated(Observable observable) {
-        if(observable instanceof ProjectListItemController){
+        if (observable instanceof ProjectListItemController) {
             Project project = ((ProjectListItemController) observable).getProject();
             projectOverview.removeProject(project);
         }
@@ -168,30 +180,48 @@ public class MainWindowController implements InvalidationListener, ProjectEventL
         addProjectsToScrollPane();
     }
 
+    /*
+     * Not needed here
+     */
     @Override
-    public void allTasksFinished() {}
+    public void allTasksFinished() {
+    }
 
+    /*
+     * Tells the project Overview to save if the taskState changed
+     */
     @Override
     public void taskStateChange(Task t) {
         this.projectOverview.save();
     }
 
+    /*
+     * Tleess the projectOverview to save if the task was deleted
+     */
     @Override
     public void taskDeleted(Task t) {
         this.projectOverview.save();
     }
 
+    /*
+     * Tells the projectOverview to save if a task was created
+     */
     @Override
     public void taskCreated(Task t) {
         this.projectOverview.save();
     }
 
+    /*
+     * Adds a listener to the project when it was created
+     */
     @Override
     public void projectCreated(Project p) {
-        System.out.println("Project has been created");
         p.addListener(this);
     }
 
+    /*
+     * Removes the listener if the project was deleted
+     */
     @Override
     public void projectDeleted(Project p) {
         p.removeListener(this);

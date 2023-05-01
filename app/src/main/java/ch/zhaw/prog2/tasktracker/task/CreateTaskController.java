@@ -51,7 +51,7 @@ public class CreateTaskController {
      */
     @FXML
     private void createTask(ActionEvent event) {
-        Date date = null;
+        java.util.Date date = null;
         if (taskDeadline.getValue() != null) {
             deadlineDate = taskDeadline.getValue();
             date = Date.valueOf(deadlineDate);

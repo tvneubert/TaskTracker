@@ -63,6 +63,7 @@ public class JSONProjectOverview implements ProjectOverview, ObservableProjectOv
                 this.projectList = new ArrayList<>();
             }
         }
+        System.out.println("Database file is: "+file.getAbsolutePath());
     }
 
     /**
