@@ -1,6 +1,7 @@
 package ch.zhaw.prog2.tasktracker.task;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -16,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 /**
@@ -114,7 +116,6 @@ public class TaskListItemController {
      * as well
      */
     private void updateRednerSettings() {
-        this.checkDeadline();
         if (taskListItem.getTaskStatus().equals(TaskStatus.FINISHED)) {
             disableText();
         } else {
@@ -135,7 +136,6 @@ public class TaskListItemController {
         taskNameLabel.setStyle("-fx-text-fill: #000;");
         deadline.setStyle("-fx-text-fill: #000;");
         goalLabel.setStyle("-fx-text-fill: #000;");
-        this.checkDeadline();
         for (Node n : taskNameLabel.getChildrenUnmodifiable()) {
             n.setStyle("-fx-strikethrough: false;");
         }
@@ -161,12 +161,15 @@ public class TaskListItemController {
      * Checks if the Deadline is in the past, if so the font turns red
      */
     private void checkDeadline() {
-        long currentTime = System.currentTimeMillis();
-        LocalDateTime localDateTime = taskListItem.getDeadline().toInstant().atZone(ZoneId.systemDefault())
+       // LocalDate today = LocalDate.now();
+       // LocalDate dateToCompare = LocalDate.from(this.taskListItem.getDeadline());
+       System.out.println("test");
+        LocalDateTime currentTime = LocalDateTime.now();
+        LocalDateTime deadlineTime = taskListItem.getDeadline().toInstant().atZone(ZoneId.systemDefault())
                 .toLocalDate().atTime(LocalTime.MAX);
-        ZonedDateTime zdt = ZonedDateTime.of(localDateTime, ZoneId.systemDefault());
-        if (zdt.toInstant().toEpochMilli() < currentTime) {
-            deadline.setStyle("-fx-text-fill: red;");
+        if (currentTime.isAfter(deadlineTime)) {
+            System.out.println("here" + deadline);
+            Platform.runLater(()-> deadline.setTextFill(Color.RED));
         }
     }
 
