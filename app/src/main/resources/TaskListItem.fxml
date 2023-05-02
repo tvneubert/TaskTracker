@@ -16,9 +16,9 @@
    <children>
       <VBox fx:id="projectItemVbox" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox fx:id="todoItemHboxOne" alignment="CENTER_LEFT" VBox.vgrow="NEVER">
+            <HBox fx:id="taskItemHboxOne" alignment="CENTER_LEFT" VBox.vgrow="NEVER">
                <children>
-                  <Label fx:id="taskNameLabel" prefHeight="23.0" text="Todo Name" HBox.hgrow="ALWAYS">
+                  <Label fx:id="taskNameLabel" prefHeight="23.0" text="Task Name" HBox.hgrow="ALWAYS">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -52,7 +52,7 @@
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
             </Label>
-            <HBox fx:id="todoItemHboxTwo" alignment="CENTER_LEFT" spacing="11.0" VBox.vgrow="NEVER">
+            <HBox fx:id="taskItemHboxTwo" alignment="CENTER_LEFT" spacing="11.0" VBox.vgrow="NEVER">
                <children>
                   <GridPane prefHeight="44.0" prefWidth="317.0">
                      <columnConstraints>

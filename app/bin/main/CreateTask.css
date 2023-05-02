@@ -13,7 +13,7 @@
     -fx-border-width: 2px;
 }
 
-#todoDescription {
+#taskDescription {
     -fx-background-color: #F7E2A8; /* Hintergrundfarbe */
 }
 
