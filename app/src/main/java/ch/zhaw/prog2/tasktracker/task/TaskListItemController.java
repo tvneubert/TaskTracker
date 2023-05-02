@@ -99,7 +99,6 @@ public class TaskListItemController {
         String _deadline = formatter.format(this.taskListItem.getDeadline());
         deadline.setText(_deadline);
         goalLabel.setText(this.taskListItem.getGoal());
-        this.checkDeadline();
         Platform.runLater(() -> {
             updateRednerSettings();
         });
@@ -135,6 +134,7 @@ public class TaskListItemController {
     private void enableText() {
         taskNameLabel.setStyle("-fx-text-fill: #000;");
         deadline.setStyle("-fx-text-fill: #000;");
+        this.checkDeadline();
         goalLabel.setStyle("-fx-text-fill: #000;");
         for (Node n : taskNameLabel.getChildrenUnmodifiable()) {
             n.setStyle("-fx-strikethrough: false;");
@@ -161,15 +161,11 @@ public class TaskListItemController {
      * Checks if the Deadline is in the past, if so the font turns red
      */
     private void checkDeadline() {
-       // LocalDate today = LocalDate.now();
-       // LocalDate dateToCompare = LocalDate.from(this.taskListItem.getDeadline());
-       System.out.println("test");
         LocalDateTime currentTime = LocalDateTime.now();
         LocalDateTime deadlineTime = taskListItem.getDeadline().toInstant().atZone(ZoneId.systemDefault())
                 .toLocalDate().atTime(LocalTime.MAX);
         if (currentTime.isAfter(deadlineTime)) {
-            System.out.println("here" + deadline);
-            Platform.runLater(()-> deadline.setTextFill(Color.RED));
+            Platform.runLater(()-> deadline.setStyle("-fx-text-fill:red;"));
         }
     }
 
