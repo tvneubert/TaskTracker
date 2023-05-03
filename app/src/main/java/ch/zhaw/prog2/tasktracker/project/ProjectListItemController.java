@@ -66,7 +66,7 @@ public class ProjectListItemController implements Observable, ProjectEventListen
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Project.fxml"));
             Pane rootPane = loader.load();
 
-            // Add random Projects to scrollPane (FOR DEMONSTRATION ONLY!!)
+            // Add random Projects to scrollPane 
             ProjectController projectController = loader.getController();
 
             // create a scene with the new the root-Node

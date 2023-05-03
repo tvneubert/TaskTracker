@@ -1,5 +1,11 @@
 package ch.zhaw.prog2.tasktracker.task;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import ch.zhaw.prog2.tasktracker.TimeFormater;
 import ch.zhaw.prog2.tasktracker.task.Task.TaskStatus;
 import javafx.animation.Animation;
@@ -11,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 /**
@@ -22,6 +29,18 @@ public class TaskListItemController {
      * The task object that is represented by this list item.
      */
     private Task taskListItem;
+
+    /*
+     * Shows the given deadline
+     */
+    @FXML
+    private Label deadline;
+
+    /*
+     * Shows the desciption of the Task
+     */
+    @FXML
+    private Label goalLabel;
 
     /**
      * The label for displaying the name of the task.
@@ -76,6 +95,10 @@ public class TaskListItemController {
         tl.play();
 
         taskNameLabel.setText(this.taskListItem.getDescription());
+        SimpleDateFormat formatter = new SimpleDateFormat("dd. MM. yyyy");
+        String _deadline = formatter.format(this.taskListItem.getDeadline());
+        deadline.setText(_deadline);
+        goalLabel.setText(this.taskListItem.getGoal());
         Platform.runLater(() -> {
             updateRednerSettings();
         });
@@ -87,27 +110,62 @@ public class TaskListItemController {
     public TaskListItemController() {
     }
 
+    /**
+     * Updates the rendersettings, so if we reload the programm the changes reload
+     * as well
+     */
     private void updateRednerSettings() {
         if (taskListItem.getTaskStatus().equals(TaskStatus.FINISHED)) {
-            taskNameLabel.setStyle("-fx-text-fill: #535151;");
-            for (Node n : taskNameLabel.getChildrenUnmodifiable()) {
-                n.setStyle("-fx-strikethrough: true;");
-            }
-            taskDoneButton.setStyle("-fx-text-fill: green;");
-            this.timerStartButton.setDisable(true);
+            disableText();
         } else {
-            taskNameLabel.setStyle("-fx-text-fill: #000;");
-            for (Node n : taskNameLabel.getChildrenUnmodifiable()) {
-                n.setStyle("-fx-strikethrough: false;");
-            }
-            taskDoneButton.setStyle("-fx-text-fill: #000;");
-            this.timerStartButton.setDisable(false);
+            enableText();
         }
-
         if (this.taskListItem.getTimeTracker().isRunning()) {
             this.timerStartButton.setText("⏸");
         } else {
             this.timerStartButton.setText("▶");
+        }
+    }
+
+    /**
+     * If task is moved back to the state of not being done, the text is back to
+     * normal as well
+     */
+    private void enableText() {
+        taskNameLabel.setStyle("-fx-text-fill: #000;");
+        deadline.setStyle("-fx-text-fill: #000;");
+        this.checkDeadline();
+        goalLabel.setStyle("-fx-text-fill: #000;");
+        for (Node n : taskNameLabel.getChildrenUnmodifiable()) {
+            n.setStyle("-fx-strikethrough: false;");
+        }
+        taskDoneButton.setStyle("-fx-text-fill: #000;");
+        this.timerStartButton.setDisable(false);
+    }
+
+    /**
+     * Grey and strokes the text of an task thets marked as done
+     */
+    private void disableText() {
+        taskNameLabel.setStyle("-fx-text-fill: #535151;");
+        deadline.setStyle("-fx-text-fill: #535151;");
+        goalLabel.setStyle("-fx-text-fill: #535151;");
+        for (Node n : taskNameLabel.getChildrenUnmodifiable()) {
+            n.setStyle("-fx-strikethrough: true;");
+        }
+        taskDoneButton.setStyle("-fx-text-fill: green;");
+        this.timerStartButton.setDisable(true);
+    }
+
+    /**
+     * Checks if the Deadline is in the past, if so the font turns red
+     */
+    private void checkDeadline() {
+        LocalDateTime currentTime = LocalDateTime.now();
+        LocalDateTime deadlineTime = taskListItem.getDeadline().toInstant().atZone(ZoneId.systemDefault())
+                .toLocalDate().atTime(LocalTime.MAX);
+        if (currentTime.isAfter(deadlineTime)) {
+            Platform.runLater(()-> deadline.setStyle("-fx-text-fill:red;"));
         }
     }
 
@@ -130,6 +188,18 @@ public class TaskListItemController {
             taskListItem.setTaskStatus(TaskStatus.ACTIVE);
         }
         updateRednerSettings();
+    }
+
+    /**
+     * The Goal desciption can now grow on Click or toggle back to the small view
+     */
+    @FXML
+    public void toggleTaskGoalText() {
+        if (goalLabel.getMaxHeight() == 20) {
+            goalLabel.setMaxHeight(Double.MAX_VALUE);
+        } else {
+            goalLabel.setMaxHeight(20);
+        }
     }
 
     /**
