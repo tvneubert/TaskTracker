@@ -3,20 +3,23 @@ package ch.zhaw.prog2.tasktracker.project;
 import java.io.IOException;
 
 import ch.zhaw.prog2.tasktracker.TimeFormater;
+import ch.zhaw.prog2.tasktracker.oservables.ProjectEvent;
 import ch.zhaw.prog2.tasktracker.task.CreateTaskController;
 import ch.zhaw.prog2.tasktracker.task.Task;
 import ch.zhaw.prog2.tasktracker.task.TaskListItemController;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -25,7 +28,7 @@ import javafx.util.Duration;
 /**
  * This class is a controller for the main window of the task application.
  */
-public class ProjectController implements InvalidationListener {
+public class ProjectController implements ProjectEvent {
 
     /**
      * The button for opening the create task window.
@@ -39,12 +42,20 @@ public class ProjectController implements InvalidationListener {
     @FXML
     private Label timeLabel;
 
+    @FXML
+    private ChoiceBox<String> filter;
+
+    @FXML
+    private Label projectName;
+
     /**
      * The VBox for displaying the list of tasks.
      */
     @FXML
     private VBox taskOverviewContent;
 
+    @FXML
+    private Label totalTimeLabel;
 
     /**
      *
@@ -72,12 +83,14 @@ public class ProjectController implements InvalidationListener {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/CreateTask.fxml"));
             Pane rootPane = loader.load();
             CreateTaskController controller = loader.getController();
-            controller.setRootProject(project);
-            controller.addListener(this);
+            controller.setProject(this.project);
             // create a scene with the new the root-Node
             Scene scene = new Scene(rootPane);
             // create a new stage and show the new window
             Stage stageOfNewWindow = new Stage();
+            stageOfNewWindow.getIcons().add(new Image(getClass().getResourceAsStream("/TaskTrackerIcon.png")));
+            stageOfNewWindow.setTitle("Erstelle einen Task");
+            stageOfNewWindow.setResizable(false);
             stageOfNewWindow.setScene(scene);
             stageOfNewWindow.show();
         } catch (IOException e) {
@@ -93,11 +106,11 @@ public class ProjectController implements InvalidationListener {
     public void addTasksToScrollPane() {
         for(Task task : project.getOpenTasks()){
             try {
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/TaskListItem.fxml"));
                 Pane taskPane = loader.load();
 
                 TaskListItemController taskListItemController = loader.getController();
-                taskListItemController.addListener(this);
                 taskListItemController.setTaskObject(task);
 
                 taskOverviewContent.getChildren().add(taskPane);
@@ -107,6 +120,11 @@ public class ProjectController implements InvalidationListener {
         }
         this.startSummarizingTimer();
 
+    }
+
+
+    private void setProjectTitle(String title) {
+        this.projectName.setText(title);
     }
 
     /**
@@ -126,28 +144,63 @@ public class ProjectController implements InvalidationListener {
     }
 
     /**
-     * Set the project that this Window is controlling
+     * Set the project that this Window is controlling and the name of the Title and the Filters for the Project
      * @param project Project to be used
      */
     public void setProject(Project project){
         if(project != null){
             this.project = project;
+            this.setProjectTitle(project.getName());
+            this.project.addListener(this);
+
+            ObservableList<String> filterOptions = FXCollections.observableArrayList(
+                "Offen",
+                "Fertig");
+            filter.setItems(filterOptions);
         }
     }
 
-    /**
-     * Implementation of the InvalidationListener
-     * Processes the invalidation event from the Observable
-     * @param observable the Observable that triggered the invalidation event
-     *            The {@code Observable} that became invalid
-     */
-    @Override
-    public void invalidated(Observable observable) {
-        if(observable instanceof TaskListItemController){
-            Task task = ((TaskListItemController) observable).getTaskListItem();
-            project.removeTask(task);
-        }
+    private void reloadTaskList() {
         taskOverviewContent.getChildren().clear();
         addTasksToScrollPane();
+    }
+
+    /**
+    This method is called when all tasks in the project have been finished.
+    This method is part of the TaskListener interface.
+    */
+    @Override
+    public void allTasksFinished() {
+    }
+
+    /**
+    This method is called when a task has been deleted from the project.
+    It reloads the task list in the UI to reflect the updated project.
+    This method is part of the TaskListener interface.
+    @param t the Task object that was deleted
+    */
+    @Override
+    public void taskDeleted(Task t) {
+        this.reloadTaskList();
+    }
+
+    /**
+    This method is called when a new task has been created in the project.
+    It reloads the task list in the UI to reflect the updated project.
+    This method is part of the TaskListener interface.
+    @param t the Task object that was created
+    */
+    @Override
+    public void taskCreated(Task t) {
+        this.reloadTaskList();
+    }
+
+    /**
+    This method is called when the state of a task in the project has changed.
+    This method is part of the TaskListener interface.
+    @param t the Task object whose state has changed
+    */
+    @Override
+    public void taskStateChange(Task t) {
     }
 }

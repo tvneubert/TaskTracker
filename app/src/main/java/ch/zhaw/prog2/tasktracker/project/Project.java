@@ -1,5 +1,8 @@
 package ch.zhaw.prog2.tasktracker.project;
 
+import ch.zhaw.prog2.tasktracker.oservables.ObservableProject;
+import ch.zhaw.prog2.tasktracker.oservables.ProjectEvent;
+import ch.zhaw.prog2.tasktracker.oservables.TaskEvent;
 import ch.zhaw.prog2.tasktracker.task.Task;
 import ch.zhaw.prog2.tasktracker.task.Task.TaskStatus;
 import java.util.ArrayList;
@@ -9,7 +12,9 @@ import java.util.ArrayList;
  * Has a list of tasks and keeps track of time used for each task
  */
 
-public class Project{
+public class Project implements ObservableProject, TaskEvent {
+    private ArrayList<ProjectEvent> observers = new ArrayList<>();
+
     private ArrayList<Task> tasks = new ArrayList<>();
     private String name;
 
@@ -78,6 +83,11 @@ public class Project{
      */
     public void addTask(Task task){
         tasks.add(task);
+        task.addListener(this);
+
+        for(ProjectEvent pe : this.observers) {
+            pe.taskCreated(task);
+        }
     }
 
     /**
@@ -110,5 +120,59 @@ public class Project{
         if(tasks.contains(task)){
             tasks.remove(task);
         }
+        
+        for(ProjectEvent pe : this.observers) {
+            pe.taskDeleted(task);
+        }
+    }
+
+    /**
+     * Implementation of Observable
+     * Add listener to the list of listeners to be notified
+     * @param listener InvalidationListener to add to the list
+     *            The listener to register
+     */
+    @Override
+    public void addListener(ProjectEvent listener) {
+        if(listener != null && !this.observers.contains(listener)) {
+            observers.add(listener);
+        }
+    }
+    /**
+     * Implementation of Observable
+     * remove listener from the list of listeners to be notified
+     * @param listener InvalidationListener to remove from the list
+     *            The listener to remove
+     */
+    @Override
+    public void removeListener(ProjectEvent listener) {
+        if(observers.contains(listener)){
+            observers.remove(listener);
+        }
+    }
+
+    /**
+     * Implementation of TaskEvent
+     * Called when the state of a task has changed.
+     * @param task the task whose state has changed
+     */
+    @Override
+    public void taskStateChanged(Task task) {
+        for(ProjectEvent pe : this.observers) {
+            pe.taskStateChange(task);
+            if(this.getOpenTasks().size() == 0) {
+                pe.allTasksFinished();
+            }
+        }
+    }
+
+     /**
+     * Implementation of TaskEvent
+     * Called when a request is made to delete a task.
+     * @param t the task to be deleted
+     */
+    @Override
+    public void deleteRequest(Task t) {
+        this.removeTask(t);
     }
 }

@@ -1,4 +1,4 @@
-package ch.zhaw.prog2.tasktracker.task;
+package ch.zhaw.prog2.tasktracker.todo;
 
 import ch.zhaw.TimeTracker;
 

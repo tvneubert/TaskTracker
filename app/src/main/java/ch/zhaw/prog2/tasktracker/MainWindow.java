@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -25,6 +26,9 @@ public class MainWindow extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         openMainWindow(primaryStage);
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/TaskTrackerIcon.png")));
+        primaryStage.setTitle("TaskTracker");
+       
     }
 
     /**
@@ -42,6 +46,17 @@ public class MainWindow extends Application {
             mainWindowController.addProjectsToScrollPane();
 
             Scene scene = new Scene(rootNode);
+
+            stage.setWidth(380);
+            stage.setHeight(600);
+
+            stage.setMinWidth(380);
+            stage.setMinHeight(600);
+            stage.setMaxWidth(380);
+            stage.setMaxHeight(600);
+
+            stage.setResizable(false);
+            
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

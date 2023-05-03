@@ -3,7 +3,7 @@ package ch.zhaw.prog2.tasktracker.todo;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.zhaw.prog2.tasktracker.task.DummyTaskDataObject;
+import ch.zhaw.prog2.tasktracker.todo.DummyTaskDataObject;
 
 
 /*

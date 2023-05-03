@@ -1,7 +1,7 @@
 package ch.zhaw.prog2.tasktracker;
 
 import ch.zhaw.prog2.tasktracker.project.Project;
-import ch.zhaw.prog2.tasktracker.task.DummyProjectOverview;
+import ch.zhaw.prog2.tasktracker.todo.DummyProjectOverview;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.event.ActionEvent;
@@ -65,6 +65,7 @@ public class CreateProjectController implements Observable {
 
         // Close window after creation
         Stage stage = (Stage) newProjectSubmitButton.getScene().getWindow();
+        
         stage.close();
         notifyListeners();
     }

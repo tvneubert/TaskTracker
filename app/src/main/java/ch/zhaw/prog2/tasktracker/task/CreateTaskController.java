@@ -1,8 +1,7 @@
 package ch.zhaw.prog2.tasktracker.task;
 
+import ch.zhaw.prog2.tasktracker.oservables.TaskEvent;
 import ch.zhaw.prog2.tasktracker.project.Project;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
  * This class is responsible for controlling the "Create task" window of the
  * application.
  */
-public class CreateTaskController implements Observable {
+public class CreateTaskController {
 
     /**
      * Submit button to create a new task.
@@ -43,20 +42,8 @@ public class CreateTaskController implements Observable {
      */
     @FXML
     private TextArea taskGoal;
-    private Task task;
     private LocalDate deadlineDate;
-    private Date date;
-    /**
-     * Project this new task will be added to
-     */
-    private Project rootProject;
-    /**
-     * List of observers
-     * Required for the implementation of Observable
-     */
-    private ArrayList<InvalidationListener> observers = new ArrayList<>();
-
-
+    private Project project;
 
     /**
      * Creates a new task based on user input.
@@ -66,6 +53,7 @@ public class CreateTaskController implements Observable {
      */
     @FXML
     private void createTask(ActionEvent event) {
+        Date date = null;
         if (taskDeadline.getValue() != null) {
             deadlineDate = taskDeadline.getValue();
             date = Date.valueOf(deadlineDate);
@@ -76,11 +64,9 @@ public class CreateTaskController implements Observable {
         boolean isDeadlineSet = checkDeadlineSet();
 
         if (isDescriptionSet && isTaskSet && isDeadlineSet) {
-            task = new Task(taskDescription.getText(), taskGoal.getText(), date);
-            rootProject.addTask(task);
+            this.project.addTask(new Task(taskDescription.getText(), taskGoal.getText(), date));
             Stage stage = (Stage) newTaskSubmitButton.getScene().getWindow();
             stage.close();
-            notifyListeners();
         }
     }
 
@@ -94,6 +80,7 @@ public class CreateTaskController implements Observable {
         String emptyDecription = "Bitte gib eine Beschreibung ein!";
         if (taskDescription.getText().trim().isEmpty()) {
             this.taskDescription.appendText(emptyDecription);
+            taskDescription.setStyle("-fx-border-color: red ;");
             return false;
         } else if (taskGoal.getText().equals(emptyDecription)) {
             return false;
@@ -120,6 +107,10 @@ public class CreateTaskController implements Observable {
         }
     }
 
+    public void setProject(Project p) {
+        this.project = p;
+    }
+
     /**
      * Checks if a deadline has been set and if it is in the future.
      * If the deadline is missing or in the past, an error message is displayed.
@@ -134,52 +125,6 @@ public class CreateTaskController implements Observable {
         } else {
             taskDeadline.getStyleClass().removeAll("emptyField");
             return true;
-        }
-    }
-
-    /**
-     * Set the project this task will be added to
-     * @param project Project to add this task to
-     */
-    public void setRootProject(Project project){
-        if(project != null){
-            rootProject = project;
-        }
-    }
-
-    /**
-     * Implementation of Observable
-     * Add listener to the list of listeners to be notified
-     * @param listener InvalidationListener to add to the list
-     *            The listener to register
-     */
-    @Override
-    public void addListener(InvalidationListener listener) {
-        if(listener != null){
-            observers.add(listener);
-        }
-    }
-
-    /**
-     * Implementation of Observable
-     * remove listener from the list of listeners to be notified
-     * @param listener InvalidationListener to remove from the list
-     *            The listener to remove
-     */
-    @Override
-    public void removeListener(InvalidationListener listener) {
-        if(observers.contains(listener)){
-            observers.remove(listener);
-        }
-    }
-
-    /**
-     * Required for the function of Observable
-     * Loop though all listeners and notify them all
-     */
-    private void notifyListeners(){
-        for(InvalidationListener listener : observers){
-            listener.invalidated(this);
         }
     }
 }

@@ -1,3 +1,36 @@
+#openCreateTodoWindowButton {
+    -fx-font-size: 20px;
+}
 #taskOverviewScrollPane {
-    -fx-background-color:#32abfc;
+    -fx-background-color:#f7e2a8;
+}
+
+
+
+/* Text in all labels */
+.choice-box .label {
+    -fx-text-fill: black;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+.choice-box {
+  -fx-background-color: #f7e2a8;
+  -fx-focus-color: #a39878;
+  -fx-border-color: #000000;
+  -fx-border-width: 1px;
+  -fx-faint-focus-color: #f7e2a8;
+  -fx-control-inner-background: #f7e2a8;
+  -fx-selection-bar: #a39878;
+  -fx-font-family: Segoe Script;
+}
+.choice-box .menu-item:focused .label{
+   -fx-text-fill: white;
+}
+
+#timeLabel {
+    -fx-border-color: transparent;
+}
+
+#totalTimeLabel {
+    -fx-border-color: transparent;
 }
