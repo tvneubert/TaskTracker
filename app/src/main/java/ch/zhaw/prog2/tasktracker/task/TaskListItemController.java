@@ -1,11 +1,9 @@
 package ch.zhaw.prog2.tasktracker.task;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import ch.zhaw.prog2.tasktracker.TimeFormater;
 import ch.zhaw.prog2.tasktracker.task.Task.TaskStatus;
 import javafx.animation.Animation;
@@ -17,7 +15,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 /**
