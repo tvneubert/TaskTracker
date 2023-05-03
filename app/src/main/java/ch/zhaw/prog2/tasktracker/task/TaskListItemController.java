@@ -5,6 +5,7 @@ import ch.zhaw.prog2.tasktracker.task.Task.TaskStatus;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -44,19 +45,13 @@ public class TaskListItemController {
      * The button for resetting the timer for the task.
      */
     @FXML
-    private Button timerResetButton;
+    private Button taskDoneButton;
 
     /**
      * The Button for starting the timer for the task.
      */
     @FXML
     private Button timerStartButton;
-
-    /**
-     * The button for stopping the timer for the task.
-     */
-    @FXML
-    private Button timerStopButton;
 
     /**
      * The timeline for the timer.
@@ -81,12 +76,39 @@ public class TaskListItemController {
         tl.play();
 
         taskNameLabel.setText(this.taskListItem.getDescription());
+        Platform.runLater(() -> {
+            updateRednerSettings();
+        });
     }
 
     /**
      * This is the constructor for the controller
      */
     public TaskListItemController() {
+    }
+
+    private void updateRednerSettings() {
+        if (taskListItem.getTaskStatus().equals(TaskStatus.FINISHED)) {
+            taskNameLabel.setStyle("-fx-text-fill: #535151;");
+            for (Node n : taskNameLabel.getChildrenUnmodifiable()) {
+                n.setStyle("-fx-strikethrough: true;");
+            }
+            taskDoneButton.setStyle("-fx-text-fill: green;");
+            this.timerStartButton.setDisable(true);
+        } else {
+            taskNameLabel.setStyle("-fx-text-fill: #000;");
+            for (Node n : taskNameLabel.getChildrenUnmodifiable()) {
+                n.setStyle("-fx-strikethrough: false;");
+            }
+            taskDoneButton.setStyle("-fx-text-fill: #000;");
+            this.timerStartButton.setDisable(false);
+        }
+
+        if (this.taskListItem.getTimeTracker().isRunning()) {
+            this.timerStartButton.setText("⏸");
+        } else {
+            this.timerStartButton.setText("▶");
+        }
     }
 
     /**
@@ -101,19 +123,13 @@ public class TaskListItemController {
     public void toggleTaskState() {
         if (taskListItem.getTaskStatus().equals(TaskStatus.ACTIVE)) {
             taskListItem.setTaskStatus(TaskStatus.FINISHED);
-            for (Node n : taskNameLabel.getChildrenUnmodifiable()) {
-                n.setStyle("-fx-strikethrough: true;");
+            if (taskListItem.getTimeTracker().isRunning()) {
+                taskListItem.getTimeTracker().pause();
             }
-            taskNameLabel.setStyle("-fx-text-fill: #535151;");
-            timerResetButton.setStyle("-fx-text-fill: green;");
         } else {
             taskListItem.setTaskStatus(TaskStatus.ACTIVE);
-            for (Node n : taskNameLabel.getChildrenUnmodifiable()) {
-                n.setStyle("-fx-strikethrough: false;");
-            }
-            taskNameLabel.setStyle("-fx-text-fill: #000;");
-            timerResetButton.setStyle("-fx-text-fill: #000;");
         }
+        updateRednerSettings();
     }
 
     /**
@@ -127,17 +143,14 @@ public class TaskListItemController {
      */
     @FXML
     public void timerButton() {
-        System.out.println(this.taskListItem.getTimeTracker().getCurrentTime());
         if (this.taskListItem.getTimeTracker().getCurrentTime() == 0) {
             this.taskListItem.getTimeTracker().start();
-            this.timerStartButton.setText("⏸");
         } else if (this.taskListItem.getTimeTracker().isRunning()) {
             this.taskListItem.getTimeTracker().pause();
-            this.timerStartButton.setText("▶");
         } else {
             this.taskListItem.getTimeTracker().resume();
-            this.timerStartButton.setText("⏸");
         }
+        updateRednerSettings();
     }
 
     /**

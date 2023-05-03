@@ -1,7 +1,5 @@
-package ch.zhaw.prog2.tasktracker;
+package ch.zhaw.prog2.tasktracker.project;
 
-import ch.zhaw.prog2.tasktracker.project.Project;
-import ch.zhaw.prog2.tasktracker.todo.DummyProjectOverview;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.event.ActionEvent;
@@ -11,6 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+
+import ch.zhaw.prog2.tasktracker.projectmodels.ProjectOverview;
 
 /**
  * This class is responsible for controlling the "Create Project" window of the
@@ -32,12 +32,13 @@ public class CreateProjectController implements Observable {
     /**
      * ProjectOverview this new Project will be added to
      */
-    private DummyProjectOverview rootProjectOverview;
+    private ProjectOverview rootProjectOverview;
     /**
      * List of observers
      * Required for the implementation of Observable
      */
     private ArrayList<InvalidationListener> observers = new ArrayList<>();
+
 
     /**
      * This method is called when the user clicks the "Create Project" button.
@@ -49,66 +50,73 @@ public class CreateProjectController implements Observable {
      *              Project" button.
      */
     @FXML
-    void createProject(ActionEvent event) {
+    public void createProject(ActionEvent event) {
         String emptyName = "Bitten geben Sie dem Projekt einen Namen";
         // task add to ProjectOverview list
-        if(newProjectTextField == null || newProjectTextField.toString().trim() == "" || newProjectTextField.toString().equals(emptyName)){
+        if (newProjectTextField == null || newProjectTextField.toString().trim() == ""
+                || newProjectTextField.toString().equals(emptyName)) {
             newProjectTextField.setText(emptyName);
-        }else{
+        } else {
             Project project = new Project(newProjectTextField.getText());
             System.out.println("Created new project " + project.getName());
             rootProjectOverview.addProject(project);
-            for(Project logProject : rootProjectOverview.getProjectList()){
+            for (Project logProject : rootProjectOverview.getProjectList()) {
                 System.out.println(logProject.getName());
             }
         }
 
         // Close window after creation
         Stage stage = (Stage) newProjectSubmitButton.getScene().getWindow();
-        
+
         stage.close();
         notifyListeners();
     }
 
     /**
      * Set the ProjectOverview this task will be added to
+     * 
      * @param projectOverview Project to add this task to
      */
-    public void setRootProjectOverview(DummyProjectOverview projectOverview){
-        if(projectOverview != null){
+    public void setRootProjectOverview(ProjectOverview projectOverview) {
+        if (projectOverview != null) {
             rootProjectOverview = projectOverview;
         }
     }
+
     /**
      * Implementation of Observable
      * Add listener to the list of listeners to be notified
+     * 
      * @param listener InvalidationListener to add to the list
-     *            The listener to register
+     *                 The listener to register
      */
     @Override
     public void addListener(InvalidationListener listener) {
-        if(listener != null){
+        if (listener != null) {
             observers.add(listener);
         }
     }
+
     /**
      * Implementation of Observable
      * remove listener from the list of listeners to be notified
+     * 
      * @param listener InvalidationListener to remove from the list
-     *            The listener to remove
+     *                 The listener to remove
      */
     @Override
     public void removeListener(InvalidationListener listener) {
-        if(observers.contains(listener)){
+        if (observers.contains(listener)) {
             observers.remove(listener);
         }
     }
+
     /**
      * Required for the function of Observable
      * Loop though all listeners and notify them all
      */
-    private void notifyListeners(){
-        for(InvalidationListener listener : observers){
+    private void notifyListeners() {
+        for (InvalidationListener listener : observers) {
             listener.invalidated(this);
         }
     }

@@ -52,7 +52,7 @@
                   <Insets bottom="15.0" />
                </VBox.margin>
             </DatePicker>
-            <Button fx:id="newTaskSubmitButton" mnemonicParsing="false" onAction="#createTask" text="Akzeptiert" />
+            <Button fx:id="newTaskSubmitButton" defaultButton="true" mnemonicParsing="false" onAction="#createTask" text="Akzeptiert" />
          </children>
       </VBox>
    </children>

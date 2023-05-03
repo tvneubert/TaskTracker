@@ -3,7 +3,7 @@ package ch.zhaw.prog2.tasktracker.project;
 import java.io.IOException;
 
 import ch.zhaw.prog2.tasktracker.TimeFormater;
-import ch.zhaw.prog2.tasktracker.oservables.ProjectEvent;
+import ch.zhaw.prog2.tasktracker.Observerable.ProjectEventListener;
 import ch.zhaw.prog2.tasktracker.task.CreateTaskController;
 import ch.zhaw.prog2.tasktracker.task.Task;
 import ch.zhaw.prog2.tasktracker.task.TaskListItemController;
@@ -28,7 +28,7 @@ import javafx.util.Duration;
 /**
  * This class is a controller for the main window of the task application.
  */
-public class ProjectController implements ProjectEvent {
+public class ProjectController implements ProjectEventListener {
 
     /**
      * The button for opening the create task window.
@@ -42,9 +42,16 @@ public class ProjectController implements ProjectEvent {
     @FXML
     private Label timeLabel;
 
+    /*
+     * This is the UI Emement for the Filter, you can coose between "Fertig" and
+     * "Offen"
+     */
     @FXML
     private ChoiceBox<String> filter;
 
+    /*
+     * This UI Element stes the Name/Title of the Project
+     */
     @FXML
     private Label projectName;
 
@@ -54,12 +61,15 @@ public class ProjectController implements ProjectEvent {
     @FXML
     private VBox taskOverviewContent;
 
+    /*
+     * This label shows the total time od the TimeTracker
+     */
     @FXML
     private Label totalTimeLabel;
 
     /**
      *
-     this timeline is for summarizing the time of all tasks
+     * this timeline is for summarizing the time of all tasks
      */
 
     private Timeline projectTimeLine;
@@ -88,6 +98,8 @@ public class ProjectController implements ProjectEvent {
             Scene scene = new Scene(rootPane);
             // create a new stage and show the new window
             Stage stageOfNewWindow = new Stage();
+            // This is some customazation of the window, with logo icon and defines that the
+            // windows cant be changed in size
             stageOfNewWindow.getIcons().add(new Image(getClass().getResourceAsStream("/TaskTrackerIcon.png")));
             stageOfNewWindow.setTitle("Erstelle einen Task");
             stageOfNewWindow.setResizable(false);
@@ -100,20 +112,17 @@ public class ProjectController implements ProjectEvent {
 
     /**
      * This method adds for each Project in the list a Project to the scrollPane
-     * 
-     * This method is here for testing and will need to be changed!
      */
     public void addTasksToScrollPane() {
-        for(Task task : project.getOpenTasks()){
+        for (Task task : project.getTasks()) {
             try {
-
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/TaskListItem.fxml"));
                 Pane taskPane = loader.load();
 
                 TaskListItemController taskListItemController = loader.getController();
-                taskListItemController.setTaskObject(task);
 
                 taskOverviewContent.getChildren().add(taskPane);
+                taskListItemController.setTaskObject(task);
             } catch (IOException e) {
                 System.err.println("Error while loading FXML file: " + e.getMessage());
             }
@@ -122,7 +131,11 @@ public class ProjectController implements ProjectEvent {
 
     }
 
-
+    /**
+     * Here the title of the projectwindow is been set
+     * 
+     * @param title the title you want to set to your project
+     */
     private void setProjectTitle(String title) {
         this.projectName.setText(title);
     }
@@ -131,7 +144,8 @@ public class ProjectController implements ProjectEvent {
      * This method starts the timeline for summarizing the time of all tasks.
      */
     private void startSummarizingTimer() {
-        // we can only start the timeline if we do have a task object because it does contain the timer
+        // we can only start the timeline if we do have a task object because it does
+        // contain the timer
         projectTimeLine = new Timeline(new KeyFrame(Duration.millis(16.6), (ActionEvent e) -> {
             int timerSum = 0;
             for (Task task : project.getTasks()) {
@@ -144,62 +158,72 @@ public class ProjectController implements ProjectEvent {
     }
 
     /**
-     * Set the project that this Window is controlling and the name of the Title and the Filters for the Project
+     * Set the project that this Window is controlling and the name of the Title and
+     * the Filters for the Project
+     * 
      * @param project Project to be used
      */
-    public void setProject(Project project){
-        if(project != null){
+    public void setProject(Project project) {
+        if (project != null) {
             this.project = project;
             this.setProjectTitle(project.getName());
             this.project.addListener(this);
 
             ObservableList<String> filterOptions = FXCollections.observableArrayList(
-                "Offen",
-                "Fertig");
+                    "Offen",
+                    "Fertig");
             filter.setItems(filterOptions);
         }
     }
 
+    /**
+     * This function refreshes the list view
+     * It deletes everything after a new task was added or deleted and loads the
+     * view new
+     */
     private void reloadTaskList() {
         taskOverviewContent.getChildren().clear();
         addTasksToScrollPane();
     }
 
     /**
-    This method is called when all tasks in the project have been finished.
-    This method is part of the TaskListener interface.
-    */
+     * This method is called when all tasks in the project have been finished.
+     * This method is part of the TaskListener interface.
+     */
     @Override
     public void allTasksFinished() {
     }
 
     /**
-    This method is called when a task has been deleted from the project.
-    It reloads the task list in the UI to reflect the updated project.
-    This method is part of the TaskListener interface.
-    @param t the Task object that was deleted
-    */
+     * This method is called when a task has been deleted from the project.
+     * It reloads the task list in the UI to reflect the updated project.
+     * This method is part of the TaskListener interface.
+     * 
+     * @param t the Task object that was deleted
+     */
     @Override
     public void taskDeleted(Task t) {
         this.reloadTaskList();
     }
 
     /**
-    This method is called when a new task has been created in the project.
-    It reloads the task list in the UI to reflect the updated project.
-    This method is part of the TaskListener interface.
-    @param t the Task object that was created
-    */
+     * This method is called when a new task has been created in the project.
+     * It reloads the task list in the UI to reflect the updated project.
+     * This method is part of the TaskListener interface.
+     * 
+     * @param t the Task object that was created
+     */
     @Override
     public void taskCreated(Task t) {
         this.reloadTaskList();
     }
 
     /**
-    This method is called when the state of a task in the project has changed.
-    This method is part of the TaskListener interface.
-    @param t the Task object whose state has changed
-    */
+     * This method is called when the state of a task in the project has changed.
+     * This method is part of the TaskListener interface.
+     * 
+     * @param t the Task object whose state has changed
+     */
     @Override
     public void taskStateChange(Task t) {
     }

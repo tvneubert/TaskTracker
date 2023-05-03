@@ -3,18 +3,20 @@ package ch.zhaw.prog2.tasktracker.task;
 import java.util.ArrayList;
 import java.util.Date;
 
-import ch.zhaw.TimeTracker;
-import ch.zhaw.prog2.tasktracker.oservables.ObservableTask;
-import ch.zhaw.prog2.tasktracker.oservables.TaskEvent;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    /**
-     * Represents a task with a description, a goal, a deadline and a TimeTracker.
-     * It can be in an ACTIVE or FINISHED state.
-     * Implements ObservableTask to allow for listeners to be notified of changes to
-     * the task.
-     **/
+import ch.zhaw.TimeTracker;
+import ch.zhaw.prog2.tasktracker.Observerable.ObservableTask;
+import ch.zhaw.prog2.tasktracker.Observerable.TaskEventListener;
+
+/**
+ * Represents a task with a description, a goal, a deadline and a TimeTracker.
+ * It can be in an ACTIVE or FINISHED state.
+ * Implements ObservableTask to allow for listeners to be notified of changes to
+ * the task.
+ **/
 public class Task implements ObservableTask {
-    private ArrayList<TaskEvent> observers = new ArrayList<>();
+    private ArrayList<TaskEventListener> observers = new ArrayList<>();
 
     /**
      * Represents the current status of the task, whether it is ACTIVE or FINISHED.
@@ -26,18 +28,20 @@ public class Task implements ObservableTask {
     private String description;
     private String goal;
     private Date deadline;
-    private TimeTracker tt = new TimeTracker();
+    private TimeTracker timeTracker = new TimeTracker();
 
     private TaskStatus taskStatus = TaskStatus.ACTIVE;
 
     /**
      * Creates a new Task with the given description, goal and deadline.
+     * Informs the ObjectMapper about the fields he should save in the JSON file
      *
      * @param description a String representing the description of the task
      * @param goal        a String representing the goal of the task
      * @param deadline    a Date representing the deadline of the task
      */
-    public Task(String description, String goal, Date deadline) {
+    public Task(@JsonProperty("description") String description, @JsonProperty("goal") String goal,
+            @JsonProperty("deadline") Date deadline) {
         this.description = description;
         this.goal = goal;
         this.deadline = deadline;
@@ -49,7 +53,7 @@ public class Task implements ObservableTask {
      * @return the TimeTracker of the task
      */
     public TimeTracker getTimeTracker() {
-        return tt;
+        return timeTracker;
     }
 
     /**
@@ -60,7 +64,7 @@ public class Task implements ObservableTask {
     public void setTaskStatus(TaskStatus ts) {
         this.taskStatus = ts;
 
-        for (TaskEvent listener : observers) {
+        for (TaskEventListener listener : observers) {
             listener.taskStateChanged(this);
         }
     }
@@ -79,7 +83,7 @@ public class Task implements ObservableTask {
      *
      * @return a String representing the description of the task
      */
-    protected String getDescription() {
+    public String getDescription() {
         return description;
     }
 
@@ -88,7 +92,7 @@ public class Task implements ObservableTask {
      *
      * @return a String representing the goal of the task
      */
-    protected String getGoal() {
+    public String getGoal() {
         return goal;
     }
 
@@ -97,7 +101,7 @@ public class Task implements ObservableTask {
      *
      * @return a Date representing the deadline of the task
      */
-    protected Date getDate() {
+    public Date getDeadline() {
         return deadline;
     }
 
@@ -109,7 +113,7 @@ public class Task implements ObservableTask {
      *                 The listener to register
      */
     @Override
-    public void addListener(TaskEvent listener) {
+    public void addListener(TaskEventListener listener) {
         if (listener != null && !this.observers.contains(listener)) {
             observers.add(listener);
         }
@@ -123,7 +127,7 @@ public class Task implements ObservableTask {
      *                 The listener to remove
      */
     @Override
-    public void removeListener(TaskEvent listener) {
+    public void removeListener(TaskEventListener listener) {
         if (observers.contains(listener)) {
             observers.remove(listener);
         }
@@ -133,7 +137,7 @@ public class Task implements ObservableTask {
      * Notifies all listeners that this task has been marked for deletion.
      */
     public void wantsDelete() {
-        for (TaskEvent listener : observers) {
+        for (TaskEventListener listener : observers) {
             listener.deleteRequest(this);
         }
     }

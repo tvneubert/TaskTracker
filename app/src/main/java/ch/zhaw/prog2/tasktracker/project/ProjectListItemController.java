@@ -3,7 +3,7 @@ package ch.zhaw.prog2.tasktracker.project;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import ch.zhaw.prog2.tasktracker.oservables.ProjectEvent;
+import ch.zhaw.prog2.tasktracker.Observerable.ProjectEventListener;
 import ch.zhaw.prog2.tasktracker.task.Task;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -20,7 +20,7 @@ import javafx.fxml.FXMLLoader;
 /**
  * This class is a controller for the Project list item.
  */
-public class ProjectListItemController implements Observable, ProjectEvent {
+public class ProjectListItemController implements Observable, ProjectEventListener {
 
     /**
      * The label for displaying the name of the Project.
@@ -88,12 +88,13 @@ public class ProjectListItemController implements Observable, ProjectEvent {
     /**
      * Event-handler for the delete button of the list item
      * Deletes the project
+     * 
      * @param event the ActionEvent that triggered this method
      */
     @FXML
     void deleteProject(ActionEvent event) {
         notifyListeners();
-        }
+    }
 
     /**
      * Sets the text of the ProjectNameLabel to the specified name.
@@ -104,96 +105,132 @@ public class ProjectListItemController implements Observable, ProjectEvent {
         ProjectNameLabel.setText(name);
     }
 
+    /**
+     * This function is for changing the text color of an lable
+     * 
+     * @param color that should apply on the text
+     */
     public void changeProjectNameLableColor(String color) {
-        ProjectNameLabel.setStyle("-fx-text-fill:"+color+";");
+        ProjectNameLabel.setStyle("-fx-text-fill:" + color + ";");
     }
 
     /**
      * Set the Project this list item represents
+     * 
      * @param project Project of this list item
      */
-    public void setProject(Project project){
-        if(project != null){
+    public void setProject(Project project) {
+        if (project != null) {
             this.project = project;
             this.project.addListener(this);
+
+            if (this.project.getTasks().size() == 0 || this.project.getOpenTasks().size() != 0) {
+                this.changeProjectNameLableColor("black");
+            } else {
+                this.changeProjectNameLableColor("green");
+            }
         }
     }
+
     /**
      * get the Project object this list item represents
+     * 
      * @return Project object
      */
-    public Project getProject(){return project;}
+    public Project getProject() {
+        return project;
+    }
+
     /**
      * Implementation of Observable
      * Add listener to the list of listeners to be notified
+     * 
      * @param listener InvalidationListener to add to the list
-     *            The listener to register
+     *                 The listener to register
      */
     @Override
     public void addListener(InvalidationListener listener) {
-        if(listener != null){
+        if (listener != null) {
             observers.add(listener);
         }
     }
+
     /**
      * Implementation of Observable
      * remove listener from the list of listeners to be notified
+     * 
      * @param listener InvalidationListener to remove from the list
-     *            The listener to remove
+     *                 The listener to remove
      */
     @Override
     public void removeListener(InvalidationListener listener) {
-        if(observers.contains(listener)){
+        if (observers.contains(listener)) {
             observers.remove(listener);
         }
     }
-    
+
     /**
      * Required for the function of Observable
      * Loop though all listeners and notify them all
      */
-    private void notifyListeners(){
-        for(InvalidationListener listener : observers){
+    private void notifyListeners() {
+        for (InvalidationListener listener : observers) {
             listener.invalidated(this);
         }
     }
 
     /**
-    * This method is called when all tasks of the project have finished.
-    * It checks if there are no tasks in the project and changes the color of the project name label to green if it is the case.
-    */
+     * This method is called when all tasks of the project have finished.
+     * It checks if there are no tasks in the project and changes the color of the
+     * project name label to green if it is the case.
+     */
     @Override
     public void allTasksFinished() {
-        if(this.project.getTasks().size() == 0) {
+        System.out.println("all done");
+        if (this.project.getTasks().size() == 0) {
             return;
         }
         this.changeProjectNameLableColor("green");
     }
 
     /**
-    * This method is called when a task is deleted from the project. It does nothing.
-    * @param t the Task that was deleted
-    */
+     * This method is called when a task is deleted from the project. It does
+     * nothing.
+     * 
+     * @param t the Task that was deleted
+     */
     @Override
     public void taskDeleted(Task t) {
+        if (this.project.getOpenTasks().size() != 0) {
+            this.changeProjectNameLableColor("black");
+        } else {
+            this.changeProjectNameLableColor("green");
+        }
     }
 
     /**
-    * This method is called when a new task is created in the project. It does nothing.
-    * @param t the Task that was created
-    */
+     * This method is called when a new task is created in the project. It does
+     * nothing.
+     * 
+     * @param t the Task that was created
+     */
     @Override
     public void taskCreated(Task t) {
+        if (this.project.getOpenTasks().size() != 0) {
+            this.changeProjectNameLableColor("black");
+        }
     }
 
     /**
-    * This method is called when the state of a task in the project is changed.
-    * It checks if there are open tasks in the project and changes the color of the project name label to black if it is the case.
-    * @param t the Task whose state was changed
-    */
+     * This method is called when the state of a task in the project is changed.
+     * It checks if there are open tasks in the project and changes the color of the
+     * project name label to black if it is the case.
+     * 
+     * @param t the Task whose state was changed
+     */
     @Override
     public void taskStateChange(Task t) {
-        if(this.project.getOpenTasks().size() != 0) {
+        if (this.project.getOpenTasks().size() != 0) {
             this.changeProjectNameLableColor("black");
         }
     }

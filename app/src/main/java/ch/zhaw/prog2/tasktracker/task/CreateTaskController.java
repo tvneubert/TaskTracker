@@ -1,6 +1,5 @@
 package ch.zhaw.prog2.tasktracker.task;
 
-import ch.zhaw.prog2.tasktracker.oservables.TaskEvent;
 import ch.zhaw.prog2.tasktracker.project.Project;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,7 +10,6 @@ import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.sql.Date;
-import java.util.ArrayList;
 
 /**
  * This class is responsible for controlling the "Create task" window of the
@@ -99,6 +97,7 @@ public class CreateTaskController {
         String emptyTask = "Bitte gib eine Beschreibung ein!";
         if (taskGoal.getText().trim().isEmpty()) {
             this.taskGoal.appendText(emptyTask);
+            taskGoal.setStyle("-fx-border-color: red ;");
             return false;
         } else if (taskGoal.getText().equals(emptyTask)) {
             return false;
@@ -107,6 +106,10 @@ public class CreateTaskController {
         }
     }
 
+    /**
+     * Sets the project that the task belongs to
+     * @param p the project the task belongs to
+     */
     public void setProject(Project p) {
         this.project = p;
     }
@@ -121,6 +124,7 @@ public class CreateTaskController {
         LocalDate today = LocalDate.now();
         if (taskDeadline.getValue() == null || deadlineDate.isBefore(today)) {
             taskDeadline.getStyleClass().add("emptyField");
+            taskDeadline.setStyle("-fx-border-color: red ;");
             return false;
         } else {
             taskDeadline.getStyleClass().removeAll("emptyField");
