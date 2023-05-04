@@ -29,7 +29,7 @@
             </Label>
             <HBox prefHeight="26.0" prefWidth="310.0">
                <children>
-                  <Button fx:id="openCreateTaskWindowButton" mnemonicParsing="false" onAction="#openCreateTaskWindow" text="Task hinzufügen">
+                  <Button fx:id="openCreateTaskWindowButton" mnemonicParsing="false" onAction="#openCreateTaskWindow" text="taskfügen">
                      <HBox.margin>
                         <Insets bottom="10.0" />
                      </HBox.margin>

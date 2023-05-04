@@ -47,8 +47,7 @@ public class ProjectController implements InvalidationListener {
 
 
     /**
-     *
-     this timeline is for summarizing the time of all tasks
+     * this timeline is for summarizing the time of all tasks
      */
 
     private Timeline projectTimeLine;
@@ -62,7 +61,7 @@ public class ProjectController implements InvalidationListener {
      * This method is called when the "open create task window" button is clicked.
      * It initializes and loads the window scene graph from the fxml description and
      * then creates a new stage with the new scene and shows it.
-     * 
+     *
      * @param event the ActionEvent that triggered the method call
      */
     @FXML
@@ -85,28 +84,63 @@ public class ProjectController implements InvalidationListener {
         }
     }
 
+
     /**
      * This method adds for each Project in the list a Project to the scrollPane
-     * 
+     * <p>
      * This method is here for testing and will need to be changed!
      */
     public void addTasksToScrollPane() {
-        for(Task task : project.getOpenTasks()){
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/TaskListItem.fxml"));
-                Pane taskPane = loader.load();
-
-                TaskListItemController taskListItemController = loader.getController();
-                taskListItemController.addListener(this);
-                taskListItemController.setTaskObject(task);
-
-                taskOverviewContent.getChildren().add(taskPane);
-            } catch (IOException e) {
-                System.err.println("Error while loading FXML file: " + e.getMessage());
-            }
+        for (Task task : project.getOpenTasks()) {
+            loadFxml(task);
         }
         this.startSummarizingTimer();
 
+    }
+
+    /**
+     * Filters the task overview content by effort, clearing the current content and loading only the open tasks with effort.
+     * @param event the event triggering the filter
+     */
+    @FXML
+    private void filterEffort(ActionEvent event) {
+        taskOverviewContent.getChildren().clear();
+        for (Task task : project.getOpenTasksEffort()) {
+            loadFxml(task);
+        }
+        this.startSummarizingTimer();
+    }
+
+    /**
+     * Filters the task overview content by date, clearing the current content and loading only the open tasks with a due date.
+     * @param event the event triggering the filter
+     */
+    @FXML
+    private void filterDate(ActionEvent event) {
+        taskOverviewContent.getChildren().clear();
+        for (Task task : project.getOpenTasksDate()) {
+            loadFxml(task);
+        }
+        this.startSummarizingTimer();
+    }
+
+    /**
+     * Loads the FXML file for a task list item and adds it to the task overview content.
+     * @param task the task object to be loaded
+     */
+    private void loadFxml(Task task) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/TaskListItem.fxml"));
+            Pane taskPane = loader.load();
+
+            TaskListItemController taskListItemController = loader.getController();
+            taskListItemController.addListener(this);
+            taskListItemController.setTaskObject(task);
+
+            taskOverviewContent.getChildren().add(taskPane);
+        } catch (IOException e) {
+            System.err.println("Error while loading FXML file: " + e.getMessage());
+        }
     }
 
     /**
@@ -127,10 +161,11 @@ public class ProjectController implements InvalidationListener {
 
     /**
      * Set the project that this Window is controlling
+     *
      * @param project Project to be used
      */
-    public void setProject(Project project){
-        if(project != null){
+    public void setProject(Project project) {
+        if (project != null) {
             this.project = project;
         }
     }
@@ -138,12 +173,13 @@ public class ProjectController implements InvalidationListener {
     /**
      * Implementation of the InvalidationListener
      * Processes the invalidation event from the Observable
+     *
      * @param observable the Observable that triggered the invalidation event
-     *            The {@code Observable} that became invalid
+     *                   The {@code Observable} that became invalid
      */
     @Override
     public void invalidated(Observable observable) {
-        if(observable instanceof TaskListItemController){
+        if (observable instanceof TaskListItemController) {
             Task task = ((TaskListItemController) observable).getTaskListItem();
             project.removeTask(task);
         }

@@ -3,6 +3,8 @@ package ch.zhaw.prog2.tasktracker.project;
 import ch.zhaw.prog2.tasktracker.task.Task;
 import ch.zhaw.prog2.tasktracker.task.Task.TaskStatus;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Class to represent a project.
@@ -62,6 +64,45 @@ public class Project{
         }
         return openTasks;
     }
+
+    /**
+     * Returns a sorted list of open tasks in the project, sorted by deadline date in ascending order.
+     * @return An ArrayList of open tasks sorted by deadline date in ascending order.
+     */
+    public ArrayList<Task> getOpenTasksDate(){
+        ArrayList<Task> openTasks = getOpenTasks();
+
+        Comparator<Task> byDeadline = new Comparator<Task>() {
+            @Override
+            public int compare(Task t1, Task t2) {
+                return t1.getDate().compareTo(t2.getDate());
+            }
+        };
+        Collections.sort(openTasks, byDeadline);
+
+        return openTasks;
+    }
+
+    /**
+     * Returns a sorted list of open tasks in the project, sorted by time tracked in ascending order.
+     * @return An ArrayList of open tasks sorted by time tracked in ascending order.
+     */
+    public ArrayList<Task> getOpenTasksEffort(){
+        ArrayList<Task> openTasks = getOpenTasks();
+        Comparator<Task> byTimeTracker = new Comparator<Task>() {
+            @Override
+            public int compare(Task t1, Task t2) {
+                long t1Time = t1.getTimeTracker().getCurrentTime();
+                long t2Time = t2.getTimeTracker().getCurrentTime();
+                return Long.compare(t1Time, t2Time);
+            }
+        };
+        Collections.sort(openTasks, byTimeTracker);
+
+        return openTasks;
+    }
+
+
 
     /**
      * Get the name of the project

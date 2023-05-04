@@ -45,11 +45,11 @@ public class Task {
         return description;
     }
 
-    protected String getGoal() {
+    public String getGoal() {
         return goal;
     }
 
-    protected Date getDate() {
+    public Date getDate() {
         return deadline;
     }
 
