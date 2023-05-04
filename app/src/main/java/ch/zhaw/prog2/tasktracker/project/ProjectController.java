@@ -110,26 +110,37 @@ public class ProjectController implements ProjectEventListener {
         }
     }
 
+    public void allTasks() {
+        taskOverviewContent.getChildren().clear();
+        for (Task task : project.getAllTasks()) {
+            loadFxml(task);
+        }
+        this.startSummarizingTimer();
+    }
 
     /**
      * This method adds for each Project in the list a Project to the scrollPane
-     * <p>
-     * This method is here for testing and will need to be changed!
      */
-    public void addTasksToScrollPane() {
+    public void filtertOpenTasks() {
+        taskOverviewContent.getChildren().clear();
         for (Task task : project.getOpenTasks()) {
             loadFxml(task);
         }
         this.startSummarizingTimer();
+    }
 
+    public void filtertCloseTasks() {
+        taskOverviewContent.getChildren().clear();
+        for (Task task : project.getClosedTasks()) {
+            loadFxml(task);
+        }
+        this.startSummarizingTimer();
     }
 
     /**
      * Filters the task overview content by effort, clearing the current content and loading only the open tasks with effort.
-     * @param event the event triggering the filter
      */
-    @FXML
-    private void filterEffort(ActionEvent event) {
+    private void filterEffortTasks() {
         taskOverviewContent.getChildren().clear();
         for (Task task : project.getOpenTasksEffort()) {
             loadFxml(task);
@@ -139,10 +150,8 @@ public class ProjectController implements ProjectEventListener {
 
     /**
      * Filters the task overview content by date, clearing the current content and loading only the open tasks with a due date.
-     * @param event the event triggering the filter
      */
-    @FXML
-    private void filterDate(ActionEvent event) {
+    private void filterDateTasks() {
         taskOverviewContent.getChildren().clear();
         for (Task task : project.getOpenTasksDate()) {
             loadFxml(task);
@@ -208,9 +217,28 @@ public class ProjectController implements ProjectEventListener {
             this.project.addListener(this);
 
             ObservableList<String> filterOptions = FXCollections.observableArrayList(
+                    "Alle Tasks",
                     "Offen",
-                    "Fertig");
+                    "Fertig",
+                    "Deadline",
+                    "Aufwand");
             filter.setItems(filterOptions);
+
+            filter.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue.equals("Fertig")) {
+                    filtertCloseTasks();
+                } else if (newValue.equals("Alle Tasks")) {
+                    allTasks();
+                } else if (newValue.equals("Offen")) {
+                    filtertOpenTasks();
+                } else if (newValue.equals("Deadline")) {
+                    filterDateTasks();
+                } else if (newValue.equals("Aufwand")) {
+                    filterEffortTasks();
+                } else {
+                    project.getOpenTasks();
+                }
+            });
         }
     }
 
@@ -226,7 +254,7 @@ public class ProjectController implements ProjectEventListener {
      */
     private void reloadTaskList() {
         taskOverviewContent.getChildren().clear();
-        addTasksToScrollPane();
+        filtertOpenTasks();
     }
 
     /**

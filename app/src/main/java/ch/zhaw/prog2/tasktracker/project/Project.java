@@ -73,12 +73,22 @@ public class Project implements ObservableProject, TaskEventListener {
      * @return List of task objects task Replace type of ArrayList with proper class
      */
     @JsonIgnore
+    public ArrayList<Task> getAllTasks() {
+        return tasks;
+    }
+
+    /**
+     * Return only the open tasks associated with this projcet
+     * Tells the ObjectMapper thet this field needs to be ignored (bcs its computed)
+     *
+     * @return List of task objects task Replace type of ArrayList with proper class
+     */
+    @JsonIgnore
     public ArrayList<Task> getOpenTasks() {
         ArrayList<Task> openTasks = new ArrayList<>();
         if (tasks.size() != 0) {
             for (Task task : tasks) {
                 if (!task.getTaskStatus().equals(TaskStatus.FINISHED)) { // task Replace with correct method of task
-                                                                         // class
                     openTasks.add(task);
                 }
             }

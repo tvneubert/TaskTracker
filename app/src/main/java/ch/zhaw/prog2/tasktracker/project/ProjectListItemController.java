@@ -78,7 +78,7 @@ public class ProjectListItemController implements Observable, ProjectEventListen
             stageOfNewWindow.setResizable(false);
             stageOfNewWindow.setScene(scene);
             projectController.setProject(this.project);
-            projectController.addTasksToScrollPane();
+            projectController.filtertOpenTasks();
             stageOfNewWindow.show();
         } catch (IOException e) {
             System.err.println("Error while loading FXML file: " + e.getMessage());
