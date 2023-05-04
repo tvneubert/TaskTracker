@@ -10,35 +10,24 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zhaw.prog2.tasktracker.MainWindowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zhaw.prog2.tasktracker.MainWindowController">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="175.0" layoutY="90.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
          <children>
-            <Label text="Task Tracker">
-               <font>
-                  <Font name="Arial Bold" size="17.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="20.0" />
-               </VBox.margin>
-            </Label>
-            <Label text="Deine Projekte:">
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-               <font>
-                  <Font name="Arial" size="12.0" />
-               </font>
-            </Label>
             <HBox prefHeight="15.0" prefWidth="310.0" spacing="10.0">
                <children>
-                  <Button fx:id="openCreateProjectWindowButton" mnemonicParsing="false" onAction="#openCreateProjectWindow" text="Projekt hinzufügen" />
+                  <Button fx:id="openCreateProjectWindowButton" mnemonicParsing="false" onAction="#openCreateProjectWindow" text="+">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Button>
+                  <Label fx:id="timestampLable" prefHeight="51.0" prefWidth="105.0" styleClass="timestamp" text="Zeit insgesamt:" />
+                  <Label fx:id="timestamp" prefHeight="51.0" prefWidth="144.0" styleClass="timestamp" text="Timestamp" />
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
             </HBox>
-            <ScrollPane fx:id="projectOverviewScrollPane" prefHeight="378.0" prefWidth="310.0">
+            <ScrollPane fx:id="projectOverviewScrollPane" prefHeight="432.0" prefWidth="310.0" VBox.vgrow="ALWAYS">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0">
                      <children>
@@ -54,7 +43,7 @@
       </VBox>
    </children>
    <stylesheets>
-      <URL value="@MainWindow.css" />
       <URL value="@GeneralStyles.css" />
+      <URL value="@MainWindow.css" />
    </stylesheets>
 </AnchorPane>

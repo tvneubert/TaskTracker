@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
@@ -9,12 +10,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import java.net.URL?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zhaw.prog2.tasktracker.task.CreateTaskController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zhaw.prog2.tasktracker.task.CreateTaskController">
    <children>
       <VBox layoutX="100.0" layoutY="14.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
          <children>
-            <Label text="Neuer Task erstellen">
+            <Label text="Neuer Task:">
                <font>
                   <Font name="Arial" size="17.0" />
                </font>
@@ -22,7 +22,7 @@
                   <Insets bottom="15.0" />
                </VBox.margin>
             </Label>
-            <Label text="Beschreibung:">
+            <Label text="Benenne den Task:">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
@@ -32,7 +32,7 @@
                   <Insets bottom="5.0" />
                </VBox.margin>
             </TextArea>
-            <Label text="Was muss erfüllt sein:">
+            <Label text="Spezifisch, Messbar, Realistisch durch:">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
@@ -42,7 +42,7 @@
                   <Insets bottom="5.0" />
                </VBox.margin>
             </TextArea>
-            <Label text="Deadline:">
+            <Label text="Terminiert:">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
@@ -52,11 +52,12 @@
                   <Insets bottom="15.0" />
                </VBox.margin>
             </DatePicker>
-            <Button fx:id="newTaskSubmitButton" mnemonicParsing="false" onAction="#createTask" stylesheets="@GeneralStyles.css" text="Task erstellen" />
+            <Button fx:id="newTaskSubmitButton" defaultButton="true" mnemonicParsing="false" onAction="#createTask" text="Akzeptiert" />
          </children>
       </VBox>
    </children>
    <stylesheets>
+      <URL value="@GeneralStyles.css" />
       <URL value="@CreateTask.css" />
    </stylesheets>
 </AnchorPane>

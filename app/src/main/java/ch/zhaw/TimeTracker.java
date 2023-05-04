@@ -1,5 +1,7 @@
 package ch.zhaw;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /*
  * This class implements a simple time tracker logic.
  * It can be started, paused and resumed.
@@ -49,6 +51,7 @@ public class TimeTracker {
      * This function returns the current time in milliseconds.
      * @return the current time in milliseconds as integer.
      */
+    @JsonIgnore
     public int getCurrentTime() {
         if (running) {
             return (int) (System.currentTimeMillis() - startTime);
@@ -63,7 +66,22 @@ public class TimeTracker {
      * @return the state of the time tracker.
      */
     public boolean isRunning() {
+        return running;
+    }
 
-        return !running;
+    /**
+     * Gets the StartTime 
+     * @return
+     */
+    public long getStartTime() {
+        return this.startTime;
+    }
+
+    /**
+     * Gets the paused time
+     * @return
+     */
+    public long getPausedTime() {
+        return this.pausedTime;
     }
 }

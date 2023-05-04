@@ -2,9 +2,12 @@ package ch.zhaw.prog2.tasktracker;
 
 import java.io.IOException;
 
+import ch.zhaw.prog2.tasktracker.project.Project;
+import ch.zhaw.prog2.tasktracker.task.Task;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -16,6 +19,8 @@ import javafx.stage.Stage;
  */
 public class MainWindow extends Application {
 
+    private MainWindowController mainWindowController;
+
     /**
      * The start method is called by the JavaFX runtime when the application is
      * launched.
@@ -25,6 +30,9 @@ public class MainWindow extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         openMainWindow(primaryStage);
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/TaskTrackerIcon.png")));
+        primaryStage.setTitle("TaskTracker");
+       
     }
 
     /**
@@ -38,14 +46,40 @@ public class MainWindow extends Application {
             Pane rootNode = loader.load();
 
             // Add random Projects to scrollPane (FOR DEMONSTRATION ONLY!!)
-            MainWindowController mainWindowController = loader.getController();
+            mainWindowController = loader.getController();
             mainWindowController.addProjectsToScrollPane();
 
             Scene scene = new Scene(rootNode);
+
+            stage.setWidth(367);
+            stage.setHeight(600);
+
+            stage.setMinWidth(367);
+            stage.setMinHeight(600);
+            stage.setMaxWidth(367);
+            stage.setMaxHeight(600);
+
+            stage.setResizable(false);
+            
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
             System.err.println("Error while loading FXML file: " + e.getMessage());
+            e.printStackTrace();
         }
+    }
+
+    /*
+     * Pauses all Timer and saves the date before closing the programm
+     */
+    @Override
+    public void stop() throws Exception {
+        for(Project p : mainWindowController.getProjectOverview().getProjectList()) {
+            for(Task t : p.getTasks()) {
+                t.getTimeTracker().pause();
+            }
+        }
+        mainWindowController.getProjectOverview().save();
+        super.stop();
     }
 }
