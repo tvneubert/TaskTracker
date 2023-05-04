@@ -1,1 +1,201 @@
-[{"name":"All done","tasks":[{"description":"Projekt erstellen","goal":"Grundstruktur eines Projekts erstellen","deadline":1682892000000,"timeTracker":{"running":false,"startTime":1683011796064,"pausedTime":1683012013379},"taskStatus":"FINISHED"},{"description":"Issues erstellen","goal":"Projekt Planen","deadline":1682892000000,"timeTracker":{"running":false,"startTime":0,"pausedTime":0},"taskStatus":"FINISHED"},{"description":"Aufgaben verteillen","goal":"Jeder weis was er zu tun hat","deadline":1683583200000,"timeTracker":{"running":false,"startTime":0,"pausedTime":0},"taskStatus":"FINISHED"},{"description":"Projekt erstellt","goal":"Git Repository aufsetzen","deadline":1682892000000,"timeTracker":{"running":false,"startTime":0,"pausedTime":0},"taskStatus":"FINISHED"},{"description":"Brauche mehr Text","goal":"Lorem ipsum dolor sit conslihkehd idhwikhd QFSTSDL.Ä jgbsja","deadline":1682892000000,"timeTracker":{"running":false,"startTime":0,"pausedTime":0},"taskStatus":"FINISHED"}]},{"name":"Nothing done","tasks":[{"description":"Chilln","goal":"Das Leben geniessen","deadline":1683669600000,"timeTracker":{"running":false,"startTime":0,"pausedTime":0},"taskStatus":"ACTIVE"},{"description":"Task in the Past","goal":"Should've be done","deadline":1681250400000,"timeTracker":{"running":false,"startTime":0,"pausedTime":0},"taskStatus":"ACTIVE"},{"description":"Semester 2 bestehen","goal":"Klick mich dann erzähle ich dir noch viel mehr darüber wie ich genau dieses Semester bestehen will. Ah... nein. Doch nicht. Ich war doch nur ein Mittel zum Zweck um dieses Feature zu testen.","deadline":1682978400000,"timeTracker":{"running":false,"startTime":1683052139831,"pausedTime":1683052144440},"taskStatus":"FINISHED"},{"description":"This is a test","goal":"please let me pass","deadline":1685052000000,"timeTracker":{"running":false,"startTime":0,"pausedTime":0},"taskStatus":"ACTIVE"}]},{"name":"Test","tasks":[{"description":"sdfdsff","goal":"wgfefgr3ewgf","deadline":1684533600000,"timeTracker":{"running":false,"startTime":0,"pausedTime":0},"taskStatus":"ACTIVE"}]}]
+[
+  {
+    "name": "All done",
+    "tasks": [
+      {
+        "description": "Projekt erstellen",
+        "goal": "Grundstruktur eines Projekts erstellen",
+        "deadline": 1682892000000,
+        "timeTracker": {
+          "running": false,
+          "startTime": 1683011796064,
+          "pausedTime": 1683012013379
+        },
+        "taskStatus": "FINISHED"
+      },
+      {
+        "description": "Issues erstellen",
+        "goal": "Projekt Planen",
+        "deadline": 1682892000000,
+        "timeTracker": {
+          "running": false,
+          "startTime": 0,
+          "pausedTime": 0
+        },
+        "taskStatus": "FINISHED"
+      },
+      {
+        "description": "Aufgaben verteillen",
+        "goal": "Jeder weis was er zu tun hat",
+        "deadline": 1683583200000,
+        "timeTracker": {
+          "running": false,
+          "startTime": 0,
+          "pausedTime": 0
+        },
+        "taskStatus": "FINISHED"
+      },
+      {
+        "description": "Projekt erstellt",
+        "goal": "Git Repository aufsetzen",
+        "deadline": 1682892000000,
+        "timeTracker": {
+          "running": false,
+          "startTime": 0,
+          "pausedTime": 0
+        },
+        "taskStatus": "FINISHED"
+      },
+      {
+        "description": "Brauche mehr Text",
+        "goal": "Lorem ipsum dolor sit conslihkehd idhwikhd QFSTSDL.Ä jgbsja",
+        "deadline": 1682892000000,
+        "timeTracker": {
+          "running": false,
+          "startTime": 0,
+          "pausedTime": 0
+        },
+        "taskStatus": "FINISHED"
+      }
+    ],
+    "openTasksDate": [],
+    "openTasksEffort": []
+  },
+  {
+    "name": "Nothing done",
+    "tasks": [
+      {
+        "description": "Chilln",
+        "goal": "Das Leben geniessen",
+        "deadline": 1683669600000,
+        "timeTracker": {
+          "running": false,
+          "startTime": 0,
+          "pausedTime": 0
+        },
+        "taskStatus": "ACTIVE"
+      },
+      {
+        "description": "Task in the Past",
+        "goal": "Should've be done",
+        "deadline": 1681250400000,
+        "timeTracker": {
+          "running": false,
+          "startTime": 0,
+          "pausedTime": 0
+        },
+        "taskStatus": "ACTIVE"
+      },
+      {
+        "description": "Semester 2 bestehen",
+        "goal": "Klick mich dann erzähle ich dir noch viel mehr darüber wie ich genau dieses Semester bestehen will. Ah... nein. Doch nicht. Ich war doch nur ein Mittel zum Zweck um dieses Feature zu testen.",
+        "deadline": 1682978400000,
+        "timeTracker": {
+          "running": false,
+          "startTime": 1683052139831,
+          "pausedTime": 1683052144440
+        },
+        "taskStatus": "FINISHED"
+      },
+      {
+        "description": "This is a test",
+        "goal": "please let me pass",
+        "deadline": 1685052000000,
+        "timeTracker": {
+          "running": false,
+          "startTime": 0,
+          "pausedTime": 0
+        },
+        "taskStatus": "ACTIVE"
+      }
+    ],
+    "openTasksDate": [
+      {
+        "description": "Task in the Past",
+        "goal": "Should've be done",
+        "deadline": 1681250400000,
+        "timeTracker": {
+          "running": false,
+          "startTime": 0,
+          "pausedTime": 0
+        },
+        "taskStatus": "ACTIVE"
+      },
+      {
+        "description": "Chilln",
+        "goal": "Das Leben geniessen",
+        "deadline": 1683669600000,
+        "timeTracker": {
+          "running": false,
+          "startTime": 0,
+          "pausedTime": 0
+        },
+        "taskStatus": "ACTIVE"
+      },
+      {
+        "description": "This is a test",
+        "goal": "please let me pass",
+        "deadline": 1685052000000,
+        "timeTracker": {
+          "running": false,
+          "startTime": 0,
+          "pausedTime": 0
+        },
+        "taskStatus": "ACTIVE"
+      }
+    ],
+    "openTasksEffort": [
+      {
+        "description": "Chilln",
+        "goal": "Das Leben geniessen",
+        "deadline": 1683669600000,
+        "timeTracker": {
+          "running": false,
+          "startTime": 0,
+          "pausedTime": 0
+        },
+        "taskStatus": "ACTIVE"
+      },
+      {
+        "description": "Task in the Past",
+        "goal": "Should've be done",
+        "deadline": 1681250400000,
+        "timeTracker": {
+          "running": false,
+          "startTime": 0,
+          "pausedTime": 0
+        },
+        "taskStatus": "ACTIVE"
+      },
+      {
+        "description": "This is a test",
+        "goal": "please let me pass",
+        "deadline": 1685052000000,
+        "timeTracker": {
+          "running": false,
+          "startTime": 0,
+          "pausedTime": 0
+        },
+        "taskStatus": "ACTIVE"
+      }
+    ]
+  },
+  {
+    "name": "Test",
+    "tasks": [
+      {
+        "description": "sdfdsff",
+        "goal": "wgfefgr3ewgf",
+        "deadline": 1684533600000,
+        "timeTracker": {
+          "running": false,
+          "startTime": 0,
+          "pausedTime": 0
+        },
+        "taskStatus": "FINISHED"
+      }
+    ],
+    "openTasksDate": [],
+    "openTasksEffort": []
+  }
+]

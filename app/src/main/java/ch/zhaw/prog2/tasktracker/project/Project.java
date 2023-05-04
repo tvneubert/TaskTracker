@@ -96,7 +96,7 @@ public class Project implements ObservableProject, TaskEventListener {
         Comparator<Task> byDeadline = new Comparator<Task>() {
             @Override
             public int compare(Task t1, Task t2) {
-                return t1.getDate().compareTo(t2.getDate());
+                return t1.getDeadline().compareTo(t2.getDeadline());
             }
         };
         Collections.sort(openTasks, byDeadline);
