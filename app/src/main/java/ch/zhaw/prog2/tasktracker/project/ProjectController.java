@@ -83,7 +83,7 @@ public class ProjectController implements ProjectEventListener {
      * This method is called when the "open create task window" button is clicked.
      * It initializes and loads the window scene graph from the fxml description and
      * then creates a new stage with the new scene and shows it.
-     * 
+     *
      * @param event the ActionEvent that triggered the method call
      */
     @FXML
@@ -110,11 +110,60 @@ public class ProjectController implements ProjectEventListener {
         }
     }
 
+    public void allTasks() {
+        taskOverviewContent.getChildren().clear();
+        for (Task task : project.getAllTasks()) {
+            loadFxml(task);
+        }
+        this.startSummarizingTimer();
+    }
+
     /**
      * This method adds for each Project in the list a Project to the scrollPane
      */
-    public void addTasksToScrollPane() {
-        for (Task task : project.getTasks()) {
+    public void filtertOpenTasks() {
+        taskOverviewContent.getChildren().clear();
+        for (Task task : project.getOpenTasks()) {
+            loadFxml(task);
+        }
+        this.startSummarizingTimer();
+    }
+
+    public void filtertCloseTasks() {
+        taskOverviewContent.getChildren().clear();
+        for (Task task : project.getClosedTasks()) {
+            loadFxml(task);
+        }
+        this.startSummarizingTimer();
+    }
+
+    /**
+     * Filters the task overview content by effort, clearing the current content and loading only the open tasks with effort.
+     */
+    private void filterEffortTasks() {
+        taskOverviewContent.getChildren().clear();
+        for (Task task : project.getOpenTasksEffort()) {
+            loadFxml(task);
+        }
+        this.startSummarizingTimer();
+    }
+
+    /**
+     * Filters the task overview content by date, clearing the current content and loading only the open tasks with a due date.
+     */
+    private void filterDateTasks() {
+        taskOverviewContent.getChildren().clear();
+        for (Task task : project.getOpenTasksDate()) {
+            loadFxml(task);
+        }
+        this.startSummarizingTimer();
+    }
+
+    /**
+     * Loads the FXML file for a task list item and adds it to the task overview content.
+     * @param task the task object to be loaded
+     */
+    private void loadFxml(Task task) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/TaskListItem.fxml"));
                 Pane taskPane = loader.load();
@@ -126,14 +175,12 @@ public class ProjectController implements ProjectEventListener {
             } catch (IOException e) {
                 System.err.println("Error while loading FXML file: " + e.getMessage());
             }
-        }
-        this.startSummarizingTimer();
 
     }
 
     /**
      * Here the title of the projectwindow is been set
-     * 
+     *
      * @param title the title you want to set to your project
      */
     private void setProjectTitle(String title) {
@@ -160,7 +207,7 @@ public class ProjectController implements ProjectEventListener {
     /**
      * Set the project that this Window is controlling and the name of the Title and
      * the Filters for the Project
-     * 
+     *
      * @param project Project to be used
      */
     public void setProject(Project project) {
@@ -170,9 +217,28 @@ public class ProjectController implements ProjectEventListener {
             this.project.addListener(this);
 
             ObservableList<String> filterOptions = FXCollections.observableArrayList(
+                    "Alle Tasks",
                     "Offen",
-                    "Fertig");
+                    "Fertig",
+                    "Deadline",
+                    "Aufwand");
             filter.setItems(filterOptions);
+
+            filter.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue.equals("Fertig")) {
+                    filtertCloseTasks();
+                } else if (newValue.equals("Alle Tasks")) {
+                    allTasks();
+                } else if (newValue.equals("Offen")) {
+                    filtertOpenTasks();
+                } else if (newValue.equals("Deadline")) {
+                    filterDateTasks();
+                } else if (newValue.equals("Aufwand")) {
+                    filterEffortTasks();
+                } else {
+                    project.getOpenTasks();
+                }
+            });
         }
     }
 
@@ -180,10 +246,15 @@ public class ProjectController implements ProjectEventListener {
      * This function refreshes the list view
      * It deletes everything after a new task was added or deleted and loads the
      * view new
+     * Implementation of the InvalidationListener
+     * Processes the invalidation event from the Observable
+     *
+     * @param observable the Observable that triggered the invalidation event
+     *                   The {@code Observable} that became invalid
      */
     private void reloadTaskList() {
         taskOverviewContent.getChildren().clear();
-        addTasksToScrollPane();
+        filtertOpenTasks();
     }
 
     /**
@@ -198,7 +269,7 @@ public class ProjectController implements ProjectEventListener {
      * This method is called when a task has been deleted from the project.
      * It reloads the task list in the UI to reflect the updated project.
      * This method is part of the TaskListener interface.
-     * 
+     *
      * @param t the Task object that was deleted
      */
     @Override
@@ -210,7 +281,7 @@ public class ProjectController implements ProjectEventListener {
      * This method is called when a new task has been created in the project.
      * It reloads the task list in the UI to reflect the updated project.
      * This method is part of the TaskListener interface.
-     * 
+     *
      * @param t the Task object that was created
      */
     @Override
@@ -221,7 +292,7 @@ public class ProjectController implements ProjectEventListener {
     /**
      * This method is called when the state of a task in the project has changed.
      * This method is part of the TaskListener interface.
-     * 
+     *
      * @param t the Task object whose state has changed
      */
     @Override
