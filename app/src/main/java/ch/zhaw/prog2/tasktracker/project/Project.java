@@ -42,7 +42,7 @@ public class Project implements ObservableProject, TaskEventListener {
     @JsonIgnore
     public boolean isCompleted() {
         for (Task task : tasks) {
-            if (!task.getTaskStatus().equals(TaskStatus.FINISHED)) { // task Replace with correct method of task class
+            if (!task.getTaskStatus().equals(TaskStatus.FINISHED)) {
                 return false;
             }
         }
@@ -75,8 +75,7 @@ public class Project implements ObservableProject, TaskEventListener {
         ArrayList<Task> openTasks = new ArrayList<>();
         if (tasks.size() != 0) {
             for (Task task : tasks) {
-                if (!task.getTaskStatus().equals(TaskStatus.FINISHED)) { // task Replace with correct method of task
-                                                                         // class
+                if (!task.getTaskStatus().equals(TaskStatus.FINISHED)) {
                     openTasks.add(task);
                 }
             }
@@ -130,7 +129,7 @@ public class Project implements ObservableProject, TaskEventListener {
     public ArrayList<Task> getClosedTasks() {
         ArrayList<Task> closedTasks = new ArrayList<>();
         for (Task task : tasks) {
-            if (task.getTaskStatus().equals(TaskStatus.FINISHED)) { // task Replace with proper method
+            if (task.getTaskStatus().equals(TaskStatus.FINISHED)) {
                 closedTasks.add(task);
             }
         }
