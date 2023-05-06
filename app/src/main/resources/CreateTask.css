@@ -17,6 +17,14 @@
     -fx-background-color: #F7E2A8; /* Hintergrundfarbe */
 }
 
+.empty-field {
+	-fx-background-color: #e50808;
+}
+
+.empty-field-border {
+	-fx-border-color: #e50808;
+}
+
 * {
 	-fx-primary-color: #a39878;
 	-fx-secondary-color: black;

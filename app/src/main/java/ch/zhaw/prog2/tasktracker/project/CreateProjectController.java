@@ -29,6 +29,7 @@ public class CreateProjectController implements Observable {
      */
     @FXML
     private TextField newProjectTextField;
+
     /**
      * ProjectOverview this new Project will be added to
      */
@@ -43,7 +44,7 @@ public class CreateProjectController implements Observable {
     /**
      * This method is called when the user clicks the "Create Project" button.
      * It creates a new project and closes the window.
-     *
+     * <p>
      * task: Implement the creation of a new project.
      *
      * @param event The ActionEvent triggered by the user clicking the "Create
@@ -74,7 +75,7 @@ public class CreateProjectController implements Observable {
 
     /**
      * Set the ProjectOverview this task will be added to
-     * 
+     *
      * @param projectOverview Project to add this task to
      */
     public void setRootProjectOverview(ProjectOverview projectOverview) {
@@ -86,7 +87,7 @@ public class CreateProjectController implements Observable {
     /**
      * Implementation of Observable
      * Add listener to the list of listeners to be notified
-     * 
+     *
      * @param listener InvalidationListener to add to the list
      *                 The listener to register
      */
@@ -100,7 +101,7 @@ public class CreateProjectController implements Observable {
     /**
      * Implementation of Observable
      * remove listener from the list of listeners to be notified
-     * 
+     *
      * @param listener InvalidationListener to remove from the list
      *                 The listener to remove
      */

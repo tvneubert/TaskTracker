@@ -13,7 +13,6 @@ public class TimeTracker {
     private long startTime;
     private long pausedTime;
 
-
     /**
      * This function starts the time tracker.
      */
@@ -23,7 +22,6 @@ public class TimeTracker {
             running = true;
         }
     }
-
 
     /**
      * This function pauses the time tracker.
@@ -35,7 +33,6 @@ public class TimeTracker {
         }
     }
 
-    
     /**
      * This function resumes the time tracker.
      */
@@ -46,9 +43,9 @@ public class TimeTracker {
         }
     }
 
-    
     /**
      * This function returns the current time in milliseconds.
+     *
      * @return the current time in milliseconds as integer.
      */
     @JsonIgnore
@@ -60,28 +57,12 @@ public class TimeTracker {
         }
     }
 
-
     /**
      * This function returns the time tracker is running.
+     *
      * @return the state of the time tracker.
      */
     public boolean isRunning() {
         return running;
-    }
-
-    /**
-     * Gets the StartTime 
-     * @return
-     */
-    public long getStartTime() {
-        return this.startTime;
-    }
-
-    /**
-     * Gets the paused time
-     * @return
-     */
-    public long getPausedTime() {
-        return this.pausedTime;
     }
 }

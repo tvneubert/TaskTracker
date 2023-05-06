@@ -27,13 +27,13 @@ public class TaskListItemController {
      */
     private Task taskListItem;
 
-    /*
+    /**
      * Shows the given deadline
      */
     @FXML
     private Label deadline;
 
-    /*
+    /**
      * Shows the desciption of the Task
      */
     @FXML
@@ -229,14 +229,5 @@ public class TaskListItemController {
     @FXML
     void deleteTask(ActionEvent event) {
         this.taskListItem.wantsDelete();
-    }
-
-    /**
-     * get the Task object this list item represents
-     * 
-     * @return Task object
-     */
-    public Task getTaskListItem() {
-        return taskListItem;
     }
 }

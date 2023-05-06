@@ -42,14 +42,14 @@ public class ProjectController implements ProjectEventListener {
     @FXML
     private Label timeLabel;
 
-    /*
+    /**
      * This is the UI Emement for the Filter, you can coose between "Fertig" and
      * "Offen"
      */
     @FXML
     private ChoiceBox<String> filter;
 
-    /*
+    /**
      * This UI Element stes the Name/Title of the Project
      */
     @FXML
@@ -61,14 +61,13 @@ public class ProjectController implements ProjectEventListener {
     @FXML
     private VBox taskOverviewContent;
 
-    /*
+    /**
      * This label shows the total time od the TimeTracker
      */
     @FXML
     private Label totalTimeLabel;
 
     /**
-     *
      * this timeline is for summarizing the time of all tasks
      */
 
@@ -129,6 +128,10 @@ public class ProjectController implements ProjectEventListener {
         this.startSummarizingTimer();
     }
 
+    /**
+     * Clears the task overview content and loads the FXML representation of all closed tasks in the project.
+     * Starts the timer for summarizing the project status.
+     */
     public void filtertCloseTasks() {
         taskOverviewContent.getChildren().clear();
         for (Task task : project.getClosedTasks()) {
@@ -161,20 +164,21 @@ public class ProjectController implements ProjectEventListener {
 
     /**
      * Loads the FXML file for a task list item and adds it to the task overview content.
+     *
      * @param task the task object to be loaded
      */
     private void loadFxml(Task task) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/TaskListItem.fxml"));
-                Pane taskPane = loader.load();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/TaskListItem.fxml"));
+            Pane taskPane = loader.load();
 
-                TaskListItemController taskListItemController = loader.getController();
+            TaskListItemController taskListItemController = loader.getController();
 
-                taskOverviewContent.getChildren().add(taskPane);
-                taskListItemController.setTaskObject(task);
-            } catch (IOException e) {
-                System.err.println("Error while loading FXML file: " + e.getMessage());
-            }
+            taskOverviewContent.getChildren().add(taskPane);
+            taskListItemController.setTaskObject(task);
+        } catch (IOException e) {
+            System.err.println("Error while loading FXML file: " + e.getMessage());
+        }
 
     }
 
@@ -191,8 +195,6 @@ public class ProjectController implements ProjectEventListener {
      * This method starts the timeline for summarizing the time of all tasks.
      */
     private void startSummarizingTimer() {
-        // we can only start the timeline if we do have a task object because it does
-        // contain the timer
         projectTimeLine = new Timeline(new KeyFrame(Duration.millis(16.6), (ActionEvent e) -> {
             int timerSum = 0;
             for (Task task : project.getTasks()) {
@@ -215,31 +217,50 @@ public class ProjectController implements ProjectEventListener {
             this.project = project;
             this.setProjectTitle(project.getName());
             this.project.addListener(this);
-
-            ObservableList<String> filterOptions = FXCollections.observableArrayList(
-                    "Alle Tasks",
-                    "Offen",
-                    "Fertig",
-                    "Deadline",
-                    "Aufwand");
-            filter.setItems(filterOptions);
-
-            filter.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue.equals("Fertig")) {
-                    filtertCloseTasks();
-                } else if (newValue.equals("Alle Tasks")) {
-                    allTasks();
-                } else if (newValue.equals("Offen")) {
-                    filtertOpenTasks();
-                } else if (newValue.equals("Deadline")) {
-                    filterDateTasks();
-                } else if (newValue.equals("Aufwand")) {
-                    filterEffortTasks();
-                } else {
-                    project.getOpenTasks();
-                }
-            });
+            setFilterOptions();
+            setFilterListener();
         }
+    }
+
+    /**
+     * Sets the filter options for the filter combo box.
+     */
+    private void setFilterOptions() {
+        ObservableList<String> filterOptions = FXCollections.observableArrayList(
+                "Alle Tasks",
+                "Offen",
+                "Fertig",
+                "Deadline (Offen)",
+                "Aufwand (Offen)");
+        filter.setItems(filterOptions);
+        filter.setValue("Offen");
+    }
+
+    /**
+     * Sets the listener for the filter combo box.
+     */
+    private void setFilterListener() {
+        filter.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            switch (newValue) {
+                case "Fertig":
+                    filtertCloseTasks();
+                    break;
+                case "Alle Tasks":
+                    allTasks();
+                    break;
+                case "Offen":
+                    filtertOpenTasks();
+                    break;
+                case "Deadline (Offen)":
+                    filterDateTasks();
+                    break;
+                case "Aufwand (Offen)":
+                    filterEffortTasks();
+                    break;
+                default:
+                    project.getOpenTasks();
+            }
+        });
     }
 
     /**
@@ -248,9 +269,6 @@ public class ProjectController implements ProjectEventListener {
      * view new
      * Implementation of the InvalidationListener
      * Processes the invalidation event from the Observable
-     *
-     * @param observable the Observable that triggered the invalidation event
-     *                   The {@code Observable} that became invalid
      */
     private void reloadTaskList() {
         taskOverviewContent.getChildren().clear();

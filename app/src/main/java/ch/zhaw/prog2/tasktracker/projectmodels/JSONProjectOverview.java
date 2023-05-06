@@ -20,13 +20,25 @@ import ch.zhaw.prog2.tasktracker.project.Project;
  * This class is an observerable and holds the data of our filebased Database that contains JSON Datascrutures
  */
 public class JSONProjectOverview implements ProjectOverview, ObservableProjectOverview {
-    //Our list of observers that listen to changes this class
+
+    /**
+     * Our list of observers that listen to changes this class.
+     */
     private ArrayList<ProjectOverviewEventListener> observers = new ArrayList<>();
-    //our database file
+
+    /**
+     * our database file.
+     */
     private File databaseFile = null;
-    //Thee list of our projects
+
+    /**
+     * Thee list of our projects.
+     */
     private List<Project> projectList;
-    //mapped text to objects and back. Like a translator for our data to JSON.
+
+    /**
+     * mapped text to objects and back. Like a translator for our data to JSON.
+     */
     private ObjectMapper objectMapper = new ObjectMapper();
 
     /**
@@ -77,7 +89,7 @@ public class JSONProjectOverview implements ProjectOverview, ObservableProjectOv
         objectMapper.writeValue(databaseFile, projectList);
     }
 
-    /*
+    /**
      * Leads the information to the saveDatabase() function.
      * Like a wrapper to handle the exceptions
      */
@@ -91,7 +103,7 @@ public class JSONProjectOverview implements ProjectOverview, ObservableProjectOv
         }
     }
 
-    /*
+    /**
      * Adds a project to our projectList and informs all listeners that there is an project created
      * Aftet we save the new state to our databasefile
      */
@@ -113,7 +125,7 @@ public class JSONProjectOverview implements ProjectOverview, ObservableProjectOv
         }
     }
 
-    /*
+    /**
      * Here we are able to delete a project, after checking if this project exists.
      * Wen inform all listeners that the project was deleted.
      * We safe the new state to our database file
@@ -136,7 +148,7 @@ public class JSONProjectOverview implements ProjectOverview, ObservableProjectOv
         }
     }
 
-    /*
+    /**
      * Getter for the projectList
      */
     @Override
@@ -144,7 +156,7 @@ public class JSONProjectOverview implements ProjectOverview, ObservableProjectOv
         return new ArrayList<>(projectList);
     }
 
-    /*
+    /**
      * Adds a listener to our observer list if the listener is not null and not already observer
      */
     @Override
@@ -154,7 +166,7 @@ public class JSONProjectOverview implements ProjectOverview, ObservableProjectOv
         }
     }
 
-    /*
+    /**
      * Remove a listener from our observer list 
      */
     @Override

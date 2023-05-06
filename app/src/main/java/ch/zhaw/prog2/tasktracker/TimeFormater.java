@@ -1,6 +1,6 @@
 package ch.zhaw.prog2.tasktracker;
 
-/*
+/**
  * This class is used to format the time in the format hh:mm:ss:ms
  * where hh is the hours, mm is the minutes, ss is the seconds and ms is the milliseconds.
  * The format is always two digits for each value.
