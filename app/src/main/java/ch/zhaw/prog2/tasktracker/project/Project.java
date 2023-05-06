@@ -6,6 +6,8 @@ import ch.zhaw.prog2.tasktracker.Observerable.TaskEventListener;
 import ch.zhaw.prog2.tasktracker.task.Task;
 import ch.zhaw.prog2.tasktracker.task.Task.TaskStatus;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 //Needed import for our JSON File Database
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
