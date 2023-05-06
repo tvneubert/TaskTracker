@@ -133,8 +133,6 @@ public class Project implements ObservableProject, TaskEventListener {
         return openTasks;
     }
 
-
-
     /**
      * Get the name of the project
      *
