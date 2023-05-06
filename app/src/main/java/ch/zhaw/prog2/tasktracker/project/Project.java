@@ -6,8 +6,6 @@ import ch.zhaw.prog2.tasktracker.Observerable.TaskEventListener;
 import ch.zhaw.prog2.tasktracker.task.Task;
 import ch.zhaw.prog2.tasktracker.task.Task.TaskStatus;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 //Needed import for our JSON File Database
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -38,13 +36,13 @@ public class Project implements ObservableProject, TaskEventListener {
     /**
      * Return the state of the project
      * Tells the ObjectMapper thet this field needs to be ignored (bcs its computed)
-     *
+     * 
      * @return boolean of the pjoject.
      */
     @JsonIgnore
     public boolean isCompleted() {
         for (Task task : tasks) {
-            if (!task.getTaskStatus().equals(TaskStatus.FINISHED)) { // task Replace with correct method of task class
+            if (!task.getTaskStatus().equals(TaskStatus.FINISHED)) {
                 return false;
             }
         }
@@ -54,7 +52,7 @@ public class Project implements ObservableProject, TaskEventListener {
     /**
      * Method to return the time already spent on this project.
      * Tells the ObjectMapper thet this field needs to be ignored (bcs its computed)
-     *
+     * 
      * @return Time spent on the project task Replace return value with proper type
      */
     @JsonIgnore
@@ -80,7 +78,7 @@ public class Project implements ObservableProject, TaskEventListener {
     /**
      * Return only the open tasks associated with this projcet
      * Tells the ObjectMapper thet this field needs to be ignored (bcs its computed)
-     *
+     * 
      * @return List of task objects task Replace type of ArrayList with proper class
      */
     @JsonIgnore
@@ -88,7 +86,7 @@ public class Project implements ObservableProject, TaskEventListener {
         ArrayList<Task> openTasks = new ArrayList<>();
         if (tasks.size() != 0) {
             for (Task task : tasks) {
-                if (!task.getTaskStatus().equals(TaskStatus.FINISHED)) { // task Replace with correct method of task
+                if (!task.getTaskStatus().equals(TaskStatus.FINISHED)) {
                     openTasks.add(task);
                 }
             }
@@ -135,7 +133,7 @@ public class Project implements ObservableProject, TaskEventListener {
 
     /**
      * Get the name of the project
-     *
+     * 
      * @return String of the name of the project
      */
     public String getName() {
@@ -146,7 +144,7 @@ public class Project implements ObservableProject, TaskEventListener {
      * Method to add a task to the project
      * If the project has been marked as complete and an open task is added the
      * project will reopen.
-     *
+     * 
      * @param task Task to be added to the project task Replace type of parameter
      *             with proper task Class
      */
@@ -161,7 +159,7 @@ public class Project implements ObservableProject, TaskEventListener {
 
     /**
      * Get all the tasks of the Project
-     *
+     * 
      * @return List of task of this project task Replace type of ArrayList with
      *         proper class
      */
@@ -172,14 +170,14 @@ public class Project implements ObservableProject, TaskEventListener {
     /**
      * Get all the tasks of this project that are closed.
      * Tells the ObjectMapper thet this field needs to be ignored (bcs its computed)
-     *
+     * 
      * @return List of closed tasks task Replace type of ArrayList with proper class
      */
     @JsonIgnore
     public ArrayList<Task> getClosedTasks() {
         ArrayList<Task> closedTasks = new ArrayList<>();
         for (Task task : tasks) {
-            if (task.getTaskStatus().equals(TaskStatus.FINISHED)) { // task Replace with proper method
+            if (task.getTaskStatus().equals(TaskStatus.FINISHED)) {
                 closedTasks.add(task);
             }
         }
@@ -194,7 +192,7 @@ public class Project implements ObservableProject, TaskEventListener {
 
     /**
      * Remove a task from this project
-     *
+     * 
      * @param task task to be removed task Replace type of parameter with proper
      *             task Class
      */
@@ -211,7 +209,7 @@ public class Project implements ObservableProject, TaskEventListener {
     /**
      * Implementation of Observable
      * Add listener to the list of listeners to be notified
-     *
+     * 
      * @param listener InvalidationListener to add to the list
      *                 The listener to register
      */
@@ -225,7 +223,7 @@ public class Project implements ObservableProject, TaskEventListener {
     /**
      * Implementation of Observable
      * remove listener from the list of listeners to be notified
-     *
+     * 
      * @param listener InvalidationListener to remove from the list
      *                 The listener to remove
      */
@@ -239,7 +237,7 @@ public class Project implements ObservableProject, TaskEventListener {
     /**
      * Implementation of TaskEvent
      * Called when the state of a task has changed.
-     *
+     * 
      * @param task the task whose state has changed
      */
     @Override
@@ -255,7 +253,7 @@ public class Project implements ObservableProject, TaskEventListener {
     /**
      * Implementation of TaskEvent
      * Called when a request is made to delete a task.
-     *
+     * 
      * @param t the task to be deleted
      */
     @Override
