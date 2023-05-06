@@ -2,6 +2,7 @@ package ch.zhaw.prog2.tasktracker.project;
 
 import java.io.IOException;
 
+import ch.zhaw.prog2.tasktracker.App;
 import ch.zhaw.prog2.tasktracker.TimeFormater;
 import ch.zhaw.prog2.tasktracker.Observerable.ProjectEventListener;
 import ch.zhaw.prog2.tasktracker.task.CreateTaskController;
@@ -191,14 +192,14 @@ public class ProjectController implements ProjectEventListener {
      * This method starts the timeline for summarizing the time of all tasks.
      */
     private void startSummarizingTimer() {
-        // we can only start the timeline if we do have a task object because it does
-        // contain the timer
-        projectTimeLine = new Timeline(new KeyFrame(Duration.millis(16.6), (ActionEvent e) -> {
+        // create a timeline that is able to update the projects time with a sum of each tasks time
+        projectTimeLine = new Timeline(new KeyFrame(Duration.millis(App.timerRefreshRate), (ActionEvent e) -> {
             int timerSum = 0;
             for (Task task : project.getTasks()) {
                 timerSum += task.getTimeTracker().getCurrentTime();
             }
-            timeLabel.setText(TimeFormater.showTheTime(timerSum));
+            String formattedTime = TimeFormater.formatTimerTime(timerSum);
+            timeLabel.setText(formattedTime);
         }));
         projectTimeLine.setCycleCount(Animation.INDEFINITE);
         projectTimeLine.play();

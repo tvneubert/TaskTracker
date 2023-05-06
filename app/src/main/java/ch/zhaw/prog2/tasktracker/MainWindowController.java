@@ -116,15 +116,16 @@ public class MainWindowController implements InvalidationListener, ProjectEventL
     }
 
     private void startSummarizingTimer() {
-        // we can only start the timeline if we do have a task object because it does
-        // contain the timer
-        allProjectsTimeLine = new Timeline(new KeyFrame(Duration.millis(16.6), (ActionEvent e) -> {
+        // create a timeline that updates the label with the sum of all projects tasks time
+        KeyFrame kf = new KeyFrame(Duration.millis(App.timerRefreshRate), (ActionEvent e) -> {
             int timerSum = 0;
             for (Project project : projectOverview.getProjectList()) {
                 timerSum += project.getTotalTaskTime();
             }
-            timestamp.setText(TimeFormater.showTheTime(timerSum));
-        }));
+            String formattedTime = TimeFormater.formatTimerTime(timerSum);
+            timestamp.setText(formattedTime);
+        });
+        allProjectsTimeLine = new Timeline(kf);
         allProjectsTimeLine.setCycleCount(Animation.INDEFINITE);
         allProjectsTimeLine.play();
     }
