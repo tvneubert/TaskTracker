@@ -38,12 +38,12 @@
                </children>
             </HBox>
             <ScrollPane fx:id="taskOverviewScrollPane" prefHeight="391.0" prefWidth="310.0">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0">
                      <children>
                         <VBox fx:id="taskOverviewContent" spacing="5.0" />
                      </children></AnchorPane>
-               </content>
+              </content>
             </ScrollPane>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>

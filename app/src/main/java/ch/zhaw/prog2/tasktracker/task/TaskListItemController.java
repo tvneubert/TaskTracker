@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
+
+import ch.zhaw.prog2.tasktracker.App;
 import ch.zhaw.prog2.tasktracker.TimeFormater;
 import ch.zhaw.prog2.tasktracker.task.Task.TaskStatus;
 import javafx.animation.Animation;
@@ -83,12 +85,21 @@ public class TaskListItemController {
      */
     public void setTaskObject(Task task) {
         this.taskListItem = task;
-        // we can only start the timeline if we do have a task object because it does
-        // contain the timer
-        tl = new Timeline(new KeyFrame(Duration.millis(16.6), (ActionEvent e) -> {
-            timerLabel.setText(TimeFormater.showTheTime(this.taskListItem.getTimeTracker().getCurrentTime()));
-        }));
+
+        // create a keyframe that is able to update the Label with our current timer time
+        KeyFrame kf = new KeyFrame(Duration.millis(App.timerRefreshRate), (ActionEvent e) -> {
+            // get the current time of our timer in milliseconds
+            int currentTimerTime = this.taskListItem.getTimeTracker().getCurrentTime();
+            // format the time
+            String formattedTime = TimeFormater.formatTimerTime(currentTimerTime);
+            // update the label
+            timerLabel.setText(formattedTime);
+        });
+        // create a timeline that refreshes the label showing the timer at an interval of App.timerRefreshRate
+        tl = new Timeline(kf);
+        // let it run forever
         tl.setCycleCount(Animation.INDEFINITE);
+        // start the timeline
         tl.play();
 
         taskNameLabel.setText(this.taskListItem.getDescription());

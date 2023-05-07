@@ -15,7 +15,7 @@ public class TimeFormater {
      * @param milliseconds The time in milliseconds.
      * @return The formatted time.
      */
-    public static String showTheTime(int milliseconds) {
+    public static String formatTimerTime(int milliseconds) {
         String result = "";
         int hours = (int) (milliseconds / (1000 * 60 * 60));
         int minutes = (int) (milliseconds % (1000 * 60 * 60)) / (1000 * 60);
