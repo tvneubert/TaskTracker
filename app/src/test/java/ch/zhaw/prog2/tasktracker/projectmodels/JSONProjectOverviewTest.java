@@ -5,10 +5,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 class JSONProjectOverviewTest {
     Project testproject1;
@@ -16,9 +18,12 @@ class JSONProjectOverviewTest {
     JSONProjectOverview projectOverview;
     @BeforeEach
     void setUp() {
-        testproject1 = mock(Project.class);
-        testproject2 = mock(Project.class);
+        // Using regular Project objects as Mock objects cannot be properly serialized and cause errors when saving to json
+        testproject1 = new Project("testproject1");
+        testproject2 = new Project("testproject2");
+        Path databasefile = Paths.get("databse.json");
         try {
+            Files.deleteIfExists(databasefile);
             projectOverview = new JSONProjectOverview();
         }catch (IOException e) {
             throw new RuntimeException(e);
@@ -45,9 +50,11 @@ class JSONProjectOverviewTest {
         projectOverview.addProject(testproject2);
         expected.add(testproject1);
         projectOverview.removeProject(testproject2);
+        System.out.println(expected);
         assertEquals(projectOverview.getProjectList(), expected);
         projectOverview.removeProject(testproject1);
         expected.remove(testproject1);
+        System.out.println(expected);
         assertEquals(projectOverview.getProjectList(), expected);
 
     }
