@@ -2,6 +2,7 @@ package ch.zhaw.prog2.tasktracker.project;
 
 import java.io.IOException;
 
+import ch.zhaw.prog2.tasktracker.App;
 import ch.zhaw.prog2.tasktracker.TimeFormater;
 import ch.zhaw.prog2.tasktracker.Observerable.ProjectEventListener;
 import ch.zhaw.prog2.tasktracker.task.CreateTaskController;
