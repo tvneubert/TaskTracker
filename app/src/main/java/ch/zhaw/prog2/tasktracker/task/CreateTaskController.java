@@ -9,7 +9,8 @@ import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
-import java.sql.Date;
+import java.time.ZoneId;
+import java.util.Date;
 
 /**
  * This class is responsible for controlling the "Create task" window of the
@@ -51,10 +52,11 @@ public class CreateTaskController {
      */
     @FXML
     private void createTask(ActionEvent event) {
-        java.util.Date date = null;
+        Date date = null;
         if (taskDeadline.getValue() != null) {
+            ZoneId defaultZoneId = ZoneId.systemDefault();
             deadlineDate = taskDeadline.getValue();
-            date = Date.valueOf(deadlineDate);
+            date = Date.from(deadlineDate.atStartOfDay(defaultZoneId).toInstant());
         }
 
         boolean isDescriptionSet = checkDecriptionSet();

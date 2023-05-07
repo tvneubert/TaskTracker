@@ -122,7 +122,7 @@ public class TaskListItemController {
      * Updates the rendersettings, so if we reload the programm the changes reload
      * as well
      */
-    private void updateRednerSettings() {
+    public void updateRednerSettings() {
         if (taskListItem.getTaskStatus().equals(TaskStatus.FINISHED)) {
             disableText();
         } else {
@@ -186,7 +186,7 @@ public class TaskListItemController {
      * displayed normally. The timer reset button will be styled in black.
      */
     @FXML
-    private void toggleTaskState() {
+    public void toggleTaskState() {
         if (taskListItem.getTaskStatus().equals(TaskStatus.ACTIVE)) {
             taskListItem.setTaskStatus(TaskStatus.FINISHED);
             if (taskListItem.getTimeTracker().isRunning()) {
@@ -220,7 +220,7 @@ public class TaskListItemController {
      * icon.
      */
     @FXML
-    private void timerButton() {
+    public void timerButton() {
         if (this.taskListItem.getTimeTracker().getCurrentTime() == 0) {
             this.taskListItem.getTimeTracker().start();
         } else if (this.taskListItem.getTimeTracker().isRunning()) {
