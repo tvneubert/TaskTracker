@@ -134,7 +134,7 @@ public class MainWindowController implements InvalidationListener, ProjectEventL
      * <p>
      * This method is here for testing and will need to be changed!
      */
-    protected void addProjectsToScrollPane() {
+    public void addProjectsToScrollPane() {
         for (Project project : projectOverview.getProjectList()) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/ProjectListItem.fxml"));

@@ -85,7 +85,7 @@ public class JSONProjectOverview implements ProjectOverview, ObservableProjectOv
      * @throws DatabindException
      * @throws IOException
      */
-    private void saveDatabase() throws StreamWriteException, DatabindException, IOException {
+    public void saveDatabase() throws StreamWriteException, DatabindException, IOException {
         objectMapper.writeValue(databaseFile, projectList);
     }
 
