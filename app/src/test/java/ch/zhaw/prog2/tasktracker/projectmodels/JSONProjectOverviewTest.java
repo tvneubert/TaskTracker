@@ -16,12 +16,13 @@ class JSONProjectOverviewTest {
     Project testproject1;
     Project testproject2;
     JSONProjectOverview projectOverview;
+    Path databasefile = Paths.get("C:\\Users\\EmilioLiliedeLeon\\OneDrive - lilie.net\\Dokumente\\Git\\team1-hugsforbugs-projekt2-tasktracker\\app\\database.json");
     @BeforeEach
     void setUp() {
+
         // Using regular Project objects as Mock objects cannot be properly serialized and cause errors when saving to json
         testproject1 = new Project("testproject1");
         testproject2 = new Project("testproject2");
-        Path databasefile = Paths.get("databse.json");
         try {
             Files.deleteIfExists(databasefile);
             projectOverview = new JSONProjectOverview();
@@ -39,9 +40,14 @@ class JSONProjectOverviewTest {
         projectOverview.addProject(testproject1);
         expected.add(testproject1);
         assertEquals(projectOverview.getProjectList(), expected);
-
     }
 
+    @Test
+    void save(){
+        projectOverview.addProject(testproject1);
+        projectOverview.save();
+        assertTrue(Files.exists(databasefile));
+    }
 
     @Test
     void removeProject() {
