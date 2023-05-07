@@ -101,7 +101,7 @@ public class Task implements ObservableTask {
      *
      * @return a String representing the description of the task
      */
-    protected String getDescription() {
+    public String getDescription() {
         return description;
     }
 
@@ -110,7 +110,7 @@ public class Task implements ObservableTask {
      *
      * @return a String representing the goal of the task
      */
-    protected String getGoal() {
+    public String getGoal() {
         return goal;
     }
 
@@ -154,7 +154,7 @@ public class Task implements ObservableTask {
     /**
      * Notifies all listeners that this task has been marked for deletion.
      */
-    protected void wantsDelete() {
+    public void wantsDelete() {
         for (TaskEventListener listener : observers) {
             listener.deleteRequest(this);
         }

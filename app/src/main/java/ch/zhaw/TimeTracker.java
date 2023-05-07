@@ -65,4 +65,21 @@ public class TimeTracker {
     public boolean isRunning() {
         return running;
     }
+
+    /**
+     * Gets the StartTime
+     * @return
+     */
+    public long getStartTime() {
+        return this.startTime;
+    }
+
+    /**
+     * Gets the paused time
+     * @return
+     */
+    public long getPausedTime() {
+        return this.pausedTime;
+    }
+
 }

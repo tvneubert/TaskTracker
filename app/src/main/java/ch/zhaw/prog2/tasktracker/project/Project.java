@@ -83,7 +83,7 @@ public class Project implements ObservableProject, TaskEventListener {
      * @return List of task objects task Replace type of ArrayList with proper class
      */
     @JsonIgnore
-    protected ArrayList<Task> getAllTasks() {
+    public ArrayList<Task> getAllTasks() {
         return tasks;
     }
 
@@ -94,7 +94,7 @@ public class Project implements ObservableProject, TaskEventListener {
      * @return List of task objects task Replace type of ArrayList with proper class
      */
     @JsonIgnore
-    protected ArrayList<Task> getOpenTasks() {
+    public ArrayList<Task> getOpenTasks() {
         ArrayList<Task> openTasks = new ArrayList<>();
         if (tasks.size() != 0) {
             for (Task task : tasks) {
@@ -111,7 +111,8 @@ public class Project implements ObservableProject, TaskEventListener {
      *
      * @return An ArrayList of open tasks sorted by deadline date in ascending order.
      */
-    protected ArrayList<Task> getOpenTasksDate() {
+    @JsonIgnore
+    public ArrayList<Task> getOpenTasksDate() {
         ArrayList<Task> openTasks = getOpenTasks();
 
         Comparator<Task> byDeadline = new Comparator<Task>() {
@@ -130,7 +131,8 @@ public class Project implements ObservableProject, TaskEventListener {
      *
      * @return An ArrayList of open tasks sorted by time tracked in ascending order.
      */
-    protected ArrayList<Task> getOpenTasksEffort() {
+    @JsonIgnore
+    public ArrayList<Task> getOpenTasksEffort() {
         ArrayList<Task> openTasks = getOpenTasks();
         Comparator<Task> byTimeTracker = new Comparator<Task>() {
             @Override
@@ -215,7 +217,7 @@ public class Project implements ObservableProject, TaskEventListener {
      * @param task task to be removed task Replace type of parameter with proper
      *             task Class
      */
-    protected void removeTask(Task task) {
+    public void removeTask(Task task) {
         if (tasks.contains(task)) {
             tasks.remove(task);
         }
