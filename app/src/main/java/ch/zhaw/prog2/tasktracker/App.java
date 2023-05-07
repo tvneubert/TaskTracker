@@ -1,8 +1,6 @@
 package ch.zhaw.prog2.tasktracker;
 
-import javafx.animation.KeyFrame;
 import javafx.application.Application;
-import javafx.util.Duration;
 
 /**
  * This class serves as the entry point of the TaskTracker application.
