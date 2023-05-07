@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class ProjectTest {
     Project testProject;
@@ -19,14 +20,18 @@ class ProjectTest {
     @BeforeEach
     void setUp() {
         testProject = new Project("testProject");
-        testtask1 = new Task("testtask1", "Test the project ", new Date(111111111L));
-        testtask2 = new Task("testtask2", "Test the project", new Date(222222222L));
-        testtask3 = new Task("testtask3", "Test the project", new Date(333333333L));
-        testtask4 = new Task("testtask4", "Test the project", new Date(444444444L));
-        testtask1.setTaskStatus(Task.TaskStatus.ACTIVE);
-        testtask2.setTaskStatus(Task.TaskStatus.FINISHED);
-        testtask3.setTaskStatus(Task.TaskStatus.ACTIVE);
-        testtask4.setTaskStatus(Task.TaskStatus.ACTIVE);
+        testtask1 = mock(Task.class);
+        testtask2 = mock(Task.class);
+        testtask3 = mock(Task.class);
+        testtask4 = mock(Task.class);
+        when(testtask1.getTaskStatus()).thenReturn(Task.TaskStatus.ACTIVE);
+        when(testtask2.getTaskStatus()).thenReturn(Task.TaskStatus.FINISHED);
+        when(testtask3.getTaskStatus()).thenReturn(Task.TaskStatus.ACTIVE);
+        when(testtask4.getTaskStatus()).thenReturn(Task.TaskStatus.ACTIVE);
+        when(testtask1.getDeadline()).thenReturn(new Date(111111111L));
+        when(testtask2.getDeadline()).thenReturn(new Date(222222222L));
+        when(testtask3.getDeadline()).thenReturn(new Date(333333333L));
+        when(testtask4.getDeadline()).thenReturn(new Date(444444444L));
     }
 
     /**
@@ -48,7 +53,7 @@ class ProjectTest {
         testProject.addTask(testtask2);
         assertTrue(testProject.isCompleted());
         testProject.addTask(testtask1);
-        testtask1.setTaskStatus(Task.TaskStatus.FINISHED);
+        when(testtask1.getTaskStatus()).thenReturn(Task.TaskStatus.FINISHED);
         assertTrue(testProject.isCompleted());
     }
 
