@@ -69,7 +69,7 @@ public class MainWindow extends Application {
         }
     }
 
-    /*
+    /**
      * Pauses all Timer and saves the date before closing the programm
      */
     @Override

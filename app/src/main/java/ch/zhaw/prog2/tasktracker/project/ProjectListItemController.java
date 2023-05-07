@@ -53,10 +53,10 @@ public class ProjectListItemController implements Observable, ProjectEventListen
 
     /**
      * Opens the Project in a new window.
-     * 
+     * <p>
      * Loads the scene graph from the FXML file, sets up the controller, and
      * displays the window.
-     * 
+     *
      * @param event the ActionEvent that triggered this method
      */
     @FXML
@@ -66,12 +66,11 @@ public class ProjectListItemController implements Observable, ProjectEventListen
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Project.fxml"));
             Pane rootPane = loader.load();
 
-            // Add random Projects to scrollPane 
+            // Add random Projects to scrollPane
             ProjectController projectController = loader.getController();
 
             // create a scene with the new the root-Node
             Scene scene = new Scene(rootPane);
-            // create a new stage and show the new window
             Stage stageOfNewWindow = new Stage();
             stageOfNewWindow.getIcons().add(new Image(getClass().getResourceAsStream("/TaskTrackerIcon.png")));
             stageOfNewWindow.setTitle("Dein Projekt");
@@ -88,17 +87,17 @@ public class ProjectListItemController implements Observable, ProjectEventListen
     /**
      * Event-handler for the delete button of the list item
      * Deletes the project
-     * 
+     *
      * @param event the ActionEvent that triggered this method
      */
     @FXML
-    void deleteProject(ActionEvent event) {
+    private void deleteProject(ActionEvent event) {
         notifyListeners();
     }
 
     /**
      * Sets the text of the ProjectNameLabel to the specified name.
-     * 
+     *
      * @param name the name of the Project to be displayed
      */
     public void setProjectNameLabel(String name) {
@@ -107,7 +106,7 @@ public class ProjectListItemController implements Observable, ProjectEventListen
 
     /**
      * This function is for changing the text color of an lable
-     * 
+     *
      * @param color that should apply on the text
      */
     public void changeProjectNameLableColor(String color) {
@@ -116,7 +115,7 @@ public class ProjectListItemController implements Observable, ProjectEventListen
 
     /**
      * Set the Project this list item represents
-     * 
+     *
      * @param project Project of this list item
      */
     public void setProject(Project project) {
@@ -134,7 +133,7 @@ public class ProjectListItemController implements Observable, ProjectEventListen
 
     /**
      * get the Project object this list item represents
-     * 
+     *
      * @return Project object
      */
     public Project getProject() {
@@ -144,7 +143,7 @@ public class ProjectListItemController implements Observable, ProjectEventListen
     /**
      * Implementation of Observable
      * Add listener to the list of listeners to be notified
-     * 
+     *
      * @param listener InvalidationListener to add to the list
      *                 The listener to register
      */
@@ -158,7 +157,7 @@ public class ProjectListItemController implements Observable, ProjectEventListen
     /**
      * Implementation of Observable
      * remove listener from the list of listeners to be notified
-     * 
+     *
      * @param listener InvalidationListener to remove from the list
      *                 The listener to remove
      */
@@ -196,7 +195,7 @@ public class ProjectListItemController implements Observable, ProjectEventListen
     /**
      * This method is called when a task is deleted from the project. It does
      * nothing.
-     * 
+     *
      * @param t the Task that was deleted
      */
     @Override
@@ -211,7 +210,7 @@ public class ProjectListItemController implements Observable, ProjectEventListen
     /**
      * This method is called when a new task is created in the project. It does
      * nothing.
-     * 
+     *
      * @param t the Task that was created
      */
     @Override
@@ -225,7 +224,7 @@ public class ProjectListItemController implements Observable, ProjectEventListen
      * This method is called when the state of a task in the project is changed.
      * It checks if there are open tasks in the project and changes the color of the
      * project name label to black if it is the case.
-     * 
+     *
      * @param t the Task whose state was changed
      */
     @Override

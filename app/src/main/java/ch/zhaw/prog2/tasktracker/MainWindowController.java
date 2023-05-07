@@ -57,7 +57,6 @@ public class MainWindowController implements InvalidationListener, ProjectEventL
     private ProjectOverview projectOverview;
 
     /**
-     *
      * this timeline is for summarizing the time of all tasks
      */
 
@@ -88,7 +87,7 @@ public class MainWindowController implements InvalidationListener, ProjectEventL
      * clicked.
      * It initializes and loads the window scene graph from the fxml description and
      * then creates a new stage with the new scene and shows it.
-     * 
+     *
      * @param event the ActionEvent that triggered the method call
      */
     @FXML
@@ -132,7 +131,7 @@ public class MainWindowController implements InvalidationListener, ProjectEventL
 
     /**
      * This method adds for each Project in the list a Project to the scrollPane
-     * 
+     * <p>
      * This method is here for testing and will need to be changed!
      */
     public void addProjectsToScrollPane() {
@@ -157,7 +156,7 @@ public class MainWindowController implements InvalidationListener, ProjectEventL
 
     /**
      * Gets the project overview
-     * 
+     *
      * @return the projectOverwiev
      */
     protected ProjectOverview getProjectOverview() {
@@ -167,7 +166,7 @@ public class MainWindowController implements InvalidationListener, ProjectEventL
     /**
      * Implementation of the InvalidationListener
      * Processes the invalidation event from the Observable
-     * 
+     *
      * @param observable the Observable that triggered the invalidation event
      *                   The {@code Observable} that became invalid
      */
