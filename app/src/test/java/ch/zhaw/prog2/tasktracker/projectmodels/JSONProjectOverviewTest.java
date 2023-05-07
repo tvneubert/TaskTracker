@@ -1,6 +1,8 @@
 package ch.zhaw.prog2.tasktracker.projectmodels;
 
 import ch.zhaw.prog2.tasktracker.project.Project;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +18,17 @@ class JSONProjectOverviewTest {
     Project testproject1;
     Project testproject2;
     JSONProjectOverview projectOverview;
-    Path databasefile = Paths.get(".\\database.json");
+    static Path databasefile = Paths.get(".\\database.json");
+    @BeforeAll
+    static void beforeTest(){
+        if(Files.exists(databasefile)){
+            try {
+                Files.move(databasefile, Paths.get("databasetemp.json"));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
     @BeforeEach
     void setUp() {
 
@@ -28,6 +40,18 @@ class JSONProjectOverviewTest {
             projectOverview = new JSONProjectOverview();
         }catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+    @AfterAll
+    static void afterTest(){
+        Path tempDatabaseFile = Paths.get("databasetemp.json");
+        if(Files.exists(tempDatabaseFile)){
+            try {
+                Files.delete(databasefile);
+                Files.move(tempDatabaseFile, databasefile);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
