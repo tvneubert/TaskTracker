@@ -83,7 +83,7 @@ public class Project implements ObservableProject, TaskEventListener {
      * @return List of task objects task Replace type of ArrayList with proper class
      */
     @JsonIgnore
-    public ArrayList<Task> getAllTasks() {
+    protected ArrayList<Task> getAllTasks() {
         return tasks;
     }
 
@@ -94,7 +94,7 @@ public class Project implements ObservableProject, TaskEventListener {
      * @return List of task objects task Replace type of ArrayList with proper class
      */
     @JsonIgnore
-    public ArrayList<Task> getOpenTasks() {
+    protected ArrayList<Task> getOpenTasks() {
         ArrayList<Task> openTasks = new ArrayList<>();
         if (tasks.size() != 0) {
             for (Task task : tasks) {
@@ -111,7 +111,7 @@ public class Project implements ObservableProject, TaskEventListener {
      *
      * @return An ArrayList of open tasks sorted by deadline date in ascending order.
      */
-    public ArrayList<Task> getOpenTasksDate() {
+    protected ArrayList<Task> getOpenTasksDate() {
         ArrayList<Task> openTasks = getOpenTasks();
 
         Comparator<Task> byDeadline = new Comparator<Task>() {
@@ -130,7 +130,7 @@ public class Project implements ObservableProject, TaskEventListener {
      *
      * @return An ArrayList of open tasks sorted by time tracked in ascending order.
      */
-    public ArrayList<Task> getOpenTasksEffort() {
+    protected ArrayList<Task> getOpenTasksEffort() {
         ArrayList<Task> openTasks = getOpenTasks();
         Comparator<Task> byTimeTracker = new Comparator<Task>() {
             @Override
@@ -198,6 +198,11 @@ public class Project implements ObservableProject, TaskEventListener {
         return closedTasks;
     }
 
+    /**
+     * Adds the current object as a listener to all tasks in the list of tasks.
+     * This method iterates through the list of tasks and adds the current object as a listener to each task.
+     * As a result, this object will receive notifications when any of the tasks completes or fails.
+     */
     public void addAllTaskListeners() {
         for (Task task : tasks) {
             task.addListener(this);
@@ -210,7 +215,7 @@ public class Project implements ObservableProject, TaskEventListener {
      * @param task task to be removed task Replace type of parameter with proper
      *             task Class
      */
-    public void removeTask(Task task) {
+    protected void removeTask(Task task) {
         if (tasks.contains(task)) {
             tasks.remove(task);
         }

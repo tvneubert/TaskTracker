@@ -186,7 +186,7 @@ public class TaskListItemController {
      * displayed normally. The timer reset button will be styled in black.
      */
     @FXML
-    public void toggleTaskState() {
+    private void toggleTaskState() {
         if (taskListItem.getTaskStatus().equals(TaskStatus.ACTIVE)) {
             taskListItem.setTaskStatus(TaskStatus.FINISHED);
             if (taskListItem.getTimeTracker().isRunning()) {
@@ -202,7 +202,7 @@ public class TaskListItemController {
      * The Goal desciption can now grow on Click or toggle back to the small view
      */
     @FXML
-    public void toggleTaskGoalText() {
+    private void toggleTaskGoalText() {
         if (goalLabel.getMaxHeight() == 20) {
             goalLabel.setMaxHeight(Double.MAX_VALUE);
         } else {
@@ -220,7 +220,7 @@ public class TaskListItemController {
      * icon.
      */
     @FXML
-    public void timerButton() {
+    private void timerButton() {
         if (this.taskListItem.getTimeTracker().getCurrentTime() == 0) {
             this.taskListItem.getTimeTracker().start();
         } else if (this.taskListItem.getTimeTracker().isRunning()) {
@@ -238,7 +238,7 @@ public class TaskListItemController {
      * @param event the ActionEvent that triggered this method
      */
     @FXML
-    void deleteTask(ActionEvent event) {
+    private void deleteTask(ActionEvent event) {
         this.taskListItem.wantsDelete();
     }
 }
