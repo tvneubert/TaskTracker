@@ -134,7 +134,7 @@ public class MainWindowController implements InvalidationListener, ProjectEventL
      * <p>
      * This method is here for testing and will need to be changed!
      */
-    public void addProjectsToScrollPane() {
+    protected void addProjectsToScrollPane() {
         for (Project project : projectOverview.getProjectList()) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/ProjectListItem.fxml"));
@@ -187,7 +187,7 @@ public class MainWindowController implements InvalidationListener, ProjectEventL
     public void allTasksFinished() {
     }
 
-    /*
+    /**
      * Tells the project Overview to save if the taskState changed
      */
     @Override
@@ -195,7 +195,7 @@ public class MainWindowController implements InvalidationListener, ProjectEventL
         this.projectOverview.save();
     }
 
-    /*
+    /**
      * Tleess the projectOverview to save if the task was deleted
      */
     @Override
@@ -203,7 +203,7 @@ public class MainWindowController implements InvalidationListener, ProjectEventL
         this.projectOverview.save();
     }
 
-    /*
+    /**
      * Tells the projectOverview to save if a task was created
      */
     @Override
@@ -211,7 +211,7 @@ public class MainWindowController implements InvalidationListener, ProjectEventL
         this.projectOverview.save();
     }
 
-    /*
+    /**
      * Adds a listener to the project when it was created
      */
     @Override
@@ -219,7 +219,7 @@ public class MainWindowController implements InvalidationListener, ProjectEventL
         p.addListener(this);
     }
 
-    /*
+    /**
      * Removes the listener if the project was deleted
      */
     @Override
