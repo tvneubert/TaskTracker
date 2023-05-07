@@ -16,7 +16,7 @@ class JSONProjectOverviewTest {
     Project testproject1;
     Project testproject2;
     JSONProjectOverview projectOverview;
-    Path databasefile = Paths.get("C:\\Users\\EmilioLiliedeLeon\\OneDrive - lilie.net\\Dokumente\\Git\\team1-hugsforbugs-projekt2-tasktracker\\app\\database.json");
+    Path databasefile = Paths.get(".\\database.json");
     @BeforeEach
     void setUp() {
 
