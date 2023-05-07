@@ -180,7 +180,7 @@ public class MainWindowController implements InvalidationListener, ProjectEventL
         addProjectsToScrollPane();
     }
 
-    /*
+    /**
      * Not needed here
      */
     @Override
