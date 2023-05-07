@@ -219,8 +219,8 @@ public class ProjectController implements ProjectEventListener {
             this.project = project;
             this.setProjectTitle(project.getName());
             this.project.addListener(this);
-            setFilterOptions();
-            setFilterListener();
+            //setFilterOptions();
+            //setFilterListener();
         }
     }
 
