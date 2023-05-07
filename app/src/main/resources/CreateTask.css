@@ -8,21 +8,8 @@
 
 }
 
-.text-area:invalid {
-    -fx-border-color: red; /* Wenn ungültig, dann roter Border */
-    -fx-border-width: 2px;
-}
-
 #taskDescription {
     -fx-background-color: #F7E2A8; /* Hintergrundfarbe */
-}
-
-.empty-field {
-	-fx-background-color: #e50808;
-}
-
-.empty-field-border {
-	-fx-border-color: #e50808;
 }
 
 * {
