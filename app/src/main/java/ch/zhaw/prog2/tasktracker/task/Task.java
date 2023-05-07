@@ -25,11 +25,29 @@ public class Task implements ObservableTask {
         ACTIVE, FINISHED
     }
 
+    /**
+     * The description of the task.
+     */
     private String description;
+
+    /**
+     * The goal of the task.
+     */
     private String goal;
+
+    /**
+     * The deadline for the task.
+     */
     private Date deadline;
+
+    /**
+     * The time tracker for the task
+     */
     private TimeTracker timeTracker = new TimeTracker();
 
+    /**
+     * The current status of the task
+     */
     private TaskStatus taskStatus = TaskStatus.ACTIVE;
 
     /**
@@ -41,7 +59,7 @@ public class Task implements ObservableTask {
      * @param deadline    a Date representing the deadline of the task
      */
     public Task(@JsonProperty("description") String description, @JsonProperty("goal") String goal,
-            @JsonProperty("deadline") Date deadline) {
+                @JsonProperty("deadline") Date deadline) {
         this.description = description;
         this.goal = goal;
         this.deadline = deadline;
@@ -83,7 +101,7 @@ public class Task implements ObservableTask {
      *
      * @return a String representing the description of the task
      */
-    public String getDescription() {
+    protected String getDescription() {
         return description;
     }
 
@@ -92,7 +110,7 @@ public class Task implements ObservableTask {
      *
      * @return a String representing the goal of the task
      */
-    public String getGoal() {
+    protected String getGoal() {
         return goal;
     }
 
@@ -136,7 +154,7 @@ public class Task implements ObservableTask {
     /**
      * Notifies all listeners that this task has been marked for deletion.
      */
-    public void wantsDelete() {
+    protected void wantsDelete() {
         for (TaskEventListener listener : observers) {
             listener.deleteRequest(this);
         }
