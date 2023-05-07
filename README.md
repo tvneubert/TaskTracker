@@ -20,7 +20,7 @@ Wir empfehlen das Programm mit ```./gradlew run``` in deinem git-bash Terminal z
 
 ## Klassendiagramm
 
-Eine einfache Version des UML-Diagramms ist unter "PFAD EINFÜGEN" zu finden. Um mehr über die Abhängigkeiten und die Verwendung in Code zu erfahren, schauen Sie bitte auf das UML-Diagramm "PFAD EINFÜGEN".
+/uml-diagramm.uml
 
 # Erkenntnisse und Projektverlauf
 
