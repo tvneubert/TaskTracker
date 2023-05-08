@@ -28,20 +28,28 @@ Eine vereinfachte und übersichtlichere Variante ist hier ersichtlich: ./uml-dia
 ## Tatsächliche Umsetzung im Bezug auf die Projektskizze:
 
 Man kann Projekte und in diesen Projekten Task anlegen
-Es gibt Zeit pro Task die sich kummuliert pro projekt oder in der übersicht über alle projekte.
-Wenn man einen neuen Task erstellt muss man Namen eingeben, dann eine beschreibung die den Task spezifiziert und eine deadline. 
+Es gibt Zeit pro Task die sich kummuliert pro Projekt oder in der Übersicht über alle Projekte.
+Wenn man einen neuen Task erstellt muss man Namen eingeben, dann eine Beschreibung die den Task spezifiziert und eine Deadline. Wir haben uns dagegen entschieden der SMART Philosopie eine ganze Klasse zu widmen, sondern dies mit der Beschreibung des Task und, dass diese Felder "required" sind versucht umzusetzen.
 
-In der Projektansicht hat man die übersicht über verscheidene task. Man kann doort den timer starten, oder pausieren. mann kann auf die previwe der beschreibung tippen um diese ganz anzuzeigen. Bei erneutem klicken wird der text wieder minimiert.
+In der Projektansicht hat man die Übersicht über die einzelnen Task die dem Projekt angehören. Man kann dort den Timer starten, oder pausieren. man kann auf die Vorschau der Beschreibung tippen um diese ganz anzuzeigen. Bei erneutem klicken wird der Text wieder minimiert.
 
-Beim abhaken stoppt der timer und wird disabled, das wird durch ein ausgrauen des Task präsentiert.
+Wir haben somit die Grundanforderungen aus der Projektskizze umgesetzt, aber im UI einige Entscheidungen getroffen, die von den ursprünglichen Mockups abweichen.
+Beim abhaken stoppt der Timer und wird inaktiv, das wird durch ein ausgrauen des Task präsentiert.
+Versteicht die Deadline eines Task und er ist noch aktiv so wird diese rot eingefärbt.
 
-Versteicht die Deadline eines task und er ist noch aktiv so wird diese rot.
+### Wir haben uns für folgende extra Features:
+File basierte Database mit JSON Elementen. -> das führt zu einigen Gettern oder public Methoden die auf den ersten Blick als "ungenutzt" in der IDE angezeigt werden können. allerdings liest das JSON die für sich wichtigen zu speichernden Datenfelder aus den "Gettern" der zuständigen Klassen und kann nur so komplett funktionieren.
 
-Wir haben uns für die Features entscheiden:
-File basierte database mit JSON elementen.
-Eine Filter option im Projekt um Task nach Aufwand, Deadline oder done zu sorteiren.
+Eine Filter-Option im Projekt um Task nach Aufwand, Deadline oder "done" zu sortieren.
 
-Wir haben uns gegen das Costumize Feature entschhieden und lieber mehr praktische Features eingebaut und mehr auf benutzerfreundlichkeit geachtet.
+Wir haben uns gegen das Costumize-Feature entschieden und lieber mehr praktische Features eingebaut und mehr auf Benutzerfreundlichkeit geachtet. Unser Ziel war es ein Programm zu präsentieren, dass einen tatsächlichen Nutzen hat und bereits in der jetzigen "Demo-Phase" ein durchdachtes UI-Design beinhaltet.
+
+Sind alle Task in einem Projekt erledigt so färbt sich der Text des Projektes grün.
+
+## Mögliche Verbesserungen
+* Es wäre schön gewesen, wenn es nicht so viele Fenster öffnet, wir konnten uns allerdings nicht einigen ob wir lieber dem User die Möglichkeit geben wollen alle Projekte ansehen zu können, oder weniger Fenster offen zu haben.
+* Icons hätten vor allem in der Projekt-Übersicht besser gewählt werden können
+* Die Date Methoden hätte man ggf. verweinfachen können. Leider ist uns nicht in den Sinn gekommen wie ohne die aktuelle Funktionalität zu verlieren.
 
 ## ChatGPT
 Siehe nutzung im RaceTrack ReadMe -> analog dazu.
