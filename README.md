@@ -37,7 +37,7 @@ Wir haben somit die Grundanforderungen aus der Projektskizze umgesetzt, aber im 
 Beim abhaken stoppt der Timer und wird inaktiv, das wird durch ein ausgrauen des Task präsentiert.
 Versteicht die Deadline eines Task und er ist noch aktiv so wird diese rot eingefärbt.
 
-### Wir haben uns für folgende extra Features:
+### Das Projekt enthält folgende Features on Top zur Grundfunktionalität:
 File basierte Database mit JSON Elementen. -> das führt zu einigen Gettern oder public Methoden die auf den ersten Blick als "ungenutzt" in der IDE angezeigt werden können. allerdings liest das JSON die für sich wichtigen zu speichernden Datenfelder aus den "Gettern" der zuständigen Klassen und kann nur so komplett funktionieren.
 
 Eine Filter-Option im Projekt um Task nach Aufwand, Deadline oder "done" zu sortieren.
