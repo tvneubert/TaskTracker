@@ -3,425 +3,94 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="-35.0" y="-204.0">ch.zhaw.prog2.tasktracker.Observerable.ObservableTask</node>
-    <node x="651.0" y="1544.0">ch.zhaw.prog2.tasktracker.task.CreateTaskController</node>
-    <node x="-988.0" y="3647.0">ch.zhaw.prog2.tasktracker.task.TaskListItemController</node>
-    <node x="12.0" y="-464.0">ch.zhaw.prog2.tasktracker.Observerable.TaskEventListener</node>
-    <node x="-205.5" y="2036.0">ch.zhaw.prog2.tasktracker.Observerable.ObservableProjectOverview</node>
-    <node x="-229.0" y="-305.0">ch.zhaw.TimeTracker</node>
-    <node x="-2.0" y="896.0">ch.zhaw.prog2.tasktracker.project.Project</node>
-    <node x="-450.5" y="2678.0">ch.zhaw.prog2.tasktracker.MainWindowController</node>
-    <node x="-587.5" y="2014.0">ch.zhaw.prog2.tasktracker.projectmodels.ProjectOverview</node>
-    <node x="-515.0" y="3443.0">ch.zhaw.prog2.tasktracker.App</node>
-    <node x="-614.0" y="3201.0">ch.zhaw.prog2.tasktracker.MainWindow</node>
-    <node x="-126.0" y="2233.0">ch.zhaw.prog2.tasktracker.projectmodels.JSONProjectOverview</node>
-    <node x="98.5" y="736.0">ch.zhaw.prog2.tasktracker.Observerable.ObservableProject</node>
-    <node x="-35.5" y="60.0">ch.zhaw.prog2.tasktracker.task.Task</node>
-    <node x="195.5" y="4230.0">ch.zhaw.prog2.tasktracker.project.ProjectController</node>
-    <node x="355.0" y="1467.0">ch.zhaw.prog2.tasktracker.project.ProjectListItemController</node>
-    <node x="-454.0" y="2266.0">ch.zhaw.prog2.tasktracker.project.CreateProjectController</node>
-    <node x="-48.0" y="1656.0">ch.zhaw.prog2.tasktracker.Observerable.ProjectOverviewEventListener</node>
-    <node x="55.5" y="534.0">ch.zhaw.prog2.tasktracker.Observerable.ProjectEventListener</node>
-    <node x="-745.0" y="2355.0">ch.zhaw.prog2.tasktracker.TimeFormater</node>
+    <node x="-602.0" y="1545.0">ch.zhaw.prog2.tasktracker.MainWindow</node>
+    <node x="-535.5" y="437.0">ch.zhaw.prog2.tasktracker.projectmodels.ProjectOverview</node>
+    <node x="-316.0" y="271.0">ch.zhaw.prog2.tasktracker.task.TaskListItemController</node>
+    <node x="-722.0" y="1010.0">ch.zhaw.prog2.tasktracker.project.CreateProjectController</node>
+    <node x="-29.5" y="-61.0">ch.zhaw.prog2.tasktracker.Observerable.ObservableProject</node>
+    <node x="-90.0" y="260.0">ch.zhaw.prog2.tasktracker.project.Project</node>
+    <node x="-1033.0" y="1578.5">ch.zhaw.prog2.tasktracker.TimeFormater</node>
+    <node x="-394.0" y="977.0">ch.zhaw.prog2.tasktracker.projectmodels.JSONProjectOverview</node>
+    <node x="467.5" y="834.0">ch.zhaw.prog2.tasktracker.project.ProjectController</node>
+    <node x="-803.0" y="1567.0">ch.zhaw.prog2.tasktracker.App</node>
+    <node x="-57.0" y="988.0">ch.zhaw.prog2.tasktracker.task.CreateTaskController</node>
+    <node x="-1038.5" y="922.0">ch.zhaw.prog2.tasktracker.MainWindowController</node>
+    <node x="-297.0" y="-581.0">ch.zhaw.TimeTracker</node>
+    <node x="-343.5" y="-216.0">ch.zhaw.prog2.tasktracker.task.Task</node>
+    <node x="167.0" y="911.0">ch.zhaw.prog2.tasktracker.project.ProjectListItemController</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="ch.zhaw.prog2.tasktracker.project.ProjectController" target="ch.zhaw.prog2.tasktracker.App" relationship="DEPENDENCY">
-      <point x="-105.66666666666674" y="-304.0" />
-      <point x="228.33333333333326" y="4194.0" />
-      <point x="-286.0" y="4194.0" />
-      <point x="-286.0" y="4134.0" />
-      <point x="-426.0" y="4134.0" />
-      <point x="0.0" y="51.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.projectmodels.JSONProjectOverview" target="ch.zhaw.prog2.tasktracker.Observerable.ObservableProjectOverview" relationship="REALIZATION">
-      <point x="-80.0" y="-161.0" />
+    <edge source="ch.zhaw.prog2.tasktracker.project.Project" target="ch.zhaw.prog2.tasktracker.Observerable.ObservableProject" relationship="REALIZATION">
+      <point x="60.0" y="-237.0" />
       <point x="0.0" y="38.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.task.TaskListItemController" target="ch.zhaw.prog2.tasktracker.App" relationship="DEPENDENCY">
-      <point x="60.0" y="-227.0" />
-      <point x="-826.0" y="3634.0" />
-      <point x="-426.0" y="3634.0" />
-      <point x="0.0" y="51.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.task.Task" target="ch.zhaw.prog2.tasktracker.Observerable.ObservableTask" relationship="REALIZATION">
-      <point x="0.0" y="-194.0" />
-      <point x="0.0" y="38.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.project.ProjectController" target="ch.zhaw.prog2.tasktracker.Observerable.ProjectEventListener" relationship="REALIZATION">
-      <point x="100.0" y="-304.0" />
-      <point x="434.0" y="4194.0" />
-      <point x="874.0" y="4194.0" />
-      <point x="874.0" y="754.0" />
-      <point x="494.0" y="754.0" />
-      <point x="494.0" y="674.0" />
-      <point x="219.66666666666674" y="674.0" />
-      <point x="65.66666666666674" y="60.0" />
     </edge>
     <edge source="ch.zhaw.prog2.tasktracker.projectmodels.JSONProjectOverview" target="ch.zhaw.prog2.tasktracker.projectmodels.ProjectOverview" relationship="REALIZATION">
-      <point x="-80.0" y="-161.0" />
-      <point x="-46.0" y="2194.0" />
-      <point x="-426.0" y="2194.0" />
-      <point x="60.0" y="60.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.task.TaskListItemController" target="ch.zhaw.TimeTracker" relationship="DEPENDENCY">
-      <point x="60.0" y="-227.0" />
-      <point x="-826.0" y="3514.0" />
-      <point x="-926.0" y="3514.0" />
-      <point x="-926.0" y="234.0" />
-      <point x="-886.0" y="234.0" />
-      <point x="-886.0" y="-6.0" />
-      <point x="-187.5" y="-6.0" />
-      <point x="-41.5" y="139.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.project.CreateProjectController" target="ch.zhaw.prog2.tasktracker.projectmodels.ProjectOverview" relationship="TO_ONE">
-      <point x="-80.0" y="-128.0" />
-      <point x="-386.0" y="2234.0" />
-      <point x="-486.0" y="2234.0" />
-      <point x="0.0" y="60.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.MainWindow" target="ch.zhaw.prog2.tasktracker.task.Task" relationship="DEPENDENCY">
-      <point x="-72.0" y="-73.0" />
-      <point x="-538.0" y="3174.0" />
-      <point x="-846.0" y="3174.0" />
-      <point x="-846.0" y="514.0" />
-      <point x="154.0" y="514.0" />
-      <point x="60.0" y="194.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.MainWindow" target="ch.zhaw.prog2.tasktracker.MainWindowController" relationship="TO_ONE">
-      <point x="80.0" y="-73.0" />
-      <point x="-80.0" y="216.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.MainWindowController" target="ch.zhaw.prog2.tasktracker.Observerable.ProjectOverviewEventListener" relationship="REALIZATION">
-      <point x="96.33333333333337" y="-216.0" />
-      <point x="-209.66666666666663" y="2654.0" />
-      <point x="214.0" y="2654.0" />
-      <point x="214.0" y="2214.0" />
-      <point x="174.0" y="2214.0" />
-      <point x="174.0" y="2054.0" />
-      <point x="154.0" y="2054.0" />
-      <point x="80.0" y="38.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.projectmodels.ProjectOverview" target="ch.zhaw.prog2.tasktracker.project.Project" relationship="DEPENDENCY">
-      <point x="0.0" y="-60.0" />
-      <point x="-486.0" y="1634.0" />
-      <point x="74.0" y="1634.0" />
-      <point x="-60.0" y="238.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.Observerable.ProjectOverviewEventListener" target="ch.zhaw.prog2.tasktracker.project.Project" relationship="DEPENDENCY">
-      <point x="0.0" y="-38.0" />
-      <point x="-60.0" y="238.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.project.Project" target="ch.zhaw.prog2.tasktracker.Observerable.TaskEventListener" relationship="REALIZATION">
-      <point x="100.0" y="-238.0" />
-      <point x="234.0" y="874.0" />
-      <point x="394.0" y="874.0" />
-      <point x="394.0" y="-246.0" />
-      <point x="194.0" y="-246.0" />
-      <point x="80.0" y="38.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.task.Task" target="ch.zhaw.TimeTracker" relationship="TO_ONE">
-      <point x="-120.0" y="-194.0" />
-      <point x="-26.0" y="34.0" />
-      <point x="-104.5" y="34.0" />
-      <point x="41.5" y="139.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.project.Project" target="ch.zhaw.prog2.tasktracker.Observerable.ObservableProject" relationship="REALIZATION">
-      <point x="100.0" y="-238.0" />
-      <point x="0.0" y="38.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.MainWindowController" target="ch.zhaw.prog2.tasktracker.project.ProjectListItemController" relationship="DEPENDENCY">
-      <point x="0.0" y="-216.0" />
-      <point x="-306.0" y="2594.0" />
-      <point x="434.0" y="2594.0" />
-      <point x="-60.0" y="227.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.project.Project" target="ch.zhaw.prog2.tasktracker.task.Task" relationship="TO_MANY">
-      <point x="-60.0" y="-238.0" />
-      <point x="74.0" y="854.0" />
-      <point x="34.0" y="854.0" />
-      <point x="-60.0" y="194.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.project.ProjectController" target="ch.zhaw.prog2.tasktracker.project.Project" relationship="TO_ONE">
-      <point x="-40.0" y="-304.0" />
-      <point x="294.0" y="1394.0" />
-      <point x="204.66666666666674" y="1394.0" />
-      <point x="70.66666666666674" y="238.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.projectmodels.JSONProjectOverview" target="ch.zhaw.prog2.tasktracker.project.Project" relationship="TO_MANY">
-      <point x="100.0" y="-161.0" />
-      <point x="134.0" y="2174.0" />
-      <point x="254.0" y="2174.0" />
-      <point x="254.0" y="1434.0" />
-      <point x="294.0" y="1434.0" />
-      <point x="294.0" y="1394.0" />
-      <point x="204.66666666666674" y="1394.0" />
-      <point x="70.66666666666674" y="238.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.project.ProjectListItemController" target="ch.zhaw.prog2.tasktracker.project.ProjectController" relationship="DEPENDENCY">
-      <point x="60.0" y="227.0" />
-      <point x="554.0" y="4154.0" />
-      <point x="374.0" y="4154.0" />
-      <point x="40.0" y="-304.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.project.ProjectListItemController" target="ch.zhaw.prog2.tasktracker.task.Task" relationship="DEPENDENCY">
-      <point x="100.0" y="-227.0" />
-      <point x="594.0" y="514.0" />
-      <point x="154.0" y="514.0" />
-      <point x="60.0" y="194.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.task.TaskListItemController" target="ch.zhaw.prog2.tasktracker.task.Task" relationship="TO_ONE">
-      <point x="-60.0" y="-227.0" />
-      <point x="-946.0" y="3614.0" />
-      <point x="-966.0" y="3614.0" />
-      <point x="-966.0" y="494.0" />
-      <point x="34.0" y="494.0" />
-      <point x="-60.0" y="194.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.project.ProjectController" target="ch.zhaw.prog2.tasktracker.task.CreateTaskController" relationship="DEPENDENCY">
-      <point x="-105.66666666666674" y="-304.0" />
-      <point x="228.33333333333326" y="4194.0" />
-      <point x="-286.0" y="4194.0" />
-      <point x="-286.0" y="4134.0" />
-      <point x="754.0" y="4134.0" />
-      <point x="0.0" y="150.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.App" target="ch.zhaw.prog2.tasktracker.MainWindow" relationship="DEPENDENCY">
-      <point x="-40.0" y="-51.0" />
-      <point x="0.0" y="73.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.project.ProjectListItemController" target="ch.zhaw.prog2.tasktracker.project.Project" relationship="TO_ONE">
-      <point x="-92.66666666666674" y="-227.0" />
-      <point x="401.33333333333326" y="1434.0" />
-      <point x="294.0" y="1434.0" />
-      <point x="294.0" y="1394.0" />
-      <point x="204.66666666666674" y="1394.0" />
-      <point x="70.66666666666674" y="238.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.MainWindow" target="ch.zhaw.prog2.tasktracker.projectmodels.ProjectOverview" relationship="DEPENDENCY">
-      <point x="-72.0" y="-73.0" />
-      <point x="-538.0" y="3174.0" />
-      <point x="-846.0" y="3174.0" />
-      <point x="-846.0" y="2914.0" />
-      <point x="-766.0" y="2914.0" />
-      <point x="-766.0" y="2334.0" />
-      <point x="-546.0" y="2334.0" />
-      <point x="-60.0" y="60.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.Observerable.ObservableProject" target="ch.zhaw.prog2.tasktracker.Observerable.ProjectEventListener" relationship="DEPENDENCY">
-      <point x="-80.0" y="-38.0" />
-      <point x="0.0" y="60.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.MainWindowController" target="ch.zhaw.prog2.tasktracker.project.Project" relationship="DEPENDENCY">
-      <point x="0.0" y="-216.0" />
-      <point x="-306.0" y="2594.0" />
-      <point x="254.0" y="2594.0" />
-      <point x="254.0" y="2194.0" />
-      <point x="214.0" y="2194.0" />
-      <point x="214.0" y="1634.0" />
-      <point x="74.0" y="1634.0" />
-      <point x="-60.0" y="238.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.project.Project" target="ch.zhaw.prog2.tasktracker.Observerable.ProjectEventListener" relationship="TO_MANY">
-      <point x="-60.0" y="-238.0" />
-      <point x="-80.0" y="60.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.Observerable.ObservableProjectOverview" target="ch.zhaw.prog2.tasktracker.Observerable.ProjectOverviewEventListener" relationship="DEPENDENCY">
-      <point x="0.0" y="-38.0" />
-      <point x="-46.0" y="2014.0" />
-      <point x="-7.333333333333371" y="2014.0" />
-      <point x="-81.33333333333337" y="38.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.MainWindowController" target="ch.zhaw.prog2.tasktracker.Observerable.ProjectEventListener" relationship="REALIZATION">
-      <point x="96.33333333333337" y="-216.0" />
-      <point x="-209.66666666666663" y="2654.0" />
-      <point x="214.0" y="2654.0" />
-      <point x="214.0" y="2614.0" />
-      <point x="334.0" y="2614.0" />
-      <point x="334.0" y="1414.0" />
-      <point x="434.0" y="1414.0" />
-      <point x="434.0" y="754.0" />
-      <point x="494.0" y="754.0" />
-      <point x="494.0" y="674.0" />
-      <point x="219.66666666666674" y="674.0" />
-      <point x="65.66666666666674" y="60.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.project.ProjectListItemController" target="ch.zhaw.prog2.tasktracker.Observerable.ProjectEventListener" relationship="REALIZATION">
-      <point x="0.0" y="-227.0" />
-      <point x="494.0" y="674.0" />
-      <point x="219.66666666666674" y="674.0" />
-      <point x="65.66666666666674" y="60.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.task.CreateTaskController" target="ch.zhaw.prog2.tasktracker.task.Task" relationship="DEPENDENCY">
-      <point x="60.0" y="-150.0" />
-      <point x="814.0" y="514.0" />
-      <point x="154.0" y="514.0" />
-      <point x="60.0" y="194.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.task.Task" target="ch.zhaw.prog2.tasktracker.Observerable.TaskEventListener" relationship="TO_MANY">
-      <point x="-120.0" y="-194.0" />
-      <point x="-26.0" y="34.0" />
-      <point x="-246.0" y="34.0" />
-      <point x="-246.0" y="-326.0" />
-      <point x="34.0" y="-326.0" />
-      <point x="-80.0" y="38.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.project.Project" target="ch.zhaw.TimeTracker" relationship="DEPENDENCY">
-      <point x="-100.0" y="-238.0" />
-      <point x="34.0" y="874.0" />
-      <point x="-66.0" y="874.0" />
-      <point x="-66.0" y="234.0" />
-      <point x="-886.0" y="234.0" />
-      <point x="-886.0" y="-6.0" />
-      <point x="-187.5" y="-6.0" />
-      <point x="-41.5" y="139.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.MainWindowController" target="ch.zhaw.prog2.tasktracker.project.CreateProjectController" relationship="DEPENDENCY">
-      <point x="0.0" y="-216.0" />
-      <point x="0.0" y="128.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.project.ProjectController" target="ch.zhaw.prog2.tasktracker.task.Task" relationship="DEPENDENCY">
-      <point x="-105.66666666666674" y="-304.0" />
-      <point x="228.33333333333326" y="4194.0" />
-      <point x="-286.0" y="4194.0" />
-      <point x="-286.0" y="4134.0" />
-      <point x="914.0" y="4134.0" />
-      <point x="914.0" y="514.0" />
-      <point x="154.0" y="514.0" />
-      <point x="60.0" y="194.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.MainWindow" target="ch.zhaw.TimeTracker" relationship="DEPENDENCY">
-      <point x="-72.0" y="-73.0" />
-      <point x="-538.0" y="3174.0" />
-      <point x="-846.0" y="3174.0" />
-      <point x="-846.0" y="2914.0" />
-      <point x="-886.0" y="2914.0" />
-      <point x="-886.0" y="-6.0" />
-      <point x="-187.5" y="-6.0" />
-      <point x="-41.5" y="139.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.Observerable.TaskEventListener" target="ch.zhaw.prog2.tasktracker.task.Task" relationship="DEPENDENCY">
-      <point x="20.0" y="38.0" />
-      <point x="134.0" y="-226.0" />
-      <point x="254.0" y="-226.0" />
-      <point x="254.0" y="34.0" />
-      <point x="174.0" y="34.0" />
-      <point x="80.0" y="-194.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.Observerable.ProjectEventListener" target="ch.zhaw.prog2.tasktracker.task.Task" relationship="DEPENDENCY">
-      <point x="0.0" y="-60.0" />
-      <point x="60.0" y="194.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.MainWindowController" target="ch.zhaw.prog2.tasktracker.App" relationship="DEPENDENCY">
-      <point x="80.0" y="216.0" />
-      <point x="-226.0" y="3414.0" />
-      <point x="-380.0" y="3414.0" />
-      <point x="46.0" y="-51.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.project.ProjectController" target="ch.zhaw.TimeTracker" relationship="DEPENDENCY">
-      <point x="-105.66666666666674" y="-304.0" />
-      <point x="228.33333333333326" y="4194.0" />
-      <point x="-286.0" y="4194.0" />
-      <point x="-286.0" y="4134.0" />
-      <point x="-1006.0" y="4134.0" />
-      <point x="-1006.0" y="234.0" />
-      <point x="-886.0" y="234.0" />
-      <point x="-886.0" y="-6.0" />
-      <point x="-187.5" y="-6.0" />
-      <point x="-41.5" y="139.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.MainWindow" target="ch.zhaw.prog2.tasktracker.project.Project" relationship="DEPENDENCY">
-      <point x="-72.0" y="-73.0" />
-      <point x="-538.0" y="3174.0" />
-      <point x="-846.0" y="3174.0" />
-      <point x="-846.0" y="2914.0" />
-      <point x="-806.0" y="2914.0" />
-      <point x="-806.0" y="2314.0" />
-      <point x="-766.0" y="2314.0" />
-      <point x="-766.0" y="1634.0" />
-      <point x="74.0" y="1634.0" />
-      <point x="-60.0" y="238.0" />
-    </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.Observerable.ObservableTask" target="ch.zhaw.prog2.tasktracker.Observerable.TaskEventListener" relationship="DEPENDENCY">
-      <point x="0.0" y="-38.0" />
-      <point x="-20.0" y="38.0" />
+      <point x="-80.0" y="-160.0" />
+      <point x="-314.0" y="957.0" />
+      <point x="-383.25" y="957.0" />
+      <point x="50.75" y="60.0" />
     </edge>
     <edge source="ch.zhaw.prog2.tasktracker.MainWindowController" target="ch.zhaw.prog2.tasktracker.projectmodels.ProjectOverview" relationship="TO_ONE">
-      <point x="-100.0" y="-216.0" />
-      <point x="-406.0" y="2654.0" />
-      <point x="-486.0" y="2654.0" />
-      <point x="0.0" y="60.0" />
+      <point x="0.0" y="-215.0" />
+      <point x="-894.0" y="897.0" />
+      <point x="-574.0" y="897.0" />
+      <point x="-574.0" y="577.0" />
+      <point x="-484.75" y="577.0" />
+      <point x="-50.75" y="60.0" />
     </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.task.TaskListItemController" target="ch.zhaw.prog2.tasktracker.TimeFormater" relationship="DEPENDENCY">
-      <point x="60.0" y="-227.0" />
-      <point x="-826.0" y="3514.0" />
-      <point x="-646.0" y="3514.0" />
-      <point x="0.0" y="39.0" />
+    <edge source="ch.zhaw.prog2.tasktracker.project.ProjectController" target="ch.zhaw.prog2.tasktracker.project.Project" relationship="TO_ONE">
+      <point x="0.0" y="-303.0" />
+      <point x="606.0" y="797.0" />
+      <point x="46.0" y="797.0" />
+      <point x="0.0" y="237.0" />
     </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.MainWindowController" target="ch.zhaw.prog2.tasktracker.TimeFormater" relationship="DEPENDENCY">
-      <point x="0.0" y="-216.0" />
-      <point x="-306.0" y="2614.0" />
-      <point x="-646.0" y="2614.0" />
-      <point x="0.0" y="39.0" />
+    <edge source="ch.zhaw.prog2.tasktracker.project.Project" target="ch.zhaw.prog2.tasktracker.task.Task" relationship="TO_MANY">
+      <point x="-60.0" y="-237.0" />
+      <point x="-14.0" y="237.0" />
+      <point x="-214.0" y="237.0" />
+      <point x="0.0" y="193.0" />
     </edge>
     <edge source="ch.zhaw.prog2.tasktracker.task.CreateTaskController" target="ch.zhaw.prog2.tasktracker.project.Project" relationship="TO_ONE">
-      <point x="-48.66666666666674" y="-150.0" />
-      <point x="705.3333333333333" y="1434.0" />
-      <point x="294.0" y="1434.0" />
-      <point x="294.0" y="1394.0" />
-      <point x="204.66666666666674" y="1394.0" />
-      <point x="70.66666666666674" y="238.0" />
+      <point x="0.0" y="-149.0" />
+      <point x="0.0" y="237.0" />
     </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.project.ProjectController" target="ch.zhaw.prog2.tasktracker.TimeFormater" relationship="DEPENDENCY">
-      <point x="-105.66666666666674" y="-304.0" />
-      <point x="228.33333333333326" y="4194.0" />
-      <point x="-286.0" y="4194.0" />
-      <point x="-286.0" y="3174.0" />
-      <point x="-466.0" y="3174.0" />
-      <point x="-466.0" y="2874.0" />
-      <point x="-646.0" y="2874.0" />
-      <point x="0.0" y="39.0" />
+    <edge source="ch.zhaw.prog2.tasktracker.projectmodels.JSONProjectOverview" target="ch.zhaw.prog2.tasktracker.project.Project" relationship="TO_MANY">
+      <point x="80.0" y="-160.0" />
+      <point x="-154.0" y="797.0" />
+      <point x="46.0" y="797.0" />
+      <point x="0.0" y="237.0" />
     </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.MainWindowController" target="ch.zhaw.prog2.tasktracker.projectmodels.JSONProjectOverview" relationship="DEPENDENCY">
-      <point x="0.0" y="-216.0" />
-      <point x="-306.0" y="2594.0" />
-      <point x="34.0" y="2594.0" />
-      <point x="0.0" y="161.0" />
+    <edge source="ch.zhaw.prog2.tasktracker.project.ProjectListItemController" target="ch.zhaw.prog2.tasktracker.project.Project" relationship="TO_ONE">
+      <point x="0.0" y="-226.0" />
+      <point x="306.0" y="797.0" />
+      <point x="46.0" y="797.0" />
+      <point x="0.0" y="237.0" />
     </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.MainWindowController" target="ch.zhaw.prog2.tasktracker.task.Task" relationship="DEPENDENCY">
-      <point x="0.0" y="-216.0" />
-      <point x="-306.0" y="2594.0" />
-      <point x="-526.0" y="2594.0" />
-      <point x="-526.0" y="2294.0" />
-      <point x="-806.0" y="2294.0" />
-      <point x="-806.0" y="514.0" />
-      <point x="154.0" y="514.0" />
-      <point x="60.0" y="194.0" />
+    <edge source="ch.zhaw.prog2.tasktracker.MainWindow" target="ch.zhaw.prog2.tasktracker.MainWindowController" relationship="TO_ONE">
+      <point x="0.0" y="-72.0" />
+      <point x="-454.0" y="1517.0" />
+      <point x="-894.0" y="1517.0" />
+      <point x="0.0" y="215.0" />
     </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.projectmodels.JSONProjectOverview" target="ch.zhaw.prog2.tasktracker.Observerable.ProjectOverviewEventListener" relationship="TO_MANY">
-      <point x="100.0" y="-161.0" />
-      <point x="134.0" y="2014.0" />
-      <point x="74.0" y="2014.0" />
-      <point x="0.0" y="38.0" />
+    <edge source="ch.zhaw.prog2.tasktracker.task.Task" target="ch.zhaw.TimeTracker" relationship="TO_ONE">
+      <point x="0.0" y="-193.0" />
+      <point x="0.0" y="138.0" />
     </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.project.CreateProjectController" target="ch.zhaw.prog2.tasktracker.project.Project" relationship="DEPENDENCY">
-      <point x="80.0" y="-128.0" />
-      <point x="-226.0" y="1634.0" />
-      <point x="74.0" y="1634.0" />
-      <point x="-60.0" y="238.0" />
+    <edge source="ch.zhaw.prog2.tasktracker.task.TaskListItemController" target="ch.zhaw.prog2.tasktracker.task.Task" relationship="TO_ONE">
+      <point x="0.0" y="-226.0" />
+      <point x="0.0" y="193.0" />
     </edge>
-    <edge source="ch.zhaw.prog2.tasktracker.project.ProjectController" target="ch.zhaw.prog2.tasktracker.task.TaskListItemController" relationship="DEPENDENCY">
-      <point x="-105.66666666666674" y="-304.0" />
-      <point x="228.33333333333326" y="4194.0" />
-      <point x="-286.0" y="4194.0" />
-      <point x="-286.0" y="4134.0" />
-      <point x="-886.0" y="4134.0" />
-      <point x="0.0" y="227.0" />
+    <edge source="ch.zhaw.prog2.tasktracker.project.CreateProjectController" target="ch.zhaw.prog2.tasktracker.projectmodels.ProjectOverview" relationship="TO_ONE">
+      <point x="0.0" y="-127.0" />
+      <point x="-574.0" y="577.0" />
+      <point x="-484.75" y="577.0" />
+      <point x="-50.75" y="60.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Compact" zoom="0.16046599022923713" showDependencies="true" x="-36.0" y="2197.0" />
+  <settings layout="Hierarchic Compact" zoom="0.5231441048034935" showDependencies="true" x="-137.0" y="564.0" />
   <SelectedNodes>
-    <node>ch.zhaw.prog2.tasktracker.Observerable.ProjectOverviewEventListener</node>
+    <node>ch.zhaw.prog2.tasktracker.Observerable.ObservableProject</node>
   </SelectedNodes>
   <Categories>
     <Category>Constructors</Category>

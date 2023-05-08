@@ -20,7 +20,8 @@ Wir empfehlen das Programm mit ```./gradlew run``` in deinem git-bash Terminal z
 
 ## Klassendiagramm
 
-/uml-diagramm.uml
+Das ganze Projekt ist hier ersichtlich; ./uml-diagramm-1
+Eine vereinfachte und übersichtlichere Variante ist hier ersichtlich: ./uml-diagramm-2
 
 # Erkenntnisse und Projektverlauf
 
